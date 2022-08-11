@@ -1,0 +1,7 @@
+{
+  "name": "sentidos-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
