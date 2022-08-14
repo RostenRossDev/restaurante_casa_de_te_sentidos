@@ -5,17 +5,17 @@ import com.sentidos.api.entities.Post;
 
 public class PostWraper {
 
-	public static Post dtoToEntity(PostDto dto) {
+	public static Post dtoToEntity(PostDto postDto) {
 		Post post = new Post();
-		post.setComment(dto.getComment());
-		post.setCreateAt(dto.getCreateAt());
+		post.setComment(postDto.getComment());
+		post.setCreateAt(postDto.getCreateAt());
 		return post;
 	}
-	public static PostDto entityToDto(Post entity) {
+	public static PostDto entityToDto(Post post) {
 		PostDto dto = new PostDto();
-		dto.setComment(entity.getComment());
-		dto.setCreateAt(entity.getCreateDate());
-		dto.setUser(entity.getCustomer().getUser().getUsername());
+		dto.setComment(post.getComment());
+		dto.setCreateAt(post.getCreateDate());
+		dto.setUser(post.getCustomer().getUser().getUsername());
 		return dto;
 	}
 }
