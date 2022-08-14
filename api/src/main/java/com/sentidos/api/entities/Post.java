@@ -15,6 +15,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="posts")
 public class Post implements Serializable{
@@ -32,8 +36,10 @@ public class Post implements Serializable{
 	
 	@Column(name = "create_at")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createAt;
 	
+	@JsonIgnore
 	@ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
