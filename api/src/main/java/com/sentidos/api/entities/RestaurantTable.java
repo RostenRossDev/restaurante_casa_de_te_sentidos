@@ -28,7 +28,11 @@ public class RestaurantTable implements Serializable{
 	
     @OneToMany(mappedBy = "restaurantTable", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Reservation> reservations;
-		
+    
+    public void addReservation(Reservation reserv) {
+    	this.reservations.add(reserv);
+    }
+    
 	public Long getId() {
 		return id;
 	}

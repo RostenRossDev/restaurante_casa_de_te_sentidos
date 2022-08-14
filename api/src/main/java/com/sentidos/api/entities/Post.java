@@ -1,7 +1,7 @@
 package com.sentidos.api.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="posts")
@@ -28,12 +31,17 @@ public class Post implements Serializable{
 	private String comment;
 	
 	@Column(name = "create_at")
-	private Date createAt;
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
 	
 	@ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
 	
+	@PrePersist
+    public void prePersist() {
+        createAt = new Date();
+    }
 	
 	public Long getId() {
 		return id;

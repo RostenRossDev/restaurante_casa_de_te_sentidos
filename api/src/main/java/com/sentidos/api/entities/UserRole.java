@@ -22,18 +22,7 @@ public class UserRole implements Serializable{
 	private Long id;
 	
 	@Column(unique = true, length = 20)
-	private String name;
-
-	public UserRole(Long id, String rolName) {
-		super();
-		this.id = id;
-		this.name = rolName;
-	}
-
-	public UserRole() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	private String name;	
 
 	public Long getId() {
 		return id;

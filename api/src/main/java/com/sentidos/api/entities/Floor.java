@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="floor")
+@Table(name="floors")
 public class Floor implements Serializable{
 	
 	
@@ -30,6 +30,10 @@ public class Floor implements Serializable{
 	@OneToMany(mappedBy = "departmen", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Customer> customers;
 
+	public void addCustomer(Customer cust) {
+    	this.customers.add(cust);
+    }
+	
 	public Long getId() {
 		return id;
 	}

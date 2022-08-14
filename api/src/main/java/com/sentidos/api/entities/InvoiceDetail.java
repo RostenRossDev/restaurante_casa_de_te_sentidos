@@ -23,12 +23,15 @@ public class InvoiceDetail implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer Quantity;
+	private Integer quantity;
 	
 	@ManyToOne()
     @JoinColumn(name = "invoice_id")
 	private Invoice invoice;
-	//private Menu menu;
+	
+	@ManyToOne()
+    @JoinColumn(name = "menu_id")
+	private Menu menu;
 	
 	public Long getId() {
 		return id;
@@ -37,17 +40,31 @@ public class InvoiceDetail implements Serializable{
 		this.id = id;
 	}
 	public Integer getQuantity() {
-		return Quantity;
+		return quantity;
 	}
 	public void setQuantity(Integer quantity) {
-		Quantity = quantity;
+		this.quantity = quantity;
 	}
 	
-	/*public Menu getMenu() {
+	public Menu getMenu() {
 		return menu;
 	}
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
-	*/
+	
+	public Double getUnitPrice() {
+		return menu.getPrice();
+	}
+	
+	public Double getDetailPrice() {
+		return menu.getPrice()*this.quantity;
+	}
+	public Invoice getInvoice() {
+		return invoice;
+	}
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+	
 }

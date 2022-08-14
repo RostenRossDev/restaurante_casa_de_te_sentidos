@@ -32,6 +32,9 @@ public class MenuType implements Serializable{
     @OneToMany(mappedBy = "menuType", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Menu> menu;
 	
+    public void addMenu(Menu menu) {
+    	this.menu.add(menu);
+    }
 	
 	public Long getId() {
 		return id;
@@ -52,7 +55,6 @@ public class MenuType implements Serializable{
 
 	public void setMenu(List<Menu> menu) {
 		this.menu = menu;
-	}
-	
+	}	
 	
 }

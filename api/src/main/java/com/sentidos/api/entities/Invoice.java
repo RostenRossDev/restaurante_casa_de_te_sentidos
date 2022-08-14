@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
@@ -37,16 +38,17 @@ public class Invoice implements Serializable{
 	private List<InvoiceDetail> details;
 	
 	@Column(name = "create_at")
-    private Date createAt;
-    
-	public Invoice(Long id, Customer customer, Invoice invoice) {
-		super();
-		this.id = id;
+    private Date createAt;    
+	
+	@PrePersist
+    public void prePersist() {
+        createAt = new Date();
+    }
+	
+	public void addInvoiceDetail(InvoiceDetail detail) {
+		this.details.add(detail);
 	}
-	public Invoice() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	public Long getId() {
 		return id;
 	}

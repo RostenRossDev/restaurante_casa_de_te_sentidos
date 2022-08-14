@@ -47,20 +47,10 @@ public class User implements Serializable{
 	    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 		private Customer customer;
 		
-		public User() {
-			super();
-			// TODO Auto-generated constructor stub
-		}
-
-		public User(Long id, String username, String password, Boolean enabled, List<UserRole> roles) {
-			super();
-			this.id = id;
-			this.username = username;
-			this.password = password;
-			this.enabled = enabled;
-			this.roles = roles;
-		}
-
+	    public void addUserRole(UserRole role) {
+	    	this.roles.add(role);
+	    }
+	    
 		public Long getId() {
 			return id;
 		}

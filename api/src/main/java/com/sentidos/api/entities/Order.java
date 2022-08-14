@@ -14,7 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="orders")
@@ -40,10 +43,15 @@ public class Order  implements Serializable{
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Invoice invoice;
 	
-	@Column(name = "create_at")
-	private Date createAt;
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
     
-	
+    @PrePersist
+    public void prePersist() {
+        createAt = new Date();
+    }
+    
 	public Customer getCustomer() {
 		return customer;
 	}

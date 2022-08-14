@@ -38,19 +38,11 @@ public class Employee  implements Serializable{
 	inverseJoinColumns = @JoinColumn(name="employee_role_id"))
 	private List<EmployeeRole> employRolls;
 
+	public void addEmployeeRole(EmployeeRole role) {
+		this.employRolls.add(role);
+	}
 	
-	public Employee(Long id, String name, String lastname, Integer dni, List<EmployeeRole> employRolls) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.lastname = lastname;
-		this.dni = dni;
-		this.employRolls = employRolls;
-	}
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	public Long getId() {
 		return id;
 	}

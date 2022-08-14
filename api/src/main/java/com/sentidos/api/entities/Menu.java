@@ -1,16 +1,16 @@
 package com.sentidos.api.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,7 +36,13 @@ public class Menu implements Serializable{
     @JoinColumn(name = "menuType_id")
 	private MenuType menuType;
     
-
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<InvoiceDetail> details;
+	
+    public void addInvoiceDetail(InvoiceDetail detail) {
+    	this.details.add(detail);
+    }
+    
 	public Long getId() {
 		return id;
 	}
@@ -69,6 +75,13 @@ public class Menu implements Serializable{
 	public void setMenuType(MenuType menuType) {
 		this.menuType = menuType;
 	}
-	
+
+	public List<InvoiceDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<InvoiceDetail> details) {
+		this.details = details;
+	}	
 	
 }

@@ -15,7 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -65,7 +68,24 @@ public class Customer implements Serializable{
 	private Floor floor;	
 	
 	@Column(name = "create_at")
-	private Date createAt;
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
+	
+	
+	@PrePersist
+    public void prePersist() {
+        createAt = new Date();
+    }
+	public void addOrder(Order order) {
+		this.orders.add(order);
+	}
+	
+	public void addReservation(Reservation reservation) {
+		this.reservations.add(reservation);
+	}
+	public void addPost(Post post) {
+		this.posts.add(post);
+	}
 	
 	public Long getId() {
 		return id;

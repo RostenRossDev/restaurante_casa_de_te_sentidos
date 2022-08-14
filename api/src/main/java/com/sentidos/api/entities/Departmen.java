@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="departmen")
+@Table(name="departmens")
 public class Departmen implements Serializable{
 	
 	
@@ -30,16 +30,9 @@ public class Departmen implements Serializable{
 	@OneToMany(mappedBy = "departmen", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Customer> customers;
 	
-	public Departmen(Long id, String dpto) {
-		super();
-		this.id = id;
-		this.dpto = dpto;
-	}
-
-	public Departmen() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public void addCustomer(Customer cust) {
+	   	this.customers.add(cust);
+	}	 	
 
 	public Long getId() {
 		return id;
