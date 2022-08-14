@@ -1,19 +1,50 @@
 package com.sentidos.api.entities;
 
-public class Employee {
+import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Entity
+@Table(name="employees")
+public class Employee  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
 	private String lastName;
 	private Integer dni;
-	private EmployeeRole employRoll;
-	public Employee(Long id, String name, String lastName, Integer dni, EmployeeRole employRoll) {
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name="employees_roles", joinColumns = @JoinColumn(name="employee_id"), 
+	inverseJoinColumns = @JoinColumn(name="employee_role_id"))
+	private List<EmployeeRole> employRolls;
+
+	
+	public Employee(Long id, String name, String lastName, Integer dni, List<EmployeeRole> employRolls) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.dni = dni;
-		this.employRoll = employRoll;
+		this.employRolls = employRolls;
 	}
 	public Employee() {
 		super();
@@ -43,11 +74,11 @@ public class Employee {
 	public void setDni(Integer dni) {
 		this.dni = dni;
 	}
-	public EmployeeRole getEmployRoll() {
-		return employRoll;
+	public List<EmployeeRole> getEmployRoll() {
+		return employRolls;
 	}
-	public void setEmployRoll(EmployeeRole employRoll) {
-		this.employRoll = employRoll;
+	public void setEmployRoll(List<EmployeeRole> employRoll) {
+		this.employRolls = employRoll;
 	}
 	
 }

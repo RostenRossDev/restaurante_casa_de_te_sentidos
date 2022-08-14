@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -43,6 +44,9 @@ public class User implements Serializable{
 		uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","role_id"})})
 		private List<UserRole> roles;
 
+	    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+		private Customer customer;
+		
 		public User() {
 			super();
 			// TODO Auto-generated constructor stub
@@ -96,4 +100,13 @@ public class User implements Serializable{
 		public void setRoles(List<UserRole> roles) {
 			this.roles = roles;
 		}
+
+		public Customer getCustomer() {
+			return customer;
+		}
+
+		public void setCustomer(Customer customer) {
+			this.customer = customer;
+		}
+		
 }
