@@ -36,19 +36,7 @@ public class Menu implements Serializable{
     @JoinColumn(name = "menuType_id")
 	private MenuType menuType;
     
-	
-	public Menu(Long id, String name, Double price, Boolean isEnabled) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.isEnabled = isEnabled;
-	}
-	
-	public Menu() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	public Long getId() {
 		return id;
 	}

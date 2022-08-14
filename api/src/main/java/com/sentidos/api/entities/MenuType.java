@@ -32,16 +32,7 @@ public class MenuType implements Serializable{
     @OneToMany(mappedBy = "menuType", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Menu> menu;
 	
-	public MenuType(Long id, String type) {
-		super();
-		this.id = id;
-		this.type = type;
-	}
 	
-	public MenuType() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 	public Long getId() {
 		return id;
 	}

@@ -1,9 +1,11 @@
 package com.sentidos.api.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,18 +40,9 @@ public class Order  implements Serializable{
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Invoice invoice;
 	
-	public Order(Customer customer, StreetName streeName, StreetNumber streetName, Departmen department, Floor floor,
-			HashMap<Menu, Integer> menuOrder, Boolean isDelivered, Invoice invoice) {
-		super();
-		this.customer = customer;
-		
-		this.isDelivered = isDelivered;
-	}
-	
-	public Order() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@Column(name = "create_at")
+	private Date createAt;
+    
 	
 	public Customer getCustomer() {
 		return customer;
@@ -63,6 +56,30 @@ public class Order  implements Serializable{
 	}
 	public void setIsDelivered(Boolean isDelivered) {
 		this.isDelivered = isDelivered;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}	
 	
 }

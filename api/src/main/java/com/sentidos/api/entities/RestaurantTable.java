@@ -43,6 +43,14 @@ public class RestaurantTable implements Serializable{
 
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
 	}	
 
 }

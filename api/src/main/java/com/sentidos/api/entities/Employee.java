@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Employee  implements Serializable{
 	private Long id;
 	
 	private String name;
-	private String lastName;
+	private String lastname;
 	private Integer dni;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -38,11 +39,11 @@ public class Employee  implements Serializable{
 	private List<EmployeeRole> employRolls;
 
 	
-	public Employee(Long id, String name, String lastName, Integer dni, List<EmployeeRole> employRolls) {
+	public Employee(Long id, String name, String lastname, Integer dni, List<EmployeeRole> employRolls) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.lastName = lastName;
+		this.lastname = lastname;
 		this.dni = dni;
 		this.employRolls = employRolls;
 	}
@@ -62,11 +63,11 @@ public class Employee  implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	public Integer getDni() {
 		return dni;

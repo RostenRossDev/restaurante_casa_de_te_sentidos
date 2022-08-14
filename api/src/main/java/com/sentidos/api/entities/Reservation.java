@@ -33,4 +33,38 @@ public class Reservation  implements Serializable{
     private Customer customer;
 	
 	private Date reservationDate;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public RestaurantTable getRestaurantTable() {
+		return restaurantTable;
+	}
+
+	public void setRestaurantTable(RestaurantTable restaurantTable) {
+		this.restaurantTable = restaurantTable;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Date getReservationDate() {
+		return reservationDate;
+	}
+
+	public void setReservationDate(Date reservationDate) {
+		this.reservationDate = reservationDate;
+	}
+	
+	
 }

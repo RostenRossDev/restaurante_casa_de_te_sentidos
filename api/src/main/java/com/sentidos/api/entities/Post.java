@@ -3,6 +3,7 @@ package com.sentidos.api.entities;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,22 +27,14 @@ public class Post implements Serializable{
 	
 	private String comment;
 	
-	private Date createDate;
+	@Column(name = "create_at")
+	private Date createAt;
 	
 	@ManyToOne()
     @JoinColumn(name = "customer_id")
     private Customer customer;
 	
-	public Post(Long id, String comment, Date createDate) {
-		super();
-		this.id = id;
-		this.comment = comment;
-		this.createDate = createDate;
-	}
-	public Post() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,16 +48,22 @@ public class Post implements Serializable{
 		this.comment = comment;
 	}
 	public Date getCreateDate() {
-		return createDate;
+		return createAt;
 	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	public void setCreateDate(Date createAt) {
+		this.createAt = createAt;
 	}
 	public Customer getCustomer() {
 		return customer;
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}
 	
 }

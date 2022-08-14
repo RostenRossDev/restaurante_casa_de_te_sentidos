@@ -1,6 +1,7 @@
 package com.sentidos.api.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -63,6 +64,8 @@ public class Customer implements Serializable{
     @JoinColumn(name = "floor_id")
 	private Floor floor;	
 	
+	@Column(name = "create_at")
+	private Date createAt;
 	
 	public Long getId() {
 		return id;
@@ -134,5 +137,31 @@ public class Customer implements Serializable{
 
 	public void setFloor(Floor floor) {
 		this.floor = floor;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Date getCreateAt() {
+		return createAt;
+	}
+
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
 	}		
+	
+	
 }
