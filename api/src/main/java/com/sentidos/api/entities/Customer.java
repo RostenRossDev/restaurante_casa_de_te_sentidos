@@ -34,13 +34,19 @@ public class Customer implements Serializable{
     @OneToOne(fetch = FetchType.LAZY)
 	private User user;
 	
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Post> posts;
-	
 	private String name;
 	
 	private String lastName;
 	
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Post> posts;
+	
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Reservation> reservations;
+	
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Order> orders;
+    
 	@ManyToOne()
     @JoinColumn(name = "streetName_id")
 	private StreetName streetName;

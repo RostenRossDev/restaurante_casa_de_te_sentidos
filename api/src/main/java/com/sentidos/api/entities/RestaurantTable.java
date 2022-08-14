@@ -5,18 +5,15 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="invoices")
-public class Invoice implements Serializable{
+@Table(name="tables")
+public class RestaurantTable implements Serializable{
 	
 	/**
 	 * 
@@ -27,25 +24,25 @@ public class Invoice implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JoinColumn(name = "order_id")
-    @OneToOne(fetch = FetchType.LAZY)
-	private Order order;
+	private Integer number;
 	
-    @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<InvoiceDetail> details;
-	
-	public Invoice(Long id, Customer customer, Invoice invoice) {
-		super();
-		this.id = id;
-	}
-	public Invoice() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @OneToMany(mappedBy = "restaurantTable", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Reservation> reservations;
+		
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}	
+
 }
