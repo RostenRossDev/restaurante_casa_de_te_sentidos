@@ -40,7 +40,7 @@ public class User implements Serializable{
 		@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		@JoinTable(name="users_roles", joinColumns = @JoinColumn(name="user_id"), 
 		inverseJoinColumns = @JoinColumn(name="role_id"), 
-		uniqueConstraints = {@UniqueConstraint(columnNames = {"usuario_id","role_id"})})
+		uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","role_id"})})
 		private List<UserRole> roles;
 
 		public User() {

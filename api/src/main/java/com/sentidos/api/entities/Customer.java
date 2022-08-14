@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Entity
-@Table(name="customers")
+//@Entity
+//@Table(name="customers")
 public class Customer implements Serializable{
 	
 	/**

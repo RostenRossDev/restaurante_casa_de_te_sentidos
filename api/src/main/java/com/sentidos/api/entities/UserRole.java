@@ -22,12 +22,12 @@ public class UserRole implements Serializable{
 	private Long id;
 	
 	@Column(unique = true, length = 20)
-	private String rolName;
+	private String name;
 
 	public UserRole(Long id, String rolName) {
 		super();
 		this.id = id;
-		this.rolName = rolName;
+		this.name = rolName;
 	}
 
 	public UserRole() {
@@ -44,11 +44,11 @@ public class UserRole implements Serializable{
 	}
 
 	public String getRolName() {
-		return rolName;
+		return name;
 	}
 
 	public void setRolName(String rolName) {
-		this.rolName = rolName;
+		this.name = rolName;
 	}
 	
 }
