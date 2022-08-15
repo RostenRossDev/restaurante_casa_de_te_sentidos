@@ -44,6 +44,8 @@ public class Customer implements Serializable{
 	
 	private String lastname;
 	
+	private String email;
+	
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Post> posts;
 	
@@ -184,7 +186,11 @@ public class Customer implements Serializable{
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
-	}		
-	
-	
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}			
 }

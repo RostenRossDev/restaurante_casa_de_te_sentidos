@@ -36,3 +36,9 @@ INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Excelente atencio
 INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Me encanto la musica y la comida.',  '2017-08-01',4);
 INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Lo lindo es la variedad en el menu Vegano.',  '2017-08-01',5);
 INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Las pastas fueron lo mejor.',  '2017-08-01',6);
+INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Viva la comida mexicana.', '2017-08-01',1);
+INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('El servicio genial.',  '2017-08-01',4);
+INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Las bebidas muy sabrosas.',  '2017-08-01',6);
+INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('No hay mejor lugar', '2017-08-01',1);
+
+
