@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sentidos.api.dto.UserDto;
@@ -20,8 +21,8 @@ import com.sentidos.api.entities.User;
 import com.sentidos.api.services.UserService;
 
 @RestController
-@RequestMapping("/api/v1/user/")
-@CrossOrigin(origins = {"http://localhost:3000"})
+@RequestMapping("/api/v1/user")
+@CrossOrigin(origins = {"http://**"}, allowCredentials = "true",  methods= {RequestMethod.GET, RequestMethod.POST})
 public class UserController {
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
