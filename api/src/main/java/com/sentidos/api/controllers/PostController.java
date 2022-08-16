@@ -26,7 +26,7 @@ import com.sentidos.api.services.CostumerServiceImpl;
 import com.sentidos.api.services.PostServiceImpl;
 import com.sentidos.api.services.UserService;
 
-@CrossOrigin({"http://localhost:3000"})
+//@CrossOrigin({"https://cyan-doors-clap-190-183-177-173.loca.lt"})
 @RestController
 @RequestMapping("/api/v1/post/")
 public class PostController {

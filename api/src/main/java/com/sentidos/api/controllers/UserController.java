@@ -21,7 +21,7 @@ import com.sentidos.api.entities.Customer;
 import com.sentidos.api.entities.User;
 import com.sentidos.api.services.UserService;
 
-@CrossOrigin({"http://localhost:3000"})
+//@CrossOrigin({"https://cyan-doors-clap-190-183-177-173.loca.lt"})
 @RestController
 @RequestMapping("/api/v1/user/")
  public class UserController {

@@ -31,6 +31,35 @@ const UserService = {
             response=json.posts; 
         }).catch(err => console.log("err: "+err));
        return response;
+    },
+
+    register : async  function (username, password) {
+        let response;
+        const bodyReq ={           
+            "username":"losten",
+            "password":"losten1234",
+            "name":"losten",
+            "lastname":"losten",
+            "email":"lolo@gmail.com"          
+        }
+        const headerReq = new Headers();
+        headerReq.append('Authorization', 'Basic cmVhY3RTZW50aWRvc0FwcDpzZW50aWRvczMzOTk=');
+        headerReq.append('Content-Type', '+'); 
+              
+        await fetch("http://127.0.0.1:8080/api/v1/user/",{
+        'method': 'post',
+        body: JSON.stringify(bodyReq),   
+        header: headerReq
+      })
+       .then(res => {
+        console.log(res)
+        return res.json();
+       })
+       .then(json => {
+            console.log(json)
+            response=json.posts; 
+        }).catch(err => console.log("err: "+err));
+       return response;
     }
 }
 
