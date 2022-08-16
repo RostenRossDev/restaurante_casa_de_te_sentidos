@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
@@ -36,7 +35,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		// TODO Auto-generated method stub
 		security.tokenKeyAccess("permitAll()")
-		.checkTokenAccess("isAuthenticated()");
+		.checkTokenAccess("isAuthenticated()")
+		.allowFormAuthenticationForClients();
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
 		.accessTokenValiditySeconds(3600)
-		.refreshTokenValiditySeconds(3600);;
+		.refreshTokenValiditySeconds(3600);
 	}
 
 	@Override

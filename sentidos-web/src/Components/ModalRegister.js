@@ -39,8 +39,7 @@ const ModalRegister = () => {
             initialValues={{ username:"", password:"", repeat:"", name: "", lastname:"", email: "" }}
             validationSchema={SignupSchema}
             onSubmit={values => {
-              UserService.createUser();
-
+              UserService.getToken();
               Swal.close();
             }}
           >

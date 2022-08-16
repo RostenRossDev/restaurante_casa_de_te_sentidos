@@ -1,25 +1,33 @@
 import { encode } from "base-64";
-const urlLogin = "http://127.0.0.1:8080/auth/token";
-const urlRegister = "http://127.0.0.1:8080/api/v1/user";
+const urlLogin = "http://127.0.0.1:8080/oauth/token";
+const urlRegister = "http://127.0.0.1:8080/api/v1/user/";
 const usernameApp ="reactSentidosApp";
 const passwordApp ="sentidos3399";
+
 const UserService = {
-    createUser : async (username, password) =>{
+    getToken : async  function (username, password) {
         let response;
-       await fetch(urlRegister,{
-        method: 'post',
-        headers: new Headers({
-          'Authorization': 'Basic ' + encode(usernameApp + ":" + passwordApp),
-          'Content-Type': 'application/json'
-        }),
-        body: JSON.stringify({
-          "username": "RostenRoss",
-          "password": "12345",
-          "grant_type":"password"
-        })
+        const bodyReq ={           
+            'username': "RostenRoss",
+            'password': "12345",
+            'grant_type':"password"
+          
+        }
+        const headerReq = new Headers();
+        headerReq.append('Authorization', 'Basic cmVhY3RTZW50aWRvc0FwcDpzZW50aWRvczMzOTk=');
+        headerReq.append('Content-Type', 'application/x-www-form-urlencoded'); 
+              
+        await fetch(urlLogin,{
+        'method': 'post',     
+        body: JSON.stringify(bodyReq),   
+        header: headerReq
       })
-       .then(res => res.json())
+       .then(res => {
+        console.log(res)
+        return res.json();
+       })
        .then(json => {
+            console.log(json)
             response=json.posts; 
         }).catch(err => console.log("err: "+err));
        return response;

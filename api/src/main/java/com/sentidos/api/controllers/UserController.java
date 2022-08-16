@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,16 +21,15 @@ import com.sentidos.api.entities.Customer;
 import com.sentidos.api.entities.User;
 import com.sentidos.api.services.UserService;
 
+@CrossOrigin({"http://localhost:3000"})
 @RestController
-@RequestMapping("/api/v1/user")
-@CrossOrigin(origins = {"http://**"}, allowCredentials = "true",  methods= {RequestMethod.GET, RequestMethod.POST})
-public class UserController {
+@RequestMapping("/api/v1/user/")
+ public class UserController {
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
-	private UserService userService;
+	private UserService userService;	
 	
-	
-	@PostMapping("")
+	@PostMapping(value= "", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<HashMap<String, Object>> createUser(@RequestBody UserDto userDto){	
 		
 		HashMap<String, Object> response = new HashMap<>();
