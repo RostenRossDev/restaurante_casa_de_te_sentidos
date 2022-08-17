@@ -29,7 +29,8 @@ import com.sentidos.api.services.UserService;
 	@Autowired
 	private UserService userService;	
 	
-	@PostMapping(value= "", produces = {MediaType.APPLICATION_JSON_VALUE})
+	//@PostMapping(value= "", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(value="", consumes = {"application/json"})
 	public ResponseEntity<HashMap<String, Object>> createUser(@RequestBody UserDto userDto){	
 		
 		HashMap<String, Object> response = new HashMap<>();

@@ -9,7 +9,6 @@ function StikyMenu () {
 
     const modalRegister = ()=>{
         let reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-        UserService.register();
 
         ModalRegister();
        
@@ -31,6 +30,8 @@ function StikyMenu () {
               return { login: login, password: password }
             }*/
           }).then((result) => {
+            UserService.register();
+
             UserService.getToken();
            /* Swal.fire(`
               Login: ${result.value.login}
