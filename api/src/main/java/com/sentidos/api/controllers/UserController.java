@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +58,16 @@ import com.sentidos.api.services.UserService;
 		
 		response.put("user", userDto);
 		response.put("message", "Usuario creado con eixto");
+		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping("")
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
+	public ResponseEntity<HashMap<String, Object>> getUserData(){	
+		HashMap<String, Object> response = new HashMap<>();
+		response.put("name", "Nestor");
+		response.put("lastname", "Costantini");
+		response.put("email", "costantini.nestor.m@gmail.com");
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
 }
