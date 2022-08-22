@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sentidos.api.dao.IPostDao;
+import com.sentidos.api.entities.Customer;
 import com.sentidos.api.entities.Post;
 
 @Service
@@ -32,4 +33,6 @@ public class PostServiceImpl implements IPostService{
 		postDao.deleteById(id);
 	}
 
+	
+	
 }

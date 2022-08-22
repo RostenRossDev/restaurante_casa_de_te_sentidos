@@ -57,4 +57,6 @@ public class UserService implements UserDetailsService, IUsuarioService{
 	public List<User>findAll(){
 		return (List<User>)userDao.findAll();
 	}
+	
+	
 }

@@ -2,17 +2,25 @@ package com.sentidos.api.controllers;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sentidos.api.dto.CustomerDto;
 import com.sentidos.api.dto.PostDto;
@@ -20,6 +28,7 @@ import com.sentidos.api.dto.UserDto;
 import com.sentidos.api.enitiesWrapper.CustomerWrapper;
 import com.sentidos.api.enitiesWrapper.PostWraper;
 import com.sentidos.api.enitiesWrapper.UserWrapper;
+import com.sentidos.api.entities.Customer;
 import com.sentidos.api.entities.Post;
 import com.sentidos.api.entities.User;
 import com.sentidos.api.services.CostumerServiceImpl;
@@ -41,6 +50,15 @@ public class PostController {
 	@Autowired
 	private PostServiceImpl postService;
 	
+	private Object getPrincipal() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) { 
+			return auth.getPrincipal();
+		
+		}
+		return null;
+	}
+	
 	@GetMapping(value= "",  produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<HashMap<String, Object>> allPost(){
 		HashMap<String, Object> response = new HashMap<>();
@@ -50,6 +68,7 @@ public class PostController {
 	}
 	
 	
+	/*
 	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@PostMapping("")
 	public ResponseEntity<HashMap<String, Object>> savePost( Post post, User user){
@@ -58,6 +77,7 @@ public class PostController {
 		response.put("post", response);
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
+	*/
 	
 	@Secured({"ROLE_USER"})
 	@GetMapping("tables")
@@ -75,4 +95,30 @@ public class PostController {
 
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
+	@PostMapping("")
+	ResponseEntity<HashMap<String, Object>> save(@RequestBody PostDto postDto){
+		HashMap<String, Object> response = new HashMap<>();
+		HttpStatus status=HttpStatus.OK;
+		User userDetails = null;
+
+		if (getPrincipal() instanceof UserDetails) {
+			  userDetails = (User) getPrincipal();
+		}
+		Post newPost= PostWraper.dtoToEntity(postDto);
+		Customer customer=costumerService.findById(userDetails.getId());
+		newPost.setCustomer(customer);
+		newPost=postService.save(newPost);
+		if(newPost.getId()==null) {
+			response.put("post", newPost);
+		}else {
+			response.put("error", "error al comentar");
+			status=HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return  new ResponseEntity<HashMap<String,Object>>(response, status);
+	} 
+	
+	
+	
 }
+
