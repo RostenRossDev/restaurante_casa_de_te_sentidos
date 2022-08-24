@@ -32,6 +32,7 @@ public class Post implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(length = 800)
 	private String comment;
 	
 	@Column(name = "create_at")
@@ -79,5 +80,11 @@ public class Post implements Serializable{
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", comment=" + comment + ", createAt=" + createAt + ", customer=" + customer + "]";
+	}
+
 	
 }

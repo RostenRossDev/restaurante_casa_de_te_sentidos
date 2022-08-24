@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,6 +42,7 @@ import com.sentidos.api.services.UserService;
 @RequestMapping("/api/v1/post/")
 public class PostController {
 
+	private static Logger log = LoggerFactory.getLogger(PostController.class);
 
 	@Autowired
 	private UserService userService;
@@ -49,6 +52,9 @@ public class PostController {
 	
 	@Autowired
 	private PostServiceImpl postService;
+	
+	@Autowired
+	private CostumerServiceImpl customerService;
 	
 	private Object getPrincipal() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -62,7 +68,11 @@ public class PostController {
 	@GetMapping(value= "",  produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<HashMap<String, Object>> allPost(){
 		HashMap<String, Object> response = new HashMap<>();
-		List<PostDto> postDtos = postService.findAll().stream().map(post -> PostWraper.entityToDto(post)).toList();
+		List<PostDto> postDtos = postService.findAll().stream().map(post ->{ 
+			log.info(post.toString());
+			return PostWraper.entityToDto(post);
+		}).toList();
+		log.info(postDtos.toString());
 		response.put("posts", postDtos);
 		return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.OK);
 	}
@@ -100,18 +110,22 @@ public class PostController {
 	ResponseEntity<HashMap<String, Object>> save(@RequestBody PostDto postDto){
 		HashMap<String, Object> response = new HashMap<>();
 		HttpStatus status=HttpStatus.OK;
-		User userDetails = null;
-
-		if (getPrincipal() instanceof UserDetails) {
-			  userDetails = (User) getPrincipal();
-		}
+		
+		User user = userService.findByUsername(postDto.getUser());
+		Customer customer = customerService.findByUser(user);
+		
 		Post newPost= PostWraper.dtoToEntity(postDto);
-		Customer customer=costumerService.findById(userDetails.getId());
 		newPost.setCustomer(customer);
 		newPost=postService.save(newPost);
-		if(newPost.getId()==null) {
+		log.info(newPost.toString());
+		
+		if(newPost.getId() !=null) {
+			log.info("if: "+newPost.getId().toString());
+
 			response.put("post", newPost);
 		}else {
+			log.info("else: "+newPost.getId().toString());
+
 			response.put("error", "error al comentar");
 			status=HttpStatus.INTERNAL_SERVER_ERROR;
 		}

@@ -32,5 +32,11 @@ public class PostDto {
 
 	public void setUser(String user) {
 		this.user = user;
-	}        
+	}
+
+	@Override
+	public String toString() {
+		return "PostDto [comment=" + comment + ", createAt=" + createAt + ", user=" + user + "]";
+	}   
+	
 }
