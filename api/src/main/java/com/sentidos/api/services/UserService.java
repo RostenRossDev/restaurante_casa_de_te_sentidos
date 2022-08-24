@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService, IUsuarioService{
 		// TODO Auto-generated method stub
 		return userDao.findByUsername(username);
 	}
-
+	
 	@Override
 	public User save(User user) {
 		// TODO Auto-generated method stub

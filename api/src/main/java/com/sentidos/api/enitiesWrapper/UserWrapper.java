@@ -1,8 +1,6 @@
 package com.sentidos.api.enitiesWrapper;
 
-import com.sentidos.api.dto.PostDto;
 import com.sentidos.api.dto.UserDto;
-import com.sentidos.api.entities.Post;
 import com.sentidos.api.entities.User;
 
 public class UserWrapper {
