@@ -14,9 +14,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="reservations")
+@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"create_at", "restaurantTable_id"})})
 public class Reservation  implements Serializable{
 	
 	/**
@@ -28,6 +31,7 @@ public class Reservation  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonIgnore
 	@ManyToOne()
     @JoinColumn(name = "restaurantTable_id")
 	private RestaurantTable restaurantTable;

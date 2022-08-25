@@ -42,3 +42,24 @@ INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('Las bebidas muy s
 INSERT INTO `posts` (comment, create_at, customer_id) VALUES ('No hay mejor lugar', '2017-08-01',1);
 
 
+/* INSERT RESTAURANT TABLES*/
+
+INSERT INTO `tables` (number) VALUES (1);
+INSERT INTO `tables` (number) VALUES (2);
+INSERT INTO `tables` (number) VALUES (3);
+INSERT INTO `tables` (number) VALUES (4);
+INSERT INTO `tables` (number) VALUES (5);
+INSERT INTO `tables` (number) VALUES (6);
+INSERT INTO `tables` (number) VALUES (7);
+INSERT INTO `tables` (number) VALUES (8);
+INSERT INTO `tables` (number) VALUES (9);
+INSERT INTO `tables` (number) VALUES (10);
+INSERT INTO `tables` (number) VALUES (11);
+INSERT INTO `tables` (number) VALUES (12);
+INSERT INTO `tables` (number) VALUES (13);
+INSERT INTO `tables` (number) VALUES (14);
+INSERT INTO `tables` (number) VALUES (15);
+INSERT INTO `tables` (number) VALUES (16);
+INSERT INTO `tables` (number) VALUES (17);
+INSERT INTO `tables` (number) VALUES (18);
+INSERT INTO `tables` (number) VALUES (19);

@@ -1,6 +1,7 @@
 package com.sentidos.api.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import com.sentidos.api.entities.Reservation;
 import com.sentidos.api.entities.RestaurantTable;
 import com.sentidos.api.entities.User;
 import com.sentidos.api.services.ICustomerService;
+import com.sentidos.api.services.ReservationService;
 import com.sentidos.api.services.TableServiceImpl;
 import com.sentidos.api.services.UserService;
 import com.sentidos.api.services.CostumerServiceImpl;
@@ -28,7 +30,7 @@ import com.sentidos.api.services.CostumerServiceImpl;
 public class ReservationController {
 
 	@Autowired
-	private IReservation reservationDao;
+	private ReservationService reservationService;
 	
 	@Autowired
 	private TableServiceImpl tableService;
@@ -52,10 +54,10 @@ public class ReservationController {
 		reservation.setCustomer(customer);
 		reservation.setRestaurantTable(table);
 		
-		reservation =reservationDao.save(reservation) ;
+		reservation =reservationService.save(reservation) ;
 		
 		if(!reservation.getId().equals(null)){
-			response.put("reservation", reservation);
+			response.put("reservation", ReservationWrapper.entityToDto(reservation));
 			return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 		}
 		response.put("error", "No se pudo realizar la reserva. Intente nuevamente");		
@@ -65,9 +67,8 @@ public class ReservationController {
 	@GetMapping("/all")
 	public ResponseEntity<HashMap<String,Object>> all(){
 		HashMap<String, Object> response = new HashMap<>();
-		
-		
-		
+		List<Reservation> reservations = reservationService.findAll();
+		response.put("reservations", reservations);		
 		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 	} 
 }
