@@ -147,7 +147,7 @@ function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col text-center align-bottom blurHover">
+                        <div className="col text-center align-bottom blurHover" >
                             <div className="card text-bg-dark">
                             <img src={img8} className="card-img imgBlurHov" alt="..." />
                                 <div className="card-img-overlay">

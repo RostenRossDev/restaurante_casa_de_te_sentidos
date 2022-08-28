@@ -16,10 +16,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"create_at", "restaurantTable_id"})})
+@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"reservation_date", "restaurantTable_id"})})
 public class Reservation  implements Serializable{
 	
 	/**
@@ -40,10 +43,18 @@ public class Reservation  implements Serializable{
     @JoinColumn(name = "customer_id")
     private Customer customer;
 	
+    @DateTimeFormat(pattern="yyyy-MM-dd")
 	@Column(name = "create_at")
     @Temporal(TemporalType.DATE)
 	private Date createAt;
-
+	
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name = "reservation_date")
+    @Temporal(TemporalType.DATE)
+	private Date reservationDate;
+	
+	private Boolean confirmed;
+	
 	@PrePersist
     public void prePersist() {
         createAt = new Date();
@@ -74,12 +85,32 @@ public class Reservation  implements Serializable{
 	}
 
 	public Date getReservationDate() {
+		return reservationDate;
+	}
+
+	public void setReservationDate(Date reservationDate) {
+		this.reservationDate = reservationDate;
+	}
+
+	public Date getCreateAt() {
 		return createAt;
 	}
 
-	public void setReservationDate(Date createAt) {
+	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
-	
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+
+	@Override
+	public String toString() {
+		return "Reservation [id=" + id + ", restaurantTable=" + restaurantTable + ", customer=" + customer
+				+ ", createAt=" + createAt + ", reservationDate=" + reservationDate + ", confirmed=" + confirmed + "]";
+	}	
 }
