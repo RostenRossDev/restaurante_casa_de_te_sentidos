@@ -4,12 +4,14 @@ import fondo from "../img/sentidos_arriba.png"
 import tables from '../img/restaurant.png'
 import ReservationService from "../Service/ReservationService";
 import ReactTooltip from "react-tooltip";
-
+import teaIco from "../img/tea.svg";
+import resto from "../img/silverware.svg"
 function Tables({modal}){
     
     const [reservas, setReservas] = useState([]);
     const [reservasDiasMesa, setReservasDiasMesas]=useState([])
     const [changeDate, setChangeDate] = useState(false);
+    const [hour, setHour] = useState(1);
 
    
     useEffect(()=>{
@@ -64,13 +66,13 @@ function Tables({modal}){
     }
     const matchDayTable = (table, date) =>{
         let match=false;
+        console.log(JSON.stringify(reservasDiasMesa))
         reservasDiasMesa.forEach(el =>{
             const myArray = el.dateReservation.split("-");
 
             const elementDate = new Date(myArray[0], myArray[1], myArray[2])
             const elementDateFormated = elementDate.getFullYear()+"-"+(elementDate.getMonth()).toString().padStart(2, '0')+"-"+elementDate.getDate()
 
-            console.log(elementDateFormated, date)
             if(elementDateFormated.localeCompare(date) === 0){
                 
                 if(el.table === table){
@@ -88,11 +90,12 @@ function Tables({modal}){
         if(sessionStorage.getItem("token")!==null) tableClass="table";
         const reservations = sessionStorage.getItem("reservations");
         const today=new Date(sessionStorage.getItem("reservationDate"))
-        const todayFormated = today.getFullYear()+"-"+(today.getMonth() + 1).toString().padStart(2, '0')+"-"+(today.getDate()+1)
+        const todayFormated = today.getFullYear()+"-"+(today.getMonth() + 1).toString().padStart(2, '0')+"-"+(today.getDate())
         for(let i=0;i<17;i++){
             tableClass="";          
 
-            if(matchDayTable(i, todayFormated)){
+            console.log("mesa: "+(i+1)+", fecha: "+todayFormated)
+            if(matchDayTable((i+1), todayFormated)){
                 console.log("mas aca")
 
                 const username=sessionStorage.getItem("username")
@@ -210,6 +213,12 @@ function Tables({modal}){
             })
         }  
     }
+
+    
+    const changeHour =(hour)=>{
+        console.log("hora: "+hour)
+        setHour(hour)
+    } 
     return (
         <div>
             <div className="row headerReservation">
@@ -226,13 +235,36 @@ function Tables({modal}){
                <div className="col row headerReservation">
                     <label>
                         <input name="rest" type="checkbox" class="filled-in"  onClick={updateCheckBox} checked={RestCheckbox}/>
-                        <span style={{"fontSize":"13px"}}>Restaurante: </span>
-                    </label>
+                        <span style={{"fontSize":"13px"}}>    
+                            <img src={resto} height="20px" width="20px" />
+                        </span>                        
+                    </label>                   
                     <label>
                         <input name="te" type="checkbox" class="filled-in"  onClick={updateCheckBox} checked={teCheckbox}/>
-                        <span  style={{"fontSize":"13px"}}>Casa de té: </span>
-                    </label>
+                        <span  style={{"fontSize":"13px"}}>
+                            <img src={teaIco} height="20px" width="20px" />
+                        </span>                                                
+                    </label>                   
+                    
                 </div>   
+                <div className="col">
+                        
+                       
+                            <select id="hour" style={{"display":"block"}} onChange={e => changeHour(e.target.value)} value={hour}>
+                            {teCheckbox?
+                                <>
+                                    <option value={1}>11hs a 15hs</option>
+                                    <option value={2}>18hs a 00hs</option>
+                                </>:
+                                <>
+                                    <option value="1">7hs a 11hs</option>
+                                    <option value="2">15hs a 19hs</option>
+                                </>
+                            }
+                            </select>
+                            
+                        
+                    </div>   
                 <div className="col headerReservation"><button className="btn" onClick={sendReservation}>Confirmar</button></div></>    
                 :null
                 }       
@@ -241,11 +273,11 @@ function Tables({modal}){
             
             <img src={fondo} alt="fondo"/>
 
-            <div className="col" style={{ "position": "absolute", "top": "320px",  "left": "140px"}}>
+            <div className="col" style={{ "position": "absolute", "top": "335px",  "left": "140px"}}>
                 {tablesLeft()}
             </div>
 
-            <div className="col" style={{ "position": "absolute", "top": "320px",  "left": "450px"}}>
+            <div className="col" style={{ "position": "absolute", "top": "335px",  "left": "450px"}}>
                 {tablesRigth()}                
             </div>
 
