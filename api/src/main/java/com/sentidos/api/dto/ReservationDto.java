@@ -22,7 +22,8 @@ public class ReservationDto {
 	private String username;
 	private String dateReservationString;
 	private Boolean confirmed;
-	private Boolean breakfast;
+	private Boolean isTea;
+	private Boolean hour;
 	
 	public Integer getTable() {
 		return table;
@@ -70,14 +71,22 @@ public class ReservationDto {
 	public void setConfirmed(Boolean confirmed) {
 		this.confirmed = confirmed;
 	}
-	public Boolean getBreakfast() {
-		return breakfast;
-	}
-	public void setBreakfast(Boolean breakfast) {
-		this.breakfast = breakfast;
-	}
+	
 	public void setDateReservationString(String dateReservationString) {
 		this.dateReservationString = dateReservationString;
+	}	
+	
+	public Boolean getIsTea() {
+		return isTea;
+	}
+	public void setIsTea(Boolean isTea) {
+		this.isTea = isTea;
+	}
+	public Boolean getHour() {
+		return hour;
+	}
+	public void setHour(Boolean hour) {
+		this.hour = hour;
 	}
 	@Override
 	public String toString() {

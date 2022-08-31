@@ -120,9 +120,7 @@ public class Reservation  implements Serializable{
 	public void setIsTea(Boolean isTea) {
 		this.isTea = isTea;
 	}
-
 	
-
 	public Boolean getHour() {
 		return hour;
 	}
