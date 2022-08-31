@@ -4,7 +4,7 @@ import axios from "axios";
 
 const baseLocal="http://127.0.0.1:8080";
 const baseWweb="https://sentidos-backend.herokuapp.com";
-const base= baseWweb;
+const base= baseLocal;
 const urlLogin = base+"/oauth/token";
 const urlRegister = base+"/api/v1/user/";
 const urlUploadPhoto = base+"/api/v1/user/uploads";

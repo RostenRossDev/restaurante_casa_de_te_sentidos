@@ -5,7 +5,6 @@ import img4 from "../../img/imagen4.jpg"
 import img5 from "../../img/imagen5.jpg"
 import img6 from "../../img/imagen6.jpg"
 import img7 from "../../img/imagen7.jpg"
-import img8 from "../../img/imagen8.jpg"
 import img10 from "../../img/imagen10.jpg"
 import logo from "../../img/sentidos_logo.png"
 import PostBox from "../../Components/PostBox"
@@ -16,6 +15,7 @@ import UserService from "../../Service/UserService"
 import Menu from "../../Components/Menu"
 import defaultUser from '../../img/default.png'
 import PostService from "../../Service/PostService"
+import Reservation from "../../Components/Reservation"
 
 function useForceUpdate(){
     const [value, setValue] = useState(0); // integer state
@@ -147,14 +147,7 @@ function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col text-center align-bottom blurHover" >
-                            <div className="card text-bg-dark">
-                            <img src={img8} className="card-img imgBlurHov" alt="..." />
-                                <div className="card-img-overlay">
-                                    <p className="titulo-menu">Reservar Mesa</p>
-                                </div>
-                            </div>
-                        </div>
+                        <Reservation/>
                         <div className="col text-center align-bottom blurHover">
                             <div className="card text-bg-dark">
                             <img src={img5} className="card-img imgBlurHov" alt="..." />

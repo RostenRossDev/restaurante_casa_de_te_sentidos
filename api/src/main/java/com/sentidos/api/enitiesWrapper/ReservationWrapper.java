@@ -9,8 +9,7 @@ public class ReservationWrapper {
 	public static Reservation dtoToEntity(ReservationDto reservationDto) {
 		Reservation reservation = new Reservation();
 		reservation.setReservationDate(reservationDto.getDateReservation());
-		//reservation.setRestaurantTable(reservationDto.getTable());
-		//reservation.setCustomer(reservationDto.getTable());
+		reservation.setBreakfast(reservationDto.getBreakfast());
 		return reservation;
 	}
 	public static ReservationDto entityToDto(Reservation reservation) {
@@ -18,6 +17,8 @@ public class ReservationWrapper {
 		reservationDto.setDateReservation(reservation.getReservationDate());
 		reservationDto.setTable(reservation.getRestaurantTable().getNumber());
 		reservationDto.setUsername(reservation.getCustomer().getUser().getUsername());
+		reservationDto.setConfirmed(reservation.getConfirmed());
+		reservationDto.setBreakfast(reservation.getBreakfast());
 		return reservationDto;
 	}
 }

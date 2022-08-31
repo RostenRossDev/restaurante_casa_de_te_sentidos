@@ -1,6 +1,6 @@
 const baseLocal="http://127.0.0.1:8080";
 const baseWweb="https://sentidos-backend.herokuapp.com";
-const base= baseWweb;
+const base= baseLocal;
 const url = `${base}/api/v1/post/`;
 
 const PostService = {

@@ -286,3 +286,137 @@
   margin-right: 50%;
 }
 
+/*tables*/
+
+.table:hover{
+  background-color: green;
+  border-radius: 10px;
+}
+
+.reservado{
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #FF0000;
+  align-self:flex-start;
+  margin: 0px;
+  padding: 0px;
+}
+
+.tuReserva{
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #0012C1;
+  align-self:flex-start;
+  margin: 0px;
+  padding: 0px;
+}
+
+.datepicker{
+  float: left;
+  display: block;
+  margin-left: 150px;
+}
+
+.headerReservation{
+  margin: 0px;
+}
+
+/* tooltips */
+
+.exit{
+  position: absolute;
+  top: 185px;
+  left:655px;
+  width: 50px;
+  height: 50px;
+}
+
+.toilet{
+  position: absolute;
+  top: 185px;
+  left:95px;
+  width: 50px;
+  height: 50px;
+}
+
+.cash{
+  position: absolute;
+  top: 210px;
+  left:510px;
+  width: 50px;
+  height: 50px;
+}
+
+.window1{
+  position: absolute;
+  top: 310px;
+  left:90px;
+  width: 50px;
+  height: 50px;
+}
+
+.window2{
+  position: absolute;
+  top: 410px;
+  left:90px;
+  width: 50px;
+  height: 50px;
+}
+
+.window3{
+  position: absolute;
+  top: 515px;
+  left:90px;
+  width: 50px;
+  height: 50px;
+}
+
+.window4{
+  position: absolute;
+  top: 625px;
+  left:90px;
+  width: 50px;
+  height: 50px;
+}
+
+.window5{
+  position: absolute;
+  top: 315px;
+  left:658px;
+  width: 50px;
+  height: 50px;
+}
+
+.window6{
+  position: absolute;
+  top: 415px;
+  left:658px;
+  width: 50px;
+  height: 50px;
+}
+
+.window7{
+  position: absolute;
+  top: 520px;
+  left:658px;
+  width: 50px;
+  height: 50px;
+}
+
+.window8{
+  position: absolute;
+  top: 632px;
+  left:658px;
+  width: 50px;
+  height: 50px;
+}
+
+.door{
+  position: absolute;
+  top: 650px;
+  left:355px;
+  width: 80px;
+  height: 90px;
+}

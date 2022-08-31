@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a59ea32e.css",
+    "main.js": "/static/js/main.eef9c4be.js",
+    "static/js/787.9eb9eac0.chunk.js": "/static/js/787.9eb9eac0.chunk.js",
+    "static/media/imagen8.jpg": "/static/media/imagen8.b77938a406452a13f860.jpg",
+    "static/media/imagen10.jpg": "/static/media/imagen10.dc0a72c15f366f8ffbd7.jpg",
+    "static/media/imagen5.jpg": "/static/media/imagen5.5bb8672767ae90097e84.jpg",
+    "static/media/imagen7.jpg": "/static/media/imagen7.373b00f07a8cbf214bba.jpg",
+    "static/media/imagen2.jpg": "/static/media/imagen2.3d079d1007a3a478cbbb.jpg",
+    "static/media/imagen3.jpg": "/static/media/imagen3.09b6f19900eb51f18ae7.jpg",
+    "static/media/imagen1.jpg": "/static/media/imagen1.09c79ac95c5cefa118a3.jpg",
+    "static/media/imagen4.jpg": "/static/media/imagen4.8f4765602033bbb4f58c.jpg",
+    "static/media/imagen6.jpg": "/static/media/imagen6.2866e6d471a288e769b9.jpg",
+    "static/media/fondo5.jpg": "/static/media/fondo5.1c7866cd5700f3c6c746.jpg",
+    "static/media/sentidos_logo.png": "/static/media/sentidos_logo.eada863f5eeb61206644.png",
+    "static/media/fondo3.jpg": "/static/media/fondo3.812a71d3f3a2348e11a9.jpg",
+    "static/media/fondo1.jpg": "/static/media/fondo1.11756ba3a1eaa9504746.jpg",
+    "static/media/default.png": "/static/media/default.6537f30afd5076cd45ac.png",
+    "static/media/fondo4.jpg": "/static/media/fondo4.d86f77147930d1f44371.jpg",
+    "index.html": "/index.html",
+    "static/media/right-to-bracket-solid.svg": "/static/media/right-to-bracket-solid.a7fa645e64b55212334bdb5be0e63dda.svg",
+    "static/media/user-plus-solid.svg": "/static/media/user-plus-solid.f823fbaccc994cd3195b509f5598d5ba.svg",
+    "main.a59ea32e.css.map": "/static/css/main.a59ea32e.css.map",
+    "main.eef9c4be.js.map": "/static/js/main.eef9c4be.js.map",
+    "787.9eb9eac0.chunk.js.map": "/static/js/787.9eb9eac0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a59ea32e.css",
+    "static/js/main.eef9c4be.js"
+  ]
+}

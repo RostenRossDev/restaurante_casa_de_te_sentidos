@@ -21,6 +21,8 @@ public class ReservationDto {
 	private Date create_at;
 	private String username;
 	private String dateReservationString;
+	private Boolean confirmed;
+	private Boolean breakfast;
 	
 	public Integer getTable() {
 		return table;
@@ -59,6 +61,23 @@ public class ReservationDto {
 	}
 	public void setCreate_at(Date create_at) {
 		this.create_at = create_at;
+	}
+	
+	
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+	public Boolean getBreakfast() {
+		return breakfast;
+	}
+	public void setBreakfast(Boolean breakfast) {
+		this.breakfast = breakfast;
+	}
+	public void setDateReservationString(String dateReservationString) {
+		this.dateReservationString = dateReservationString;
 	}
 	@Override
 	public String toString() {
