@@ -21,7 +21,7 @@ const url = `${base}/api/v1/reservation/`;
         .catch(error => console.log('error', error));
                 
     },
-    createReservation: async (date, table)=>{
+    createReservation: async (date, table, hour, isTea)=>{
         console.log(typeof date)
         const myArray = date.split("-");
         const selectedDate= new Date(myArray[0], "0"+(myArray[1]-1), myArray[2])
@@ -34,9 +34,11 @@ const url = `${base}/api/v1/reservation/`;
         var raw = JSON.stringify({
         "username": username,
         "dateReservation": selectedDate,
-        "table": table
+        "table": table,
+        "hour":hour,
+        "isTea":isTea
         });
-
+        console.log("Data to send: " +raw)
         var requestOptions = {
         method: 'POST',
         headers: myHeaders,

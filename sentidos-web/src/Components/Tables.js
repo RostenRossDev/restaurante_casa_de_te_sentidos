@@ -183,7 +183,9 @@ function Tables({modal}){
         const reservationDate = sessionStorage.getItem("reservationDate")
         const table =sessionStorage.getItem("table")
         console.log("fecha: "+typeof reservationDate)
-        const response = await ReservationService.createReservation(reservationDate, table);
+        const isTea = ((teCheckbox&& !RestCheckbox) && true) || ((!teCheckbox&& RestCheckbox)&& false);
+        console.log("es te:"+isTea)
+        const response = await ReservationService.createReservation(reservationDate, table, hour, isTea);
         if(response){
             console.log(JSON.stringify(response))
         }
@@ -249,9 +251,9 @@ function Tables({modal}){
                 </div>   
                 <div className="col">
                         
-                       
+                       { teCheckbox || RestCheckbox ?
                             <select id="hour" style={{"display":"block"}} onChange={e => changeHour(e.target.value)} value={hour}>
-                            {teCheckbox?
+                            {RestCheckbox?
                                 <>
                                     <option value={1}>11hs a 15hs</option>
                                     <option value={2}>18hs a 00hs</option>
@@ -262,10 +264,10 @@ function Tables({modal}){
                                 </>
                             }
                             </select>
-                            
-                        
+                        :null    
+                       }
                     </div>   
-                <div className="col headerReservation"><button className="btn" onClick={sendReservation}>Confirmar</button></div></>    
+                <div className="col headerReservation"><button className="btn" onClick={sendReservation}>Reservar</button></div></>    
                 :null
                 }       
                 <Calendar startDate={startDate} changeDate={setChangeDate} change={changeDate}/>
