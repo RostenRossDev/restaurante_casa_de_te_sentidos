@@ -18,11 +18,10 @@ import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"reservation_date", "restaurant_table_id", "breakfast"})})
+@Table(name="reservations", uniqueConstraints = { @UniqueConstraint(columnNames={"reservation_date", "restaurant_table_id", "is_tea", "hour_reservation"})})
 public class Reservation  implements Serializable{
 	
 	/**
@@ -53,9 +52,13 @@ public class Reservation  implements Serializable{
     @Temporal(TemporalType.DATE)
 	private Date reservationDate;
 	
-    private Boolean breakfast;
+    @Column(name="is_tea")
+    private Boolean isTea;
     
-	private Boolean confirmed = false;
+    @Column(name="hour_reservation" )
+    private Boolean hour;
+    
+	private Boolean confirmed;
 	
 	@PrePersist
     public void prePersist() {
@@ -109,14 +112,23 @@ public class Reservation  implements Serializable{
 	public void setConfirmed(Boolean confirmed) {
 		this.confirmed = confirmed;
 	}
-
 	
-	public Boolean getBreakfast() {
-		return breakfast;
+	public Boolean getIsTea() {
+		return isTea;
 	}
 
-	public void setBreakfast(Boolean breakfast) {
-		this.breakfast = breakfast;
+	public void setIsTea(Boolean isTea) {
+		this.isTea = isTea;
+	}
+
+	
+
+	public Boolean getHour() {
+		return hour;
+	}
+
+	public void setHour(Boolean hour) {
+		this.hour = hour;
 	}
 
 	@Override
