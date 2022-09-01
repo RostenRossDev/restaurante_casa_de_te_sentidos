@@ -11,7 +11,7 @@ function Tables({modal}){
     const [reservas, setReservas] = useState([]);
     const [reservasDiasMesa, setReservasDiasMesas]=useState([])
     const [changeDate, setChangeDate] = useState(false);
-    const [hour, setHour] = useState(1);
+    const [hour, setHour] = useState(true);
 
    
     useEffect(()=>{
@@ -40,13 +40,15 @@ function Tables({modal}){
             if(lastTable!==null){
                 lastTable.style.backgroundColor="transparent"
                 setLasTable(e.currentTarget)
-                e.currentTarget.style.backgroundColor="green"
+                e.currentTarget.style.borderStyle="solid"
+                e.currentTarget.style.borderColor="#8b90d3"                
                 e.currentTarget.style.borderRadius="10px"
 
                 sessionStorage.setItem("table",e.currentTarget.id)
             }else{
                 setLasTable(e.currentTarget)
-                e.currentTarget.style.backgroundColor="green"
+                e.currentTarget.style.borderStyle="solid"
+                e.currentTarget.style.borderColor="#8b90d3"
                 e.currentTarget.style.borderRadius="10px"
                 sessionStorage.setItem("table",e.currentTarget.id)
             }
@@ -255,12 +257,12 @@ function Tables({modal}){
                             <select id="hour" style={{"display":"block"}} onChange={e => changeHour(e.target.value)} value={hour}>
                             {RestCheckbox?
                                 <>
-                                    <option value={1}>11hs a 15hs</option>
-                                    <option value={2}>18hs a 00hs</option>
+                                    <option value={true}>11hs a 15hs</option>
+                                    <option value={false}>18hs a 00hs</option>
                                 </>:
                                 <>
-                                    <option value="1">7hs a 11hs</option>
-                                    <option value="2">15hs a 19hs</option>
+                                    <option value={true}>7hs a 11hs</option>
+                                    <option value={false}>15hs a 19hs</option>
                                 </>
                             }
                             </select>

@@ -296,21 +296,23 @@
 .reservado{
   width: 20px;
   height: 20px;
-  border-radius: 5px;
-  background-color: #FF0000;
+  border-radius: 10px;
+  background-color: #fc5656;
   align-self:flex-start;
   margin: 0px;
   padding: 0px;
+  pointer-events: none;
 }
 
 .tuReserva{
   width: 20px;
   height: 20px;
-  border-radius: 5px;
-  background-color: #0012C1;
+  border-radius: 10px;
+  background-color: #8b90d3;
   align-self:flex-start;
   margin: 0px;
   padding: 0px;
+  pointer-events: none;
 }
 
 .datepicker{

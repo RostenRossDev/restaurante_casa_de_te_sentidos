@@ -24,6 +24,7 @@ public class ReservationDto {
 	private Boolean confirmed;
 	private Boolean isTea;
 	private Boolean hour;
+	private String location;
 	
 	public Integer getTable() {
 		return table;
@@ -87,6 +88,14 @@ public class ReservationDto {
 	}
 	public void setHour(Boolean hour) {
 		this.hour = hour;
+	}
+	
+	
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	@Override
 	public String toString() {

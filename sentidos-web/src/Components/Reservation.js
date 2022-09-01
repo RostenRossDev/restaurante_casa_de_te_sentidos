@@ -57,7 +57,7 @@ function Reservation(){
 
     return(
         <> 
-            <div className="col text-center align-bottom blurHover" onClick={()=>setShow(!show)}>
+            <div className="col text-center align-bottom blurHover" onClick={()=>setShow(!show)} style={{"cursor":"pointer"}}>
                 <div className="card text-bg-dark">
                 <img src={img8} className="card-img imgBlurHov" alt="..." />
                     <div className="card-img-overlay">

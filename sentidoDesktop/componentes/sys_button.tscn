@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resource/icons/x.svg" type="Texture" id=1]
+[ext_resource path="res://scripts/sys_button.gd" type="Script" id=2]
+
+[node name="sys_button" type="ColorRect"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+color = Color( 0.372549, 0.117647, 0.278431, 1 )
+script = ExtResource( 2 )
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 26, 24 )
+texture = ExtResource( 1 )
+
+[connection signal="gui_input" from="." to="." method="_on_sys_button_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_sys_button_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_sys_button_mouse_exited"]

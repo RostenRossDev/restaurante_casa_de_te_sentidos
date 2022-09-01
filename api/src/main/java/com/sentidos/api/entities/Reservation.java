@@ -58,7 +58,9 @@ public class Reservation  implements Serializable{
     @Column(name="hour_reservation" )
     private Boolean hour;
     
-	private Boolean confirmed;
+	private Boolean confirmed=false;
+	
+	private String location;
 	
 	@PrePersist
     public void prePersist() {
@@ -127,6 +129,15 @@ public class Reservation  implements Serializable{
 
 	public void setHour(Boolean hour) {
 		this.hour = hour;
+	}
+
+	
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	@Override
