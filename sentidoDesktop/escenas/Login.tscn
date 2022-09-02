@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://resource/img/sentidos_logo.png" type="Texture" id=1]
 [ext_resource path="res://resource/fonts/CrimsonText-Bold.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://resource/fonts/bold.tres" type="DynamicFont" id=3]
-[ext_resource path="res://escenas/Button.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Login.gd" type="Script" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.811765, 0.435294, 0.807843, 1 )
@@ -18,21 +17,13 @@ bg_color = Color( 0.482353, 0.0705882, 0.670588, 1 )
 size = 26
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.682353, 0, 1, 1 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.482353, 0.0705882, 0.670588, 1 )
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.482353, 0.0705882, 0.670588, 1 )
-
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.482353, 0.0705882, 0.670588, 1 )
 
 [node name="Login" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_bottom = 1.0
@@ -72,17 +63,14 @@ margin_bottom = 148.8
 custom_fonts/font = SubResource( 2 )
 text = "Autenticacion de usuario"
 
+[node name="HTTPRequest" type="HTTPRequest" parent="Panel"]
+
 [node name="Button" type="Button" parent="Panel"]
-margin_left = 154.0
-margin_top = 456.0
-margin_right = 255.0
-margin_bottom = 489.0
-custom_fonts/font = ExtResource( 3 )
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/normal = SubResource( 8 )
-text = "Confirmar"
-script = ExtResource( 4 )
+margin_left = 136.0
+margin_top = 436.0
+margin_right = 259.0
+margin_bottom = 482.0
+text = "Aceptar"
 
 [node name="Panel2" type="Panel" parent="."]
 margin_left = 400.0
@@ -121,4 +109,5 @@ position = Vector2( 320, 328 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
-[connection signal="gui_input" from="Panel/Button" to="Panel/Button" method="_on_Button_gui_input"]
+[connection signal="request_completed" from="Panel/HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]

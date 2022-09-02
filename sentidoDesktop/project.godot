@@ -14,6 +14,10 @@ config/name="Sentido Desktop"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
+[autoload]
+
+global="*res://scripts/globalVar.gd"
+
 [display]
 
 window/size/borderless=true

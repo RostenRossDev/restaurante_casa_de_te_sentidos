@@ -1,5 +1,7 @@
 package com.sentidos.api.auth;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
-
+	private Logger log = LoggerFactory.getLogger(SpringSecurityConfig.class);
 	@Autowired
 	private UserDetailsService userService;
 
@@ -39,7 +41,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	
 	@Override
-	public void configure(HttpSecurity http) throws Exception {
+	public void configure(HttpSecurity http) throws Exception {		
+		log.debug("http: ".concat(http.toString()));
 		http
 		.authorizeRequests()
 		.anyRequest()

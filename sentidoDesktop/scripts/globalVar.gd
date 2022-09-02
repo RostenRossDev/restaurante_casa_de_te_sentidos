@@ -1,7 +1,10 @@
-extends Button
+extends Node
 
-onready var username = $"../LineEdit"
-onready var password = $"../LineEdit2"
+
+var token =""
+var username=""
+var reservas =[]
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -12,13 +15,17 @@ func _ready():
 	pass # Replace with function body.
 
 
+func setToken(tokenStr):
+	token=tokenStr
+
+func getToken():
+	return token
+	
+func setUsername(usernameStr):
+	username=usernameStr
+
+func getUsername():
+	return username
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_Button_gui_input(event):
-	if event is InputEventMouseButton:
-		if event.is_pressed() and event.get_button_index() == 1:
-			print("username: "+username.text)
-			print("password: "+password.text)
