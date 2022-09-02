@@ -24,6 +24,7 @@ public class ReservationWrapper {
 		reservationDto.setIsTea(reservation.getIsTea());
 		reservationDto.setHour(reservation.getHour());
 		reservationDto.setLocation(reservation.getLocation()); 
+		
 		return reservationDto;
 	}
 }

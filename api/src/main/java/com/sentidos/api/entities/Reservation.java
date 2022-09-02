@@ -55,12 +55,14 @@ public class Reservation  implements Serializable{
     @Column(name="is_tea")
     private Boolean isTea;
     
-    @Column(name="hour_reservation" )
+    @Column(name="hour_reservation")
     private Boolean hour;
     
 	private Boolean confirmed=false;
 	
 	private String location;
+	
+	private Boolean disabled =false;
 	
 	@PrePersist
     public void prePersist() {
@@ -140,9 +142,21 @@ public class Reservation  implements Serializable{
 		this.location = location;
 	}
 
+	
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation [id=" + id + ", restaurantTable=" + restaurantTable + ", customer=" + customer
-				+ ", createAt=" + createAt + ", reservationDate=" + reservationDate + ", confirmed=" + confirmed + "]";
-	}	
+				+ ", createAt=" + createAt + ", reservationDate=" + reservationDate + ", isTea=" + isTea + ", hour="
+				+ hour + ", confirmed=" + confirmed + ", location=" + location + ", disabled=" + disabled + "]";
+	}
+
+		
 }
