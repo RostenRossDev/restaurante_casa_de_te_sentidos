@@ -158,5 +158,5 @@ public class Reservation  implements Serializable{
 				+ hour + ", confirmed=" + confirmed + ", location=" + location + ", disabled=" + disabled + "]";
 	}
 
-		
+	 	
 }
