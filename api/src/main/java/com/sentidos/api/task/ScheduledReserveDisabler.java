@@ -71,13 +71,14 @@ public class ScheduledReserveDisabler {
 		log.info("Se deshabilitaron las reservas el restaurante en el horario de 11hs a 15hs del dia ".concat(formater.format(today)));
 	}
 	
-	@Scheduled(cron = "0 31 00 * * ?")
+	@Scheduled(cron = "0 0 00 * * ?")
 	public void disableDinnerhReservations() {
 		log.info("iniciando");
 
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");		
 		Date today = new Date();		
-		today = new Date(formater.format(today));		
+		today = new Date(today.getYear(), today.getMonth(), (today.getDate()-1));	
+		log.info("fecha:"+today);
 		List<Reservation> reservations = reservationService.findByReservationDateAndDisabledAndIsTeaAndHour(today, Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
 		log.info(reservations.toString());
 		
