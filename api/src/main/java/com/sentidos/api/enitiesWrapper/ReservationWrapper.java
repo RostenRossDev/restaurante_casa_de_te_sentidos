@@ -13,6 +13,7 @@ public class ReservationWrapper {
 		reservation.setHour(reservationDto.getHour());
 		reservation.setConfirmed(reservationDto.getConfirmed());
 		reservation.setLocation(reservationDto.getLocation());
+		reservation.setDisabled(reservationDto.getDisabled());
 		return reservation;
 	}
 	public static ReservationDto entityToDto(Reservation reservation) {
@@ -24,7 +25,8 @@ public class ReservationWrapper {
 		reservationDto.setIsTea(reservation.getIsTea());
 		reservationDto.setHour(reservation.getHour());
 		reservationDto.setLocation(reservation.getLocation()); 
-		
+		reservationDto.setDisabled(reservation.getDisabled());
+
 		return reservationDto;
 	}
 }

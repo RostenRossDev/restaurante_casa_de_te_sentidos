@@ -4,8 +4,13 @@ export(StreamTexture) var icon
 export var label ="Inicio"
 export var active = false
 export(NodePath) var page
+export var pageName=""
 
-
+onready var boxContainer =$"../../../../body/ScrollContainer/VBoxContainer"
+onready var homeMin =$"../../../../body/ScrollContainer/VBoxContainer/Pages/Home/min"
+onready var homeMax =$"../../../../body/ScrollContainer/VBoxContainer/Pages/Home/max"
+onready var pedidosMax =$"../../../../body/ScrollContainer/VBoxContainer/Pages/pedidos/max"
+onready var pedidosMin =$"../../../../body/ScrollContainer/VBoxContainer/Pages/pedidos/min"
 func _ready():
 	$ico.texture=icon
 	$Label.text=label
@@ -21,16 +26,13 @@ func deactive():
 	
 func update_elements():	
 	$active.visible=active	
-	get_node(page).visible=active
+	get_node(page).visible=active	
 	
 func _on_navItem_mouse_entered():
 	$bg.color="#7735b9"
 
-
-
 func _on_navItem_mouse_exited():
 	$bg.color="#511379"
-
 
 func _on_navItem_gui_input(event):
 	if event is InputEventMouseButton:

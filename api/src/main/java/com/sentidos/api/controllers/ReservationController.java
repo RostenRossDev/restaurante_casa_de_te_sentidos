@@ -55,7 +55,8 @@ public class ReservationController {
 	public ResponseEntity<HashMap<String,Object>> save(@RequestBody ReservationDto reservationDto){
 		HashMap<String, Object> response = new HashMap<>();
 		Date now = new Date();
-		log.info(reservationDto.getDateReservation()+": reserva dto");
+		
+		log.info(reservationDto.toString());
 
 		Date calendarReservation = reservationDto.getDateReservation();
 
@@ -91,6 +92,8 @@ public class ReservationController {
 			
 			reservation.setCustomer(customer);
 			reservation.setRestaurantTable(table);
+			reservation.setDisabled(Boolean.FALSE);
+			
 			try {
 				reservation =reservationService.save(reservation) ;
 

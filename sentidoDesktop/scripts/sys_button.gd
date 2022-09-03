@@ -8,11 +8,11 @@ export (StreamTexture) var icon =preload("res://resource/icons/x.svg")
 # var a = 2
 # var b = "text"
 
-onready var homeMax=$"../../../Pages/Home/max"
-onready var homeMin=$"../../../Pages/Home/min"
+onready var homeMax=$"../../../ScrollContainer/VBoxContainer/Pages/Home/max"
+onready var homeMin=$"../../../ScrollContainer/VBoxContainer/Pages/Home/min"
 
-onready var pedidosMax=$"../../../Pages/pedidos/max"
-onready var pedidosMin=$"../../../Pages/pedidos/min"
+onready var pedidosMax=$"../../../ScrollContainer/VBoxContainer/Pages/pedidos/max"
+onready var pedidosMin=$"../../../ScrollContainer/VBoxContainer/Pages/pedidos/min"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,8 +25,7 @@ func _on_sys_button_gui_input(event):
 			if types == TYPES.close:
 				get_tree().quit()
 			elif types == TYPES.minimize:
-				OS.set_window_minimized(true)
-				
+				OS.set_window_minimized(true)				
 			else:
 				var isMaxmimized =OS.is_window_maximized()
 				OS.set_window_maximized(!isMaxmimized)

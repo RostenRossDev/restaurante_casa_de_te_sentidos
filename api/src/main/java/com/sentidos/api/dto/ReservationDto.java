@@ -24,6 +24,7 @@ public class ReservationDto {
 	private Boolean confirmed;
 	private Boolean isTea;
 	private Boolean hour;
+	private Boolean disabled;
 	private String location;
 	
 	public Integer getTable() {
@@ -97,10 +98,21 @@ public class ReservationDto {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	
+	public Boolean getDisabled() {
+		return disabled;
+	}
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
+	}
 	@Override
 	public String toString() {
-		return "ReservationDto [table=" + table + ", dateReservation=" + dateReservation + ", username=" + username
-				+ "]";
+		return "ReservationDto [log=" + log + ", table=" + table + ", dateReservation=" + dateReservation
+				+ ", create_at=" + create_at + ", username=" + username + ", dateReservationString="
+				+ dateReservationString + ", confirmed=" + confirmed + ", isTea=" + isTea + ", hour=" + hour
+				+ ", disabled=" + disabled + ", location=" + location + "]";
 	}
+	
 	
 }
