@@ -25,17 +25,17 @@ public class ScheduledReserveDisabler {
 	
 	//private static final String TIME_ZONE =  "America/Buenos_Aires";   
 	
-	@Scheduled(cron = "0 0 11 * * ?")
+	@Scheduled(cron = "0 0 10 * * ?")
 	public void disableTeaReservationsMorging() {
 		
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");		
 		Date today = new Date();		
-		today = new Date(formater.format(today));		
+		today = new Date(today.getYear(), today.getMonth(), (today.getDate()));		
 		List<Reservation> reservations = reservationService.findByReservationDateAndDisabledAndIsTeaAndHour(today, Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
-		log.info(reservations.toString());
+		log.info("ReservaS: "+reservations.toString());
 		
 		reservations.forEach(e -> e.setDisabled(!e.getDisabled()));
-		log.info(reservations.toString());
+		log.info("res updated: "+reservations.toString());
 		reservationService.saveAll(reservations);
 		log.info("Se deshabilitaron las reservas para la casa de Té en el horario de 7hs a 11hs del dia ".concat(formater.format(today)));
 	}
@@ -45,7 +45,7 @@ public class ScheduledReserveDisabler {
 		
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");		
 		Date today = new Date();		
-		today = new Date(formater.format(today));		
+		today = new Date(today.getYear(), today.getMonth(), (today.getDate()));		
 		List<Reservation> reservations = reservationService.findByReservationDateAndDisabledAndIsTeaAndHour(today, Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
 		log.info(reservations.toString());
 		
@@ -61,7 +61,7 @@ public class ScheduledReserveDisabler {
 		
 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");		
 		Date today = new Date();		
-		today = new Date(formater.format(today));		
+		today = new Date(today.getYear(), today.getMonth(), (today.getDate()));		
 		List<Reservation> reservations = reservationService.findByReservationDateAndDisabledAndIsTeaAndHour(today, Boolean.FALSE, Boolean.FALSE, Boolean.TRUE);
 		log.info(reservations.toString());
 		

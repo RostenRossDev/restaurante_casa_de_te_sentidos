@@ -118,20 +118,20 @@ const UserService = {
         lastname:"",
       };
 
-    const  getData= axios(config)
-      .then()
-      .then((response) => {
-        window.sessionStorage.setItem("name", response.data.name)
-        window.sessionStorage.setItem("lastname", response.data.lastname)
-        window.sessionStorage.setItem("email", response.data.email)
-        console.log(response.data)
-        window.sessionStorage.setItem("photo", response.data.photo)
-        return response.data
-      })
-      .catch(function (error) {
-        console.log(error.response.status);
-        if(error.response.status) sessionStorage.clear()
-      });     
+      const  getData= axios(config)
+        .then()
+        .then((response) => {
+          window.sessionStorage.setItem("name", response.data.name)
+          window.sessionStorage.setItem("lastname", response.data.lastname)
+          window.sessionStorage.setItem("email", response.data.email)
+          console.log(response.data)
+          window.sessionStorage.setItem("photo", response.data.photo)
+          return response.data
+        })
+        .catch(function (error) {
+          console.log(error.response.status);
+          if(error.response.status) sessionStorage.clear()
+        });     
 
       return getData;
     },

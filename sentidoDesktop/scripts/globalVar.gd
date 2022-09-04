@@ -1,8 +1,11 @@
 extends Node
 
 
-var token =""
-var username=""
+var token = ""
+var username = ""
+var uName = ""
+var email = ""
+var lastname = ""
 var reservas =[]
 
 var selectedPage=""
@@ -16,6 +19,25 @@ func _ready():
 	pass # Replace with function body.
 
 
+func getLastname():
+	return lastname
+		
+func setLastname(lastname):
+	lastname=lastname
+
+
+func getEmail():
+	return email
+		
+func setEmail(emai):
+	email=emai
+
+func getUName():
+	return uName
+		
+func setUName(uname):
+	uName=uname
+	
 func setToken(tokenStr):
 	token=tokenStr
 

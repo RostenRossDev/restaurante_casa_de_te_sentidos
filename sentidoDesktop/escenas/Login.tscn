@@ -72,6 +72,8 @@ margin_right = 259.0
 margin_bottom = 482.0
 text = "Aceptar"
 
+[node name="getUserData" type="HTTPRequest" parent="Panel"]
+
 [node name="Panel2" type="Panel" parent="."]
 margin_left = 400.0
 margin_right = 1024.0
@@ -111,3 +113,4 @@ texture = ExtResource( 1 )
 
 [connection signal="request_completed" from="Panel/HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="Panel/Button" to="." method="_on_Button_pressed"]
+[connection signal="request_completed" from="Panel/getUserData" to="." method="_on_getUserData_request_completed"]
