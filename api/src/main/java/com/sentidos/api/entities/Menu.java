@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,19 +31,20 @@ public class Menu implements Serializable{
 	
 	private Double price;
 	
+	@Column(name="is_enabled")
 	private Boolean isEnabled;
 	
 	@ManyToOne()
-    @JoinColumn(name = "menuType_id")
+    @JoinColumn(name = "menu_type_id")
 	private MenuType menuType;
     
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<InvoiceDetail> details;
+	private List<InvoiceDetail> invoiceDetails;
 	
-    public void addInvoiceDetail(InvoiceDetail detail) {
-    	this.details.add(detail);
-    }
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<OrderDetail> orderDetails;
     
+   
 	public Long getId() {
 		return id;
 	}
@@ -75,13 +77,24 @@ public class Menu implements Serializable{
 	public void setMenuType(MenuType menuType) {
 		this.menuType = menuType;
 	}
-
-	public List<InvoiceDetail> getDetails() {
-		return details;
+	public List<InvoiceDetail> getInvoiceDetails() {
+		return invoiceDetails;
+	}
+	public void setInvoiceDetails(List<InvoiceDetail> invoiceDetails) {
+		this.invoiceDetails = invoiceDetails;
+	}
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 
-	public void setDetails(List<InvoiceDetail> details) {
-		this.details = details;
-	}	
-	
+	public void addOrderDetails(OrderDetail orderDetails) {
+		this.orderDetails.add(orderDetails);
+	}
+		
+	public void addInvoiceDetails(InvoiceDetail orderDetails) {
+		this.invoiceDetails.add(orderDetails);
+	}
 }

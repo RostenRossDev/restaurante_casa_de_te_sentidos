@@ -83,7 +83,7 @@ import com.sentidos.api.services.UserService;
 		customer.setLastname(userDto.getLastname());
 		customer.setUser(newUser);
 		newUser.setCustomer(customer);	
-		
+		log.info("pass: "+newUser.getPassword());
 		if( userService.save(newUser) == null) {
 			response.put("error", "Error al crear usuario, intente nuevamente mas tarde");
 			return  new ResponseEntity<HashMap<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
