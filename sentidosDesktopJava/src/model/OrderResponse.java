@@ -5,11 +5,11 @@ import java.util.List;
 
 public class OrderResponse {
 
-	private Date createAt;
-	private Integer state;
-    private Boolean isDelivered;
-    private List<OrderDetail> orderDetails;
-	private List<Customer> customer;
+	public Date createAt;
+    public List<OrderDetail> orderDetails;
+    public int state;
+    public boolean isDelivered;
+    public Customer customerDto;
 	
 	public Date getCreateAt() {
 		return createAt;
@@ -35,18 +35,22 @@ public class OrderResponse {
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	public List<Customer> getCustomer() {
-		return customer;
+	public Customer getCustomerDto() {
+		return customerDto;
 	}
-	public void setCustomer(List<Customer> customer) {
-		this.customer = customer;
+	public void setCustomerDto(Customer customerDto) {
+		this.customerDto = customerDto;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
+	public void setDelivered(boolean isDelivered) {
+		this.isDelivered = isDelivered;
 	}
 	@Override
 	public String toString() {
-		return "OrderResponse [createAt=" + createAt + ", state=" + state + ", isDelivered=" + isDelivered
-				+ ", orderDetails=" + orderDetails + ", customer=" + customer + "]";
+		return "OrderResponse [createAt=" + createAt + ", orderDetails=" + orderDetails + ", state=" + state
+				+ ", isDelivered=" + isDelivered + ", customerDto=" + customerDto + "]";
 	}
-    
-	
 }
 

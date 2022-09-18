@@ -17,6 +17,5 @@ public class OrderList {
 	@Override
 	public String toString() {
 		return "OrderList [orders=" + orders + "]";
-	}	
-	
+	}
 }

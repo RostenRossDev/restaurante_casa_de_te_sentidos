@@ -2,9 +2,10 @@ package model;
 
 public class Customer {
 
-    private String name;
-    private String lastname;
-    private String username;
+	public String name;
+    public String lastname;
+    public String username;
+    
 	public String getName() {
 		return name;
 	}
@@ -22,6 +23,10 @@ public class Customer {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", lastname=" + lastname + ", username=" + username + "]";
 	}
     
     

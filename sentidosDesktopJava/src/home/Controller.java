@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.LoginResponse;
+import model.OrderDetail;
 import model.OrderList;
 import model.OrderResponse;
 
@@ -119,7 +120,8 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     		warning.setText("Ocurrio un error, intente nuevamente.");
     	}
     }
-          
+    
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
@@ -173,10 +175,30 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
         }                        
     }
 
+    private String stateToString(Integer n) {
+    	if(n==0) return "pendiente";
+    	if(n==1) return "procesando";
+    	if(n==2) return "terminado";
+    	return "indefinido";
+    }
+    
+    private String totalOrder(OrderResponse order) {
+    	double total= 0;
+    	for (OrderDetail detail : order.getOrderDetails()) {
+        	System.out.println(detail.getMenu().toString());
+
+    		Double price= detail.getMenu().getPrice();
+    		System.out.println("price: "+price);
+			total +=price*detail.getQuantity();
+		}
+    	return total+"";
+    }
+    
     private void rellenarOrdenes() {
     	OrderList orders= http.orders(); 
     	List<OrderResponse> orderList = orders.getOrders();
     	System.out.println("longitud : "+orders);
+    	
 	    if(orderList != null && orderList.size() >0) {
 	        Node[] nodes = new Node[orderList.size()];
 	        for (int i = 0; i < nodes.length; i++) {
@@ -186,47 +208,66 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
 	                final int j = i;
 	                
 	                HBox load = FXMLLoader.load(getClass().getResource("Item.fxml"));
-	                
 	                ObservableList<Node> childs= load.getChildren();
-	                for(int x=0; x< childs.size();x++) {
-	                	System.out.println(childs.get(x).getId());
-	                	
-	                	if("fecha".equals(childs.get(x).getId())) {	                		
-	                		Date date = order.getCreateAt();	                		
-	                		Calendar calendar = new GregorianCalendar();
-	                		calendar.setTime(date);
-	                		int year = calendar.get(Calendar.YEAR);
-	                		//Add one to month {0 - 11}
-	                		int month = calendar.get(Calendar.MONTH) + 1;
-	                		int day = calendar.get(Calendar.DAY_OF_MONTH);
-	                		
-	                		System.out.println("entramos");
-	                		Label label = (Label) childs.get(x);
-	                		label.setText(day+"/"+month+"/"+year);
-	                		System.out.println("fechaa: "+label.getText());
-	                		load.getChildren().remove(x);
-	                		load.getChildren().add(label);
-	                		System.out.println("llegamos: ");
-	                		
-	                	}else if("mesa".equals(childs.get(x).getId())) {
-	                		Label label = (Label) childs.get(x);
-	                		label.setText("1");
-	                		load.getChildren().remove(x);
-	                		load.getChildren().add(label);
-	                	}else if("total".equals(childs.get(x).getId())) {
-	                		Label label = (Label) childs.get(x);
-	                		label.setText("$523,50");
-	                		load.getChildren().remove(x);
-	                		load.getChildren().add(label);
-	                	}else if ("estado".equals(childs.get(x).getId())) {
-	                		Button button = (Button) childs.get(x);
-	                		button.setText("pendiente");
-	                		load.getChildren().remove(x);
-	                		load.getChildren().add(button);
-	                	}
-	                	System.out.println("Row "+i+" Child index: "+x);
-	                }	             
 	                
+	                System.out.println("0: "+childs.get(0).getId());	   
+	                System.out.println("1: "+childs.get(1).getId());	   
+	                System.out.println("2: "+childs.get(2).getId());	   
+	                System.out.println("3: "+childs.get(3).getId());	   
+	                System.out.println("4: "+childs.get(4).getId());	   
+	                System.out.println("5: "+childs.get(5).getId());	   
+	                
+	                Label mesa = (Label) childs.get(1);
+	                Label fecha= (Label) childs.get(2);
+	                Label usuario = (Label) childs.get(3);
+            		Label total = (Label) childs.get(4);
+            		Button estado = (Button) childs.get(5);
+            		//Label orden = (Label) childs.get(0);
+
+            		childs.clear();
+	                
+	                System.out.println("1 mesa");	                
+	                mesa.setText("1");
+            		childs.add(mesa);
+            		
+	                System.out.println("2 fecha");	
+	                Date date = order.getCreateAt();	                		
+            		Calendar calendar = new GregorianCalendar();
+            		calendar.setTime(date);
+            		int year = calendar.get(Calendar.YEAR);
+            		//Add one to month {0 - 11}
+            		int month = calendar.get(Calendar.MONTH) + 1;
+            		int day = calendar.get(Calendar.DAY_OF_MONTH);
+            		
+            		fecha.setText(day+"/"+month+"/"+year);
+            		
+            		childs.add(fecha);  
+	                
+            		
+	               
+            		
+	                System.out.println("3 usuario");
+	                usuario.setText(order.getCustomerDto().getUsername());
+            		childs.add(usuario);
+	                	                 
+            		
+            		System.out.println("4 total");	
+             		total.setText("$".concat(totalOrder(order)));
+             		childs.add(total);
+            		
+	                
+            		
+	                System.out.println("5 estado");
+	                estado.setText(stateToString( order.getState()));
+            		childs.add(estado);
+	                
+	               
+	                
+	                System.out.println("0 orden");
+
+	               
+	                
+	                System.out.println("\n");
 	                //nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
 	                nodes[i]= (Node) load;
 	               

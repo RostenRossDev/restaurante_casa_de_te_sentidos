@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import model.Customer;
 import model.LoginResponse;
 import model.OrderList;
 import model.OrderResponse;
@@ -73,10 +74,9 @@ public class HttpService {
 				sb.append(line + "\n");
 			}
 			br.close();
-
+			System.out.println(sb.toString());
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
 				OrderList orderResp = JsonToObject.jsonToOrderResponse(sb.toString());
-				
 				return orderResp;
 			}
 		} catch (Exception e) {

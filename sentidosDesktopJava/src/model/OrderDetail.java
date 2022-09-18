@@ -1,8 +1,9 @@
 package model;
 
 public class OrderDetail {
-	private Integer quantity;
-	private Menu menu;
+	 public int quantity;
+	 public Menu menuDto;
+	
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -10,11 +11,13 @@ public class OrderDetail {
 		this.quantity = quantity;
 	}
 	public Menu getMenu() {
-		return menu;
+		return menuDto;
 	}
 	public void setMenu(Menu menu) {
-		this.menu = menu;
+		this.menuDto = menu;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "OrderDetail [quantity=" + quantity + ", menu=" + menuDto + "]";
+	}	
 }
