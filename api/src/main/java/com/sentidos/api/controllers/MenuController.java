@@ -14,7 +14,7 @@ public class MenuController {
 
         return null;
     }
-    @GetMapping
+    @GetMapping("/{id}")
     public Menu menuById(){
 
         return null;
