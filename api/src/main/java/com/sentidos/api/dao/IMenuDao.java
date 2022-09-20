@@ -1,16 +1,10 @@
 package com.sentidos.api.dao;
-
-
-import com.sentidos.api.entities.Menu;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+import com.sentidos.api.entities.Menu;
+import com.sentidos.api.entities.Post;
 @Repository
-public interface IMenuDao extends CrudRepository<Menu, Long> {
-
-    List<Menu> findAll(Menu menu);
-
+public interface IMenuDao extends CrudRepository<Menu, Long>{
 
 }

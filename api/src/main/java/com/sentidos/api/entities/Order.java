@@ -3,6 +3,7 @@ package com.sentidos.api.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -38,11 +40,18 @@ public class Order  implements Serializable{
     private Customer customer;
 	
 	//private HashMap<Menu, Integer> menuOrder;
+	@Column(name = "is_delivered")
 	private Boolean isDelivered;
 	
+	private Integer state;
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<OrderDetail> orderDetails;
+	
+    /*
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Invoice invoice;
-	
+	*/
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
@@ -73,7 +82,7 @@ public class Order  implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+/*
 	public Invoice getInvoice() {
 		return invoice;
 	}
@@ -81,13 +90,32 @@ public class Order  implements Serializable{
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 	}
-
+*/
 	public Date getCreateAt() {
 		return createAt;
 	}
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public List<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
 	}	
 	
+	public void addOrderDetails(OrderDetail orderDetails) {
+		this.orderDetails.add(orderDetails);
+	}
 }

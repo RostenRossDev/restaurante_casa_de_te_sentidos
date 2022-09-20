@@ -48,12 +48,14 @@ public class UserService implements UserDetailsService, IUsuarioService{
 		return userDao.findByUsername(username);
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public User save(User user) {
 		// TODO Auto-generated method stub
 		return userDao.save(user);
 	}
 
+	@Transactional(readOnly = true)
 	public List<User>findAll(){
 		return (List<User>)userDao.findAll();
 	}
