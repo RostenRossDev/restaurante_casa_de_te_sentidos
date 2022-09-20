@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.sentidos.api.entities.Post;
 
 @Repository
-public interface IPostDao extends CrudRepository<Post, Long>{
-		
+public interface IPostDao extends CrudRepository<Post, Long>{		
 			
 }

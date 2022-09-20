@@ -30,9 +30,11 @@ public class Invoice implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	/*
 	@JoinColumn(name = "order_id")
     @OneToOne(fetch = FetchType.LAZY)
 	private Order order;
+	*/
 	
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<InvoiceDetail> details;
@@ -55,12 +57,17 @@ public class Invoice implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Order getOrder() {
+	
+	/*
+	 
+	 public Order getOrder() {
+	 
 		return order;
 	}
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+	*/
 	public List<InvoiceDetail> getDetails() {
 		return details;
 	}

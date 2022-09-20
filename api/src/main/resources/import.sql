@@ -68,7 +68,7 @@ INSERT INTO `tables` (number) VALUES (19);
 
 
 
-/*INSER RESERVATIONS*/
+/*INSERT RESERVATIONS*/
 
 
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-5', 0, 1, 0);
@@ -88,3 +88,79 @@ INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reserva
 
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-3', 1, 1, 0);
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-3', 1, 1, 0);
+
+/*INSERT MENU_TYPE*/
+
+INSERT INTO `menu_types` (type) VALUES ('celiaco');
+INSERT INTO `menu_types` (type) VALUES ('vegano');
+INSERT INTO `menu_types` (type) VALUES ('vegetariano');
+INSERT INTO `menu_types` (type) VALUES ('normal');
+
+/*INSERT MENU*/
+
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Camarones Jumbo', 300, 1, 4);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Pollo a la Parmesana', 300, 1, 4);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Linguini con Camarones', 300, 1, 4);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Spaguetti de la Casa', 300, 1, 4);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Pastel de Carne', 300, 1, 4);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Solomillo con Salsa Verde', 300, 1, 4);
+
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Pizza Keto con Harina de Coco', 300, 1, 1);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('NaturGreen', 300, 1, 1);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Ensalada de Col Rizada Kale con Garbanzos Tostados', 300, 1, 1);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Nocchis con Boloñesa de Soja', 300, 1, 1);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Fideos Soba con Salsa de Soja', 300, 1, 1);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Jengibre Fresco', 300, 1, 1);
+
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('tzatziki griego', 300, 1, 2);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Farinata genovesa o fainá', 300, 1, 2);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('tostadas de boniato', 300, 1, 2);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Hummus', 300, 1, 2);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Pan de queso minero brasileño', 300, 1, 2);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Mini Pizzas de Berenjena', 300, 1, 2);
+
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Ensalada de Soja con Acelga', 300, 1, 3);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Ensalada Fin de Otoño con Amaranto', 300, 1, 3);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Ensalada Mixta con Lentejas', 300, 1, 3);
+INSERT INTO `menus` (name, price, is_enabled, menu_type_id) VALUES ('Ensalada de Alubias Rojas con Guacamole', 300, 1, 3);
+
+/* INSERT ORDERS */
+
+INSERT INTO `orders` (customer_id, is_delivered, state, create_at) VALUES (1, 0, 0, CURRENT_TIMESTAMP);
+INSERT INTO `orders` (customer_id, is_delivered, state, create_at) VALUES (2, 0, 0, CURRENT_TIMESTAMP);
+INSERT INTO `orders` (customer_id, is_delivered, state, create_at) VALUES (3, 0, 0, CURRENT_TIMESTAMP);
+INSERT INTO `orders` (customer_id, is_delivered, state, create_at) VALUES (4, 0, 0, CURRENT_TIMESTAMP);
+INSERT INTO `orders` (customer_id, is_delivered, state, create_at) VALUES (5, 0, 0, CURRENT_TIMESTAMP);
+INSERT INTO `orders` (customer_id, is_delivered, state, create_at) VALUES (6, 0, 0, CURRENT_TIMESTAMP);
+
+/*INSERT ORDERS DETAILS*/
+
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 1, 1);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 1, 4);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (3, 1, 9);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (4, 1, 10);
+
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 2, 2);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (3, 2, 4);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (4, 2, 9);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 2, 6);
+
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (5, 3, 13);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 3, 1);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 3, 2);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 3, 14);
+
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 4, 2);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 4, 5);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (5, 4, 2);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 4, 7);
+
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (3, 5, 5);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (3, 5, 6);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 5, 10);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 5, 11);
+
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 6, 12);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (5, 6, 13);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 6, 14);
+INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (3, 6, 15);
