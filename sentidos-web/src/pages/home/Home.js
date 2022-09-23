@@ -16,6 +16,7 @@ import Menu from "../../Components/Menu"
 import defaultUser from '../../img/default.png'
 import PostService from "../../Service/PostService"
 import Reservation from "../../Components/Reservation"
+import Footer from "../../Components/Footer"
 
 function useForceUpdate(){
     const [value, setValue] = useState(0); // integer state
@@ -119,7 +120,8 @@ function Home() {
         window.location.reload();
         setUser({ user: {username:"",token:false,loged:false, name:"", lastname:"", email:"",photo:null}, setUser: () => {} })
     }
-    return (        
+    return (    
+        <>    
         <div className="home">
             {(token !==false  && token !==null)? <Menu clear={clear} updatePhoto={updatePhoto} username={user.username} name={user.name} lastname={user.lastname} email={user.email} token={token} id={1} photo={user.photo}/> : null}
             
@@ -171,7 +173,8 @@ function Home() {
                     <img src={img4} className="card-img imgBlur" alt="..."  />
                     <div className="card-img-overlay container borde">
                         <h3 className="card-title">Sentidos</h3>
-                        <h4>Restaurante y casa de té</h4>                        
+                        <h4 >Restaurante y casa de té</h4>      
+                        <p class="texto-presentacion">Buscamos atraer la atención de nuestros clientes a travéz de experiencias inspiradoras en la seducción de los sentidos para que disfrute de un momento de bienestar, en total armonía.</p>                  
                     </div>
                 </div>
             </div>
@@ -191,6 +194,8 @@ function Home() {
             </div>
            
         </div>
+        <Footer/>
+        </>
     );
 }
 
