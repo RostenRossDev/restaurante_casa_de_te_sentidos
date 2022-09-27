@@ -75,10 +75,13 @@ function Tables({modal}){
             const elementDate = new Date(myArray[0], myArray[1], myArray[2])
             const elementDateFormated = elementDate.getFullYear()+"-"+(elementDate.getMonth()).toString().padStart(2, '0')+"-"+elementDate.getDate()
 
+            console.log(elementDateFormated+", "+date)
+            console.log(el.table+", "+table)
             if(elementDateFormated.localeCompare(date) === 0){
                 
                 if(el.table === table){
                     match= true;
+                    console.log("MATCH fecha "+date+", mesa : "+table)
                 }
             }
         })
@@ -92,10 +95,11 @@ function Tables({modal}){
         if(sessionStorage.getItem("token")!==null) tableClass="table";
         const reservations = sessionStorage.getItem("reservations");
         const today=new Date(sessionStorage.getItem("reservationDate"))
-        const todayFormated = today.getFullYear()+"-"+(today.getMonth() + 1).toString().padStart(2, '0')+"-"+(today.getDate())
+        const todayFormated = today.getFullYear()+"-"+(today.getMonth() + 1).toString().padStart(2, '0')+"-"+(today.getDate()+1)
+        console.log("hoy :"+todayFormated)
         for(let i=0;i<17;i++){
-            tableClass="";          
 
+            tableClass="";          
             console.log("mesa: "+(i+1)+", fecha: "+todayFormated)
             if(matchDayTable((i+1), todayFormated)){
                 console.log("mas aca")
@@ -129,15 +133,14 @@ function Tables({modal}){
     }  
     const tablesRigth = ()=>{
         const tableList=[];
-        const breaks =[2,4,7,10,13]
+        const breaks =[20,23,26,29,32]
         let tableClass="noTable";      
         if(sessionStorage.getItem("token")!==null) tableClass="table"
         const today=new Date(sessionStorage.getItem("reservationDate"))
         const todayFormated = today.getFullYear()+"-"+(today.getMonth() + 1).toString().padStart(2, '0')+"-"+(today.getDate()+1)
-        for(let i=0;i<17;i++){
+        for(let i=18;i<35;i++){
 
             tableClass="";          
-
             if(matchDayTable(i, todayFormated)){
                 console.log("mas aca")
 
@@ -152,12 +155,12 @@ function Tables({modal}){
                     tableClass="reservado";  
                 }
             }
-            const id =`table`+(i+18)
+            const id =`table`+(i)
             tableList.push(
-                <div data-tip data-for={id}  onClick={(e)=>selectTable(e)} className={tableClass} id={i+18} style={{"marginBottom":"20px", "marginRight":"35px", "cursor":"pointer","width":"45px","height":"45px", "float":"right"}}>
+                <div data-tip data-for={id}  onClick={(e)=>selectTable(e)} className={tableClass} id={i} style={{"marginBottom":"20px", "marginRight":"35px", "cursor":"pointer","width":"45px","height":"45px", "float":"right"}}>
                     <img src={tables} height="40" width={40} />
                     <ReactTooltip id={id}  type='error'>
-                        <span>Mesa N°{i+18}</span>
+                        <span>Mesa N°{i}</span>
                     </ReactTooltip>
                 </div>
             )
