@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class LoginResponse {
 	private String access_token;
 	private String token_type;
@@ -8,11 +10,12 @@ public class LoginResponse {
 	private String scope;
 	private String username;
 	private String jti;
+	private List<Role> roles;
 	
 	public LoginResponse() {}
 	
 	public LoginResponse(String access_token, String token_type, String refresh_token, Integer expires_in, String scope,
-			String username, String jti) {
+			String username, String jti, List<Role> roles) {
 		super();
 		this.access_token = access_token;
 		this.token_type = token_type;
@@ -21,8 +24,11 @@ public class LoginResponse {
 		this.scope = scope;
 		this.username = username;
 		this.jti = jti;
+		this.roles = roles;
 	}
-	
+
+
+
 	public String getAccess_token() {
 		return access_token;
 	}
@@ -64,6 +70,15 @@ public class LoginResponse {
 	}
 	public void setJti(String jti) {
 		this.jti = jti;
+	}
+
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override

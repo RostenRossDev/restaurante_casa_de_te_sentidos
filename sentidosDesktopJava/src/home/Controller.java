@@ -22,6 +22,7 @@ import model.OrderResponse;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -144,15 +145,53 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     }
     
     private void setBtnVisible() {
-    	btnCustomers.setVisible(true);
-    	btnMenus.setVisible(true);
-    	btnOverview.setVisible(true);
-    	btnOrders.setVisible(true);
-    	btnPackages.setVisible(true);
-    	btnSignout.setVisible(true);    	
-    	pnLogin.setVisible(false);
-    	pnlOverview.setStyle("-fx-background-color : #02030A");
-    	pnlOverview.toFront();
+    	LoginResponse login =(LoginResponse) Main.contexto.get("login");
+    	List<String> roles = new ArrayList<>();
+    	login.getRoles().forEach(role ->{
+    		roles.add(role.getRolName());
+    	});
+    	
+    	System.out.println("ROLES: "+roles);
+    	if(roles.contains("ROLE_ADMIN")) {
+    		System.out.println("seccion admin");
+	    	btnCustomers.setVisible(true);
+	    	btnMenus.setVisible(true);
+	    	btnOverview.setVisible(true);
+	    	btnOrders.setVisible(true);
+	    	btnPackages.setVisible(true);
+	    	btnSignout.setVisible(true);    	
+	    	pnLogin.setVisible(false);
+	    	pnlOverview.setStyle("-fx-background-color : #02030A");
+	    	pnlOverview.toFront();
+    	}else if (roles.contains("ROLE_MOZO")) {
+    		System.out.println("seccion mozo");
+
+    		btnOrders.setVisible(true);
+	    	pnLogin.setVisible(false);
+	    	pnlOrders.toFront();
+	    	pnlOrders.setVisible(true);
+
+	    	pnlOverview.setVisible(false);
+
+    	}else if(roles.contains("ROLE_MAITRE")) {
+    		System.out.println("seccion maitre");
+
+	    	pnLogin.setVisible(false);
+	    	pnlMenus.toFront();
+	    	pnlMenus.setVisible(true);
+
+	    	pnlOverview.setVisible(false);
+	    	btnMenus.setVisible(true);
+    	}else if(roles.contains("ROLE_CAJA")) {
+    		System.out.println("seccion caja");
+
+	    	pnLogin.setVisible(false);
+	    	pnlCustomer.setVisible(true);
+	    	pnlCustomer.toFront();
+	    	pnlOverview.setVisible(false);
+	    	btnCustomers.setVisible(true);
+    	}
+    	
     }
 
     public void handleClicks(ActionEvent actionEvent) {
