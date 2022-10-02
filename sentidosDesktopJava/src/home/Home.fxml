@@ -23,350 +23,113 @@
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.Controller">
 
 	<children>
-		<StackPane layoutX="258.0" prefHeight="100"
-			prefWidth="793.0" style="-fx-background-color: #f1f1f1;">
-		</StackPane>
-		<HBox alignment="TOP_CENTER" prefHeight="500" prefWidth="500"
-			style="-fx-background-color: #f1f1f1;" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
-
-		</HBox>
-
-		<VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0"
-			style="-fx-background-color: #05071F;" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.topAnchor="0.0">
-			<children>
-				<ImageView fitHeight="73.0" fitWidth="67.0"
-					pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../images/jimmy-fallon.png" />
-					</image>
-					<VBox.margin>
-						<Insets bottom="10.0" top="50.0" />
-					</VBox.margin>
-				</ImageView>
-				<Label text="Jimmy Fallon" textFill="#e7e5e5">
-					<VBox.margin>
-						<Insets bottom="20.0" />
-					</VBox.margin>
-				</Label>
-				<Button fx:id="btnOverview" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false"
-					onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0"
-					stylesheets="@style.css" text="Overview" textFill="#e7e5e5">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Home_32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<opaqueInsets>
-						<Insets />
-					</opaqueInsets>
-					<VBox.margin>
-						<Insets />
-					</VBox.margin>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-				<Button fx:id="btnOrders" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false"
-					onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0"
-					stylesheets="@style.css" text="Orders">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Open_Envelope_32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-				<Button fx:id="btnCustomers" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false"
-					onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0"
-					stylesheets="@style.css" text="Customers">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Person_32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-				<Button fx:id="btnMenus" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false"
-					onAction="#handleClicks" prefHeight="42.0" prefWidth="259.0"
-					stylesheets="@style.css" text="Menus">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Xbox_Menu_32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-				<Button fx:id="btnPackages" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0"
-					prefWidth="259.0" stylesheets="@style.css" text="Packages">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Box_32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-				<Button fx:id="btnSettings" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0"
-					prefWidth="259.0" stylesheets="@style.css" text="Settings">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Slider__32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-				<Button fx:id="btnSignout" alignment="BASELINE_LEFT"
-					graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0"
-					prefWidth="259.0" stylesheets="@style.css" text="Sign Out">
-					<graphic>
-						<ImageView fitHeight="23.0" fitWidth="27.0"
-							pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Sign_Out_32px.png" />
-							</image>
-						</ImageView>
-					</graphic>
-					<padding>
-						<Insets left="50.0" />
-					</padding>
-				</Button>
-			</children>
-		</VBox>
-		<StackPane layoutX="258.0" prefHeight="576.0"
-			prefWidth="793.0" style="-fx-background-color: #02030A;">
-			<children>
-				<Pane fx:id="pnlCustomer" prefHeight="200.0" prefWidth="200.0" />
-				<Pane fx:id="pnlOrders" prefHeight="200.0" prefWidth="200.0" />
-				<Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
-				<Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0">
-					<children>
-
-						<TextField layoutX="590.0" layoutY="47.0"
-							prefHeight="27.0" prefWidth="183.0" promptText="search"
-							style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;" />
-						<Label layoutX="57.0" layoutY="25.0"
-							text="Restaurant Orders" textFill="#e7e5e5">
-							<font>
-								<Font size="24.0" />
-							</font>
-						</Label>
-						<HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="72.0"
-							prefHeight="92.0" prefWidth="661.0" spacing="50.0">
-							<children>
-								<VBox alignment="CENTER" prefHeight="200.0"
-									prefWidth="100.0">
-									<children>
-										<Label text="22000" textFill="#2a73ff">
-											<font>
-												<Font name="System Bold" size="26.0" />
-											</font>
-										</Label>
-										<Label text="Total Orders" textFill="#e7e5e5" />
-									</children>
-								</VBox>
-								<VBox alignment="CENTER" prefHeight="200.0"
-									prefWidth="100.0">
-									<children>
-										<Label text="1500" textFill="#26bfbc">
-											<font>
-												<Font name="System Bold" size="26.0" />
-											</font>
-										</Label>
-										<Label text="Total delivered" textFill="#e7e5e5" />
-									</children>
-								</VBox>
-								<VBox alignment="CENTER" prefHeight="200.0"
-									prefWidth="100.0">
-									<children>
-										<Label text="1000" textFill="#fa5f7e">
-											<font>
-												<Font name="System Bold" size="26.0" />
-											</font>
-										</Label>
-										<Label text="Peding Orders" textFill="#e7e5e5" />
-									</children>
-								</VBox>
-								<VBox alignment="CENTER" prefHeight="200.0"
-									prefWidth="100.0">
-									<children>
-										<Label text="780" textFill="#de0000">
-											<font>
-												<Font name="System Bold" size="26.0" />
-											</font>
-										</Label>
-										<Label text="Orders on Hold" textFill="#e7e5e5" />
-									</children>
-								</VBox>
-							</children>
-						</HBox>
-						<HBox alignment="CENTER_LEFT" layoutX="45.0" layoutY="178.0"
-							prefHeight="42.0" prefWidth="862.0" spacing="80.0"
-							style="-fx-background-color: #02030A;">
-							<children>
-								<Label text="Orden" textFill="#e7e5e5">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label>
-								<Label text="Usuario" textFill="#e7e5e5">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label>
-								<Label text="Amount" textFill="#e7e5e5">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label>
-								<Label text="Table" textFill="#e7e5e5">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label>
-								<Label text="Status" textFill="#e7e5e5">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label>
-								<Label text="Delivery Date" textFill="#e7e5e5">
-									<HBox.margin>
-										<Insets />
-									</HBox.margin>
-								</Label>
-							</children>
-						</HBox>
-						<ScrollPane layoutX="14.0" layoutY="232.0"
-							prefHeight="320.0" prefWidth="896.0" stylesheets="@style.css">
-							<content>
-								<VBox fx:id="pnItems" prefHeight="318.0" prefWidth="744.0"
-									spacing="5.0" style="-fx-background-color: #02030A;">
-									<padding>
-										<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-									</padding>
-								</VBox>
-							</content>
-						</ScrollPane>
-						<ImageView fitHeight="17.0" fitWidth="16.0"
-							layoutX="749.0" layoutY="53.0" pickOnBounds="true"
-							preserveRatio="true">
-							<image>
-								<Image url="@../images/icons8_Search_52px.png" />
-							</image>
-						</ImageView>
-					</children>
-				</Pane>
-
-				<Pane fx:id="pnLogin" prefHeight="554.0" prefWidth="943.0">
-					<children>
-						<Label layoutX="360" layoutY="25.0" text="Login"
-							textFill="#e7e5e5">
-							<font>
-								<Font size="24.0" />
-							</font>
-						</Label>
-
-						<TextField fx:id="username" layoutX="400" layoutY="100" prefHeight="27.0"
-							prefWidth="183.0" promptText="Ingrese su usuario"
-							style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em; -fx-text-fill: #FFFFFF " />
-						<Label  layoutX="250" layoutY="100"
-							text="Usuario" textFill="#e7e5e5">
-							<font>
-								<Font size="24.0" />
-							</font>
-						</Label>
-
-						<PasswordField fx:id="password" layoutX="400" layoutY="200" prefHeight="27.0"
-							prefWidth="183.0" promptText="ingrese su clave" 
-							style="-fx-background-color: #02030A; -fx-border-color: #B7C3D7; -fx-border-radius: 2em;-fx-text-fill: #FFFFFF" />
-						<Label  layoutX="250" layoutY="200"
-							text="Contraseña" textFill="#e7e5e5">
-							<font>
-								<Font size="24.0" />
-							</font>
-						</Label>
-						
-						<Label fx:id="warning"  layoutX="330" layoutY="250" style="-fx-text-fill:FF0000;; -fx-border-color: #B7C3D7; -fx-border-radius: 2em"
-							text="Contraseña" textFill="#e7e5e5">
-							<font>
-								<Font size="12.0" />
-							</font>
-						</Label>
-
-
-						<Button fx:id="btnLogin" alignment="BASELINE_LEFT" layoutX="300" layoutY="300"
-							graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0"
-							prefWidth="259.0" stylesheets="@style.css" text="Ingresar">
-							<graphic>
-								<ImageView fitHeight="23.0" fitWidth="27.0"
-									pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@../images/login.png" />
-									</image>
-								</ImageView>
-							</graphic>
-							<padding>
-								<Insets left="50.0" />
-							</padding>
-						</Button>
-						
-					</children>
-				</Pane>
-			</children>
-
-		</StackPane>
-
-
-
+		<Pane id="pnReservacion" fx:id="pnReservacion" layoutX="258.0" layoutY="190.0" prefHeight="386.0" prefWidth="981.0" visible="false">
+         <children>
+            <TableView id="tbOrden" fx:id="tbReservacion" layoutX="-1.0" prefHeight="386.0" prefWidth="981.0">
+              <columns>
+                <TableColumn id="tdOrden" prefWidth="85.0" text="Reserva" />
+                <TableColumn id="tdMesa" prefWidth="65.0" text="Mesa" />
+                  <TableColumn id="tdFecha" prefWidth="119.0" text="Fecha" />
+                  <TableColumn id="tdUsuario" prefWidth="271.0" text="Usuario" />
+                  <TableColumn id="tdConfirmado" prefWidth="93.0" text="Confirmado" />
+                  <TableColumn id="tdTe" prefWidth="102.0" text="Te/Comida" />
+                  <TableColumn id="tdHora" prefWidth="98.0" text="Hora" />
+                  <TableColumn id="tdHora" maxWidth="75.0" prefWidth="207.0" text="Eliminar" />
+                  <TableColumn id="tdHora" maxWidth="75.0" prefWidth="150.0" text="Editar" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+	  
+	  <Pane id="pnLateral" fx:id="pnLateral" layoutY="161.0" prefHeight="255.0" prefWidth="261.0" scaleX="1.045" scaleY="2.26" style="-fx-background-color: linear-gradient(to right, #9B52FF,#FF52B3);" visible="false">
+         <children>
+            <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" layoutY="130.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/icons8_Open_Envelope_32px.png" />
+               </image>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="16.0" layoutX="30.0" layoutY="70.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/icons8_Home_32px.png" />
+               </image>
+               <effect>
+                  <Shadow blurType="GAUSSIAN" height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" layoutY="90.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/icons8_Xbox_Menu_32px.png" />
+               </image>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" layoutY="190.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/icons8_Slider__32px.png" />
+               </image>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" layoutY="110.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/icons8_Box_32px.png" />
+               </image>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="31.0" layoutY="213.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/icons8_Sign_Out_32px.png" />
+               </image>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children></Pane>
+		 
+		 <Pane id="pnOrden" fx:id="pnOrden" layoutX="258.0" layoutY="168.0" prefHeight="408.0" prefWidth="981.0" visible="false" AnchorPane.bottomAnchor="0.0">
+         <children>
+            <TableView id="tbOrden" fx:id="tbOrden" layoutY="13.0" prefHeight="394.0" prefWidth="981.0">
+               <columns>
+                  <TableColumn id="tdOrden" prefWidth="96.0" text="Orden" />
+                  <TableColumn id="tdMesa" prefWidth="275.0" text="Usuario" />
+                  <TableColumn id="tdFecha" prefWidth="141.0" text="Total" />
+                  <TableColumn id="tdUsuario" prefWidth="57.0" text="Mesa" />
+                  <TableColumn id="tdConfirmado" prefWidth="141.0" text="Estado" />
+                  <TableColumn id="tdTe" maxWidth="300.0" prefWidth="129.0" text="Fecha de Entrega" />
+                  <TableColumn id="tdTe" maxWidth="100.0" prefWidth="67.0" text="Eliminar" />
+                  <TableColumn id="tdTe" maxWidth="100.0" prefWidth="74.0" text="Editar" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
 	</children>
 
-	<Button layoutX="1000" layoutY="0" fx:id="btnClose"
-		alignment="TOP_RIGHT" graphicTextGap="22.0" mnemonicParsing="false"
-		prefHeight="30" prefWidth="15" stylesheets="@style.css"
-		text="Settings">
-		<graphic>
-			<ImageView fitHeight="25" fitWidth="25.0"
-				pickOnBounds="true" preserveRatio="true">
-				<image>
-					<Image url="@../images/close.png" />
-				</image>
-			</ImageView>
-		</graphic>
-	</Button>
+	
 
 	<effect>
 		<DropShadow color="#1b1eeb" />
