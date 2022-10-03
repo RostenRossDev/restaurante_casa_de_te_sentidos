@@ -1,13 +1,13 @@
 /*create users*/
-INSERT INTO `users` (username, password, enabled) VALUES ('RostenRoss', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
-INSERT INTO `users` (username, password, enabled) VALUES ('RostenRossAdmin', '$2a$10$Dyx/LIs5FjBKU11pg3XG7uURB49s/1jnNJoVLv5efKFVd0FOcTRFe', 1);
+INSERT INTO `users` (username, password, enabled) VALUES ('RostenRoss', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
+INSERT INTO `users` (username, password, enabled) VALUES ('RostenRossAdmin', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
 INSERT INTO `users` (username, password, enabled) VALUES ('EliPas', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
 INSERT INTO `users` (username, password, enabled) VALUES ('MaCristina', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
 INSERT INTO `users` (username, password, enabled) VALUES ('NestorCos', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
 INSERT INTO `users` (username, password, enabled) VALUES ('PiliBe', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
-INSERT INTO `users` (username, password, enabled) VALUES ('mozo', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
-INSERT INTO `users` (username, password, enabled) VALUES ('caja', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
-INSERT INTO `users` (username, password, enabled) VALUES ('maitre', '$2a$10$kNPId0pL/AXnJHqt/ChfReq2RHlBx2rQsn8ME3OG/cjWApmpWmeGC', 1);
+INSERT INTO `users` (username, password, enabled) VALUES ('mozoEmp', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
+INSERT INTO `users` (username, password, enabled) VALUES ('cajaEmp', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
+INSERT INTO `users` (username, password, enabled) VALUES ('maitreEmp', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
 
 /*create customers*/
 INSERT INTO `customers` (user_id, name, lastname, create_at, email) VALUES (1,'Rosten', 'Ross', '2017-08-01','rosten_ross@gmail.com');

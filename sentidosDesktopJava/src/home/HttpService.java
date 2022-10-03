@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import Servicios.HttpReservaService;
 import model.Customer;
 import model.LoginResponse;
 import model.OrderList;
@@ -28,7 +29,8 @@ public class HttpService {
 
 			LoginResponse resp = makeConnectionLogin(form);
 			Main.contexto.put("login", resp);
-
+			HttpReservaService reservas = new HttpReservaService();
+			reservas.todasLasReservas();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

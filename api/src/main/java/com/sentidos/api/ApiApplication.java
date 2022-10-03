@@ -24,7 +24,7 @@ public class ApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		String password ="12345";
+		String password ="Java#@#8";
 		System.out.println(encoder.encode(password));
 		System.out.println(encoder.encode(password));
 	}

@@ -14,7 +14,6 @@ public class Main extends Application {
     private double x, y;
     
     public static Map<String, Object> contexto = new HashMap<>();
-    
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));

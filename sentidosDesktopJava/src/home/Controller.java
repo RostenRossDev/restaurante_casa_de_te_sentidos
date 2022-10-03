@@ -11,14 +11,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.LoginResponse;
 import model.OrderDetail;
 import model.OrderList;
 import model.OrderResponse;
+import model.ReservaList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +31,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import Servicios.HttpReservaService;
 
 public class Controller implements Initializable , EventHandler<ActionEvent>{
 
@@ -35,7 +42,7 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     private VBox pnItems = null;
     
     @FXML
-    private Button btnLogin;
+    private Button btnIngresar;
     
     @FXML
     private Button btnOverview;
@@ -61,26 +68,51 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     @FXML
     private Button btnSignout;
 
+    
     @FXML
-    private Pane pnlCustomer;
+    private Pane pnReservacion;
+    
+    @FXML
+    private Pane pnTicket;
 
     @FXML
-    private Pane pnlOrders;
+    private Pane pnOrden;
 
     @FXML
-    private Pane pnlOverview;
+    private Pane pnLateral;
 
     @FXML
-    private Pane pnlMenus;
+    private Pane pnLateralTicket;
+    
+    @FXML
+    private Pane pnLateralReserva;
+    
+    @FXML
+    private Pane pnLateralOrden;
+    
+    @FXML
+    private Pane pnLateralSalir;
+    
+    @FXML
+    private Pane pnFondo;
 
     @FXML
     private Pane pnLogin;
     
     @FXML
-    private TextField username;
+    private TextField textUser;
     
     @FXML
-    private PasswordField password;
+    private Text textClaveError;
+    
+    @FXML
+    private Text textLoginError;
+    
+    @FXML
+    private Text textUsuarioError;
+    
+    @FXML
+    private PasswordField textPassword;
     
     @FXML
     private Label warning;
@@ -88,10 +120,11 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     Stage stage;    
   
     private HttpService http = new HttpService();
+    private HttpReservaService httpReserva = new HttpReservaService();
     
     @Override
 	public void handle(ActionEvent actionEvent) {
-		// TODO Auto-generated method stub
+	/*	// TODO Auto-generated method stub
     	Button btn = (Button) actionEvent.getSource();    	
     	System.out.println(http.hashCode());
     	if (btn.getId().equals("btnClose")) {
@@ -107,18 +140,17 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     	{
     		System.out.println(btn.getId());
     	}
-    	
+    	*/
 	}
     
     private void verifyLogin() {
     	LoginResponse login =(LoginResponse) Main.contexto.get("login");
     	
     	if(login.getAccess_token() != null) {
-    		setBtnVisible();
-    		rellenarOrdenes();
+    		setBtnVisible();    		
     	}else{
-    		warning.setVisible(true);
-    		warning.setText("Ocurrio un error, intente nuevamente.");
+    		textLoginError.setText("Ocurrio un error, intente nuevamente.");
+    		textLoginError.setVisible(true);
     	}
     }
     
@@ -126,22 +158,37 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
-    	loginToFrontt();
-    	btnClose.setOnAction(this);
-    	btnLogin.setOnAction(this);
-    	warning.setVisible(false);	   	
+    	//loginToFrontt();
+    	//btnClose.setOnAction(this);
+    	//btnLogin.setOnAction(this);
+    	//warning.setVisible(false);
+    	
+    	pnLateralSalir.addEventFilter(MouseEvent.MOUSE_ENTERED, evenEntertLateralMenu);
+    	pnLateralOrden.addEventFilter(MouseEvent.MOUSE_ENTERED, evenEntertLateralMenu);
+    	pnLateralReserva.addEventFilter(MouseEvent.MOUSE_ENTERED, evenEntertLateralMenu);
+    	pnLateralTicket.addEventFilter(MouseEvent.MOUSE_ENTERED, evenEntertLateralMenu);
+    	
+    	
+    	pnLateralSalir.addEventFilter(MouseEvent.MOUSE_EXITED, eventExitedLateralMenu);
+    	pnLateralOrden.addEventFilter(MouseEvent.MOUSE_EXITED, eventExitedLateralMenu);
+    	pnLateralReserva.addEventFilter(MouseEvent.MOUSE_EXITED, eventExitedLateralMenu);
+    	pnLateralTicket.addEventFilter(MouseEvent.MOUSE_EXITED, eventExitedLateralMenu);
 
+    	pnLateralSalir.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
+    	pnLateralOrden.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
+    	pnLateralReserva.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
+    	pnLateralTicket.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
     }
 
     private void loginToFrontt() {
-    	btnCustomers.setVisible(false);
-    	btnMenus.setVisible(false);
-    	btnOverview.setVisible(false);
-    	btnOrders.setVisible(false);
-    	btnPackages.setVisible(false);
-    	btnSignout.setVisible(false);
-    	pnLogin.setStyle("-fx-background-color : #1620A1");
-    	pnLogin.toFront();    	
+    	//btnCustomers.setVisible(false);
+    	//btnMenus.setVisible(false);
+    	//btnOverview.setVisible(false);
+    	//btnOrders.setVisible(false);
+    	//btnPackages.setVisible(false);
+    	//btnSignout.setVisible(false);
+    	//pnLogin.setStyle("-fx-background-color : #1620A1");
+    	//pnLogin.toFront();    	
     }
     
     private void setBtnVisible() {
@@ -152,17 +199,48 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     	});
     	
     	System.out.println("ROLES: "+roles);
+    	
+    	if(roles == null || roles.size() == 0) return;
+    	
     	if(roles.contains("ROLE_ADMIN")) {
-    		System.out.println("seccion admin");
-	    	btnCustomers.setVisible(true);
-	    	btnMenus.setVisible(true);
-	    	btnOverview.setVisible(true);
-	    	btnOrders.setVisible(true);
-	    	btnPackages.setVisible(true);
-	    	btnSignout.setVisible(true);    	
-	    	pnLogin.setVisible(false);
-	    	pnlOverview.setStyle("-fx-background-color : #02030A");
-	    	pnlOverview.toFront();
+    		pnLogin.setVisible(false);
+    		pnFondo.setVisible(false);
+    		pnTicket.setVisible(true);
+    		pnLateral.setVisible(true);
+    		pnOrden.setVisible(true);
+    		pnReservacion.setVisible(true);
+    		
+    	}else if (roles.contains("ROLE_MOZO")) {
+    		pnLogin.setVisible(false);
+    		pnFondo.setVisible(false);
+    		pnLateral.setVisible(true);
+    		pnOrden.setVisible(true);
+    	}else if(roles.contains("ROLE_MAITRE")) {
+    		pnLogin.setVisible(false);
+    		pnFondo.setVisible(false);
+    		pnLateral.setVisible(true);
+    		pnReservacion.setVisible(true);
+    	}else if(roles.contains("ROLE_CAJA")) {
+    		pnLogin.setVisible(false);
+    		pnFondo.setVisible(false);
+    		pnTicket.setVisible(true);
+    		pnLateral.setVisible(true);
+    	}else {
+    		textLoginError.setText("Usted no cuenta con permisos para ingresar al sistema. \nIntente con otra cuenta.");
+    	}
+    	/*if(roles.contains("ROLE_ADMIN")) {
+    		//System.out.println("seccion admin");
+	    	//btnCustomers.setVisible(true);
+	    	//btnMenus.setVisible(true);
+	    	//btnOverview.setVisible(true);
+	    	//btnOrders.setVisible(true);
+	    	//btnPackages.setVisible(true);
+	    	//btnSignout.setVisible(true);    	
+	       //pnLogin.setVisible(false);
+	    	//pnlOverview.setStyle("-fx-background-color : #02030A");
+	    	//pnlOverview.toFront();
+    		//rellenarOrdenes();
+
     	}else if (roles.contains("ROLE_MOZO")) {
     		System.out.println("seccion mozo");
 
@@ -170,8 +248,8 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
 	    	pnLogin.setVisible(false);
 	    	pnlOrders.toFront();
 	    	pnlOrders.setVisible(true);
-
 	    	pnlOverview.setVisible(false);
+    		rellenarOrdenes();
 
     	}else if(roles.contains("ROLE_MAITRE")) {
     		System.out.println("seccion maitre");
@@ -191,16 +269,17 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
 	    	pnlOverview.setVisible(false);
 	    	btnCustomers.setVisible(true);
     	}
-    	
+    	*/
     }
 
     public void handleClicks(ActionEvent actionEvent) {
+    /*	System.out.println("aca");
         if (actionEvent.getSource() == btnCustomers) {
             pnlCustomer.setStyle("-fx-background-color : #1620A1");
             pnlCustomer.toFront();
         }
         if (actionEvent.getSource() == btnMenus) {
-            pnlMenus.setStyle("-fx-background-color : #53639F");
+           pnlMenus.setStyle("-fx-background-color : #53639F");
             pnlMenus.toFront();
         }
         if (actionEvent.getSource() == btnOverview) {
@@ -211,7 +290,7 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
         {
             pnlOrders.setStyle("-fx-background-color : #464F67");
             pnlOrders.toFront();
-        }                        
+        }  */                      
     }
 
     private String stateToString(Integer n) {
@@ -231,6 +310,11 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
 			total +=price*detail.getQuantity();
 		}
     	return total+"";
+    }
+    
+    private void rellenarReservas() {
+    	ReservaList orders= httpReserva.todasLasReservas(); 
+    	
     }
     
     private void rellenarOrdenes() {
@@ -326,4 +410,125 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     	}
     }
 	
+    
+    /// nueva aplicacion
+    private Boolean verificarNombreDeUsuario() {
+    	
+    	if(textUser.getText().length() >4  ) return true;
+    	
+    	return false;
+    }  
+ 
+    
+    private Boolean verificarClave() {
+    	// Regex to check valid password.
+        String regex = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%._-]).{8,20})";
+        String regexMin = "(?=.*[a-z])";
+        String regexMay = "(?=.*[A-Z])";
+        String regexNum = "(?=.*\\\\d)";
+        String regexEsp = "(?=.*[@#$%._-])";
+        String regexLong = ".{8,20}";
+
+        // Compile the ReGex
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);  
+        Pattern pregexMin = Pattern.compile(regexMin);  
+        Pattern pregexMay = Pattern.compile(regexMay);  
+        Pattern pregexNum = Pattern.compile(regexNum);  
+        Pattern pregexEsp = Pattern.compile(regexEsp);  
+        Pattern pregexLong = Pattern.compile(regexLong);  
+       
+        if (textPassword.getText() == null) {
+            return false;
+        }
+  
+        
+        Matcher m = p.matcher(textPassword.getText());
+        Matcher mregexMin = pregexMin.matcher(textPassword.getText());
+        Matcher mregexMay = pregexMay.matcher(textPassword.getText());
+        Matcher mregexNum = pregexNum.matcher(textPassword.getText());
+        Matcher mregexEsp = pregexEsp.matcher(textPassword.getText());
+        Matcher mpregexLong = pregexLong.matcher(textPassword.getText());
+        
+        System.out.println("Min: "+mregexMin.matches());
+        System.out.println("may: "+mregexMay.matches());
+        System.out.println("num: "+mregexNum.matches());
+        System.out.println("esp: "+mregexEsp.matches());
+        System.out.println("long: "+mpregexLong.matches());
+        
+        return m.matches();
+    }
+    
+    public void handleIngresar(MouseEvent event) { 
+    	Boolean complejidad = verificarClave();
+    	Boolean longUsuario = verificarNombreDeUsuario();
+    	textUsuarioError.setText("");
+		textClaveError.setText("");
+		textClaveError.setVisible(false);
+		textUsuarioError.setVisible(false);
+    	if(!complejidad) {
+    		textClaveError.setText("La clave debe tener minimo 8 caracteres,\n1 mayuscula, 1 minuscula y 1 caracter especial.");
+    		textClaveError.setVisible(true);
+    	}
+    	
+    	if(!longUsuario) {
+    		textUsuarioError.setText("El usuario debe tener un minumo de 5 caracteres.");
+    		textUsuarioError.setVisible(true);
+    	}
+    	
+    	if (longUsuario && complejidad) {
+    		
+	    	System.out.println(textUser.toString());      	   
+	    	http.login(textUser.getText(), textPassword.getText());
+	    	verifyLogin();    
+    	} 
+    }
+    
+    EventHandler<MouseEvent> evenEntertLateralMenu = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent event) {
+        	String id =((Pane) event.getSource()).getId();
+        	Pane panel = (Pane) event.getSource();
+        	panel.setStyle("-fx-background-color:#7800FF;");
+        	System.out.println(id);
+        } 
+     };  
+    
+     EventHandler<MouseEvent> eventExitedLateralMenu = new EventHandler<MouseEvent>() { 
+         @Override 
+         public void handle(MouseEvent event) {
+         	String id =((Pane) event.getSource()).getId();
+         	Pane panel = (Pane) event.getSource();
+         	panel.setStyle("-fx-background-color:transparent;");
+         	System.out.println(id);
+         } 
+      }; 
+      
+      EventHandler<MouseEvent> eventClickLateralMenu = new EventHandler<MouseEvent>() { 
+          @Override 
+          public void handle(MouseEvent event) {
+          	String id =((Pane) event.getSource()).getId();
+          	Pane panel = (Pane) event.getSource();
+          	if(id.equals("pnLateralTicket")) {
+          		pnTicket.setVisible(true);
+          		pnTicket.toFront();
+          	}else if(id.equals("pnLateralOrden")) {
+          		pnOrden.setVisible(true);
+
+          		pnOrden.toFront();
+          	}else if(id.equals("pnLateralReserva")) {
+          		pnReservacion.setVisible(true);
+
+          		pnReservacion.toFront();
+          	}else if(id.equals("pnLateralSalir")) {
+          		pnLogin.setVisible(true);
+          		pnFondo.setVisible(true);
+          		pnFondo.toFront();
+          		pnLogin.toFront();
+          		Main.contexto.clear();
+          	}
+          } 
+       }; 
+        
 }
+
