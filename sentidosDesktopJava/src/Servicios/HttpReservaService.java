@@ -19,12 +19,14 @@ import model.Reservations;
 import util.JsonToObject;
 public class HttpReservaService {
 
-	private LoginResponse userData =(LoginResponse) Main.contexto.get("login");
 	
 	
 	public ReservaList todasLasReservas() {
-		ReservaList reservaList = todasLasReservasResponse(userData.getAccess_token());
-		Main.contexto.put("reservations", reservaList);
+		String userToken =((LoginResponse) Main.contexto.get("login")).getAccess_token();
+
+		System.out.println("EL LOGGGGIN : "+((LoginResponse) Main.contexto.get("login")));
+		ReservaList reservaList = todasLasReservasResponse(userToken);
+		Main.contexto.put("reservas", reservaList.getReservas());
 		return reservaList;
 	}
 	

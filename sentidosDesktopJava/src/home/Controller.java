@@ -1,5 +1,6 @@
 package home;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,7 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -26,6 +30,8 @@ import model.OrderDetail;
 import model.OrderList;
 import model.OrderResponse;
 import model.ReservaList;
+import model.ReservaTableItem;
+import model.Reservations;
 
 import java.io.IOException;
 import java.net.URL;
@@ -148,6 +154,10 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     @FXML
     private Label warning;
     
+    @FXML
+    private TableView<ReservaTableItem> tbReservacion;
+    
+    
     Stage stage;    
   
     private HttpService http = new HttpService();
@@ -178,7 +188,8 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     	LoginResponse login =(LoginResponse) Main.contexto.get("login");
     	
     	if(login.getAccess_token() != null) {
-    		setBtnVisible();    		
+    		setBtnVisible();    	
+    		httpReserva.todasLasReservas();
     	}else{
     		textLoginError.setText("Ocurrio un error, intente nuevamente.");
     		textLoginError.setVisible(true);
@@ -216,6 +227,7 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
         pnNuevoReserva.addEventFilter(MouseEvent.MOUSE_RELEASED, eventNoResaltarLetra);        
         pnNuevoOrden.addEventFilter(MouseEvent.MOUSE_RELEASED, eventNoResaltarLetra);   
         pnNuevoTicket.addEventFilter(MouseEvent.MOUSE_RELEASED, eventNoResaltarLetra);
+        
         
     }
 
@@ -309,6 +321,8 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
 	    	btnCustomers.setVisible(true);
     	}
     	*/
+        actualizarTablaReservas();
+
     }
 
     public void handleClicks(ActionEvent actionEvent) {
@@ -629,5 +643,25 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
 				}
             } 
          }; 
+         
+         private void actualizarTablaReservas() {
+        	 
+        	 List<ReservaTableItem> reservas = new ArrayList<>();
+        	 ((List<Reservations>) Main.contexto.get("reservas")).forEach(r ->{
+        		ReservaTableItem item = new ReservaTableItem(r.getTable(), r.getUsername(), r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour()); 
+        		reservas.add(item);
+        	 });
+        	 ObservableList<ReservaTableItem> datos = FXCollections.observableList(reservas);       	 
+        	 
+        	 TableColumn<ReservaTableItem, String> mesa = new TableColumn<>("Mesa");
+        	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Mesa"));
+        	 
+        	 tbReservacion.getColumns().add(mesa);
+        	 tbReservacion.setItems(datos);
+        	
+         	//tbReservacion.setItems(reservas);
+         	
+         }
+         
 }
 
