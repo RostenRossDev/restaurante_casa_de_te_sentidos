@@ -11,10 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.LoginResponse;
@@ -100,6 +104,15 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     private Pane pnLogin;
     
     @FXML
+    private Pane pnNuevoReserva;
+    
+    @FXML
+    private Pane pnNuevoOrden;
+    
+    @FXML
+    private Pane pnNuevoTicket;
+    
+    @FXML
     private TextField textUser;
     
     @FXML
@@ -110,6 +123,24 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     
     @FXML
     private Text textUsuarioError;
+    
+    @FXML
+    private Text txtNuevoReservacion;
+    
+    @FXML
+    private Text txtNuevoOrden;
+    
+    @FXML
+    private Text txtNuevoTicket;
+    
+    @FXML
+    private ImageView imgNuevoResarvacion;
+    
+    @FXML
+    private ImageView imgNuevoOrden;
+    
+    @FXML
+    private ImageView imgNuevoTicket;
     
     @FXML
     private PasswordField textPassword;
@@ -178,6 +209,14 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     	pnLateralOrden.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
     	pnLateralReserva.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
     	pnLateralTicket.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickLateralMenu);
+    	
+        pnNuevoReserva.addEventFilter(MouseEvent.MOUSE_PRESSED, eventResaltarLetra);        
+        pnNuevoOrden.addEventFilter(MouseEvent.MOUSE_PRESSED, eventResaltarLetra);   
+        pnNuevoTicket.addEventFilter(MouseEvent.MOUSE_PRESSED, eventResaltarLetra);
+        pnNuevoReserva.addEventFilter(MouseEvent.MOUSE_RELEASED, eventNoResaltarLetra);        
+        pnNuevoOrden.addEventFilter(MouseEvent.MOUSE_RELEASED, eventNoResaltarLetra);   
+        pnNuevoTicket.addEventFilter(MouseEvent.MOUSE_RELEASED, eventNoResaltarLetra);
+        
     }
 
     private void loginToFrontt() {
@@ -530,5 +569,65 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
           } 
        }; 
         
+       
+       EventHandler<MouseEvent> eventResaltarLetra = new EventHandler<MouseEvent>() { 
+           @Override 
+           public void handle(MouseEvent event) {
+        	   Color color = Color.web("#FF54B9", 1);
+				DropShadow dropShadow = new DropShadow(); 
+				dropShadow.setBlurType(BlurType.GAUSSIAN); 
+			    dropShadow.setColor(color); 
+			    dropShadow.setHeight(5); 
+			    dropShadow.setWidth(5); 
+			    dropShadow.setRadius(5); 
+			    dropShadow.setOffsetX(0); 
+			    dropShadow.setOffsetY(0); 
+			    dropShadow.setSpread(12);  
+				String id = ((Pane) event.getSource()).getId();
+				Pane panel = (Pane) event.getSource();
+				if (id.equals("pnNuevoReserva")) {
+					System.out.println("id: " + id);
+					
+
+					imgNuevoResarvacion.setEffect(dropShadow);
+					txtNuevoReservacion.setStyle("-fx-fill:#FF54B9;");
+
+				} else if (id.equals("pnNuevoTicket")) {
+					System.out.println("id: " + id);
+					imgNuevoTicket.setEffect(dropShadow);
+					txtNuevoTicket.setStyle("-fx-fill:#FF54B9;");
+				} else if (id.equals("pnNuevoOrden")) {
+					System.out.println("id: " + id);
+					imgNuevoOrden.setEffect(dropShadow);
+					txtNuevoOrden.setStyle("-fx-fill:#FF54B9;");
+				} else {
+					System.out.println("id: " + id);
+				}
+           } 
+        }; 
+        
+        EventHandler<MouseEvent> eventNoResaltarLetra = new EventHandler<MouseEvent>() { 
+            @Override 
+            public void handle(MouseEvent event) {
+         	   
+            	String id = ((Pane) event.getSource()).getId();
+				Pane panel = (Pane) event.getSource();
+				if (id.equals("pnNuevoReserva")) {
+					System.out.println("id: " + id);
+					imgNuevoResarvacion.setEffect(null);
+					txtNuevoReservacion.setStyle("-fx-fill:#000000;");
+				} else if (id.equals("pnNuevoTicket")) {
+					System.out.println("id: " + id);
+					imgNuevoTicket.setEffect(null);
+					txtNuevoTicket.setStyle("-fx-fillr:#000000;");
+				} else if (id.equals("pnNuevoOrden")) {
+					System.out.println("id: " + id);
+					imgNuevoOrden.setEffect(null);
+					txtNuevoOrden.setStyle("-fx-fill:#000000;");
+				} else {
+					System.out.println("id: " + id);
+				}
+            } 
+         }; 
 }
 

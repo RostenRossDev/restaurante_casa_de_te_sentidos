@@ -76,7 +76,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane id="pnLogin" fx:id="pnLogin" layoutX="561.0" layoutY="34.0" prefHeight="539.0" prefWidth="636.0" visible="false">
+      <Pane id="pnLogin" fx:id="pnLogin" layoutX="561.0" layoutY="34.0" prefHeight="540.0" prefWidth="636.0" visible="false">
 
          <children>
             <TextField id="textUser" fx:id="textUser" layoutX="381.0" layoutY="266.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su usuario" />
@@ -138,20 +138,10 @@
             <PasswordField fx:id="textPassword" layoutX="381.0" layoutY="354.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su contraseña" />
          </children>
       </Pane>
-   
-   	<Button fx:id="btnClose" alignment="TOP_RIGHT" graphicTextGap="22.0" layoutX="1189.0" layoutY="-2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" stylesheets="@style.css">
-   		<graphic>
-      			<ImageView fitHeight="25" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-      				<image>
-      					<Image url="@../images/close.png" />
-      				</image>
-      			</ImageView>
-   		</graphic>
-   	</Button>
-      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="258.0" layoutY="190.0" prefHeight="408.0" prefWidth="972.0" visible="false">
+      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;">
 
          <children>
-            <TableView id="tbOrden" fx:id="tbReservacion" layoutX="-1.0" prefHeight="386.0" prefWidth="981.0">
+            <TableView id="tbOrden" fx:id="tbReservacion" layoutY="183.0" prefHeight="394.0" prefWidth="972.0">
               <columns>
                 <TableColumn id="tdOrden" prefWidth="85.0" text="Reserva" />
                 <TableColumn id="tdMesa" prefWidth="65.0" text="Mesa" />
@@ -164,30 +154,56 @@
                   <TableColumn id="tdHora" maxWidth="75.0" prefWidth="150.0" text="Editar" />
               </columns>
             </TableView>
+            <Pane fx:id="pnNuevoReserva" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">
+               <children>
+                  <ImageView fx:id="imgNuevoResarvacion">
+                     <image>
+                        <Image url="@../images/add_89274.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="txtNuevoReservacion" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuevo" x="60.0" y="20.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
          </children>
       </Pane>
-      <Pane id="pnCaja" fx:id="pnTicket" layoutX="258.0" layoutY="183.0" prefHeight="408.0" prefWidth="972.0" visible="false">
+      <Pane id="pnCaja" fx:id="pnTicket" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;" visible="false">
 
          <children>
-            <TableView id="tbTicket" fx:id="tbTicket" layoutX="2.0" prefHeight="386.0" prefWidth="981.0" style="-fx-background-color: #02030A;">
+            <TableView id="tbTicket" fx:id="tbTicket" layoutY="183.0" prefHeight="394.0" prefWidth="972.0" style="-fx-background-color: #02030A;">
                <columns>
                   <TableColumn id="tdTicket" prefWidth="85.0" style="-fx-background-color: #02030A;" text="Ticket" />
                   <TableColumn id="tdFechaCreacion" prefWidth="110.0" text="fecha de creacion" />
                   <TableColumn id="tdTotal" minWidth="0.0" prefWidth="82.0" text="Total" />
-                  <TableColumn id="tdUsuario" prefWidth="266.0" text="Usuario" />
-                  <TableColumn id="tdPagado" minWidth="0.0" prefWidth="78.0" text="Pagado" />
-                  <TableColumn id="tdMetodo" prefWidth="156.0" text="Metodo de pago" />
-                  <TableColumn id="tdFechaPago" prefWidth="109.0" text="fecha de pago" />
-                  <TableColumn id="tdEliminar" maxWidth="100.0" prefWidth="53.0" text="eliminar" />
-                  <TableColumn id="tdEditar" maxWidth="100.0" prefWidth="41.0" text="editar" />
+                  <TableColumn id="tdUsuario" prefWidth="250.0" text="Usuario" />
+                  <TableColumn id="tdPagado" minWidth="0.0" prefWidth="84.0" text="Pagado" />
+                  <TableColumn id="tdMetodo" prefWidth="139.0" text="Metodo de pago" />
+                  <TableColumn id="tdFechaPago" prefWidth="100.0" text="fecha de pago" />
+                  <TableColumn id="tdEliminar" maxWidth="100.0" prefWidth="66.0" text="eliminar" />
+                  <TableColumn id="tdEditar" maxWidth="100.0" prefWidth="54.0" text="editar" />
                </columns>
             </TableView>
+            <Pane fx:id="pnNuevoTicket" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">
+               <children>
+                  <ImageView fx:id="imgNuevoTicket">
+                     <image>
+                        <Image url="@../images/add_89274.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="txtNuevoTicket" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuevo" x="60.0" y="20.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
          </children>
       </Pane>
-      <Pane id="pnOrden" fx:id="pnOrden" layoutX="267.0" layoutY="168.0" prefHeight="408.0" prefWidth="972.0" visible="false" AnchorPane.bottomAnchor="0.0">
+      <Pane id="pnOrden" fx:id="pnOrden" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;" visible="false">
 
          <children>
-            <TableView id="tbOrden" fx:id="tbOrden" layoutY="13.0" prefHeight="394.0" prefWidth="981.0">
+            <TableView id="tbOrden" fx:id="tbOrden" layoutY="183.0" prefHeight="394.0" prefWidth="972.0">
                <columns>
                   <TableColumn id="tdOrden" prefWidth="96.0" text="Orden" />
                   <TableColumn id="tdMesa" prefWidth="275.0" text="Usuario" />
@@ -199,6 +215,19 @@
                   <TableColumn id="tdTe" maxWidth="100.0" prefWidth="74.0" text="Editar" />
                </columns>
             </TableView>
+            <Pane fx:id="pnNuevoOrden" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">
+               <children>
+                  <ImageView fx:id="imgNuevoOrden">
+                     <image>
+                        <Image url="@../images/add_89274.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="txtNuevoOrden" scaleX="2.0" scaleY="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuevo" x="60.0" y="20.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
          </children>
       </Pane>
       <Pane id="pnLateral" fx:id="pnLateral" layoutY="161.0" prefHeight="255.0" prefWidth="261.0" scaleX="1.045" scaleY="2.26" style="-fx-background-color: linear-gradient(to right, #9B52FF,#FF52B3);">
@@ -304,6 +333,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor></Pane>
          </children></Pane>
+   
+         	<Button fx:id="btnClose" alignment="TOP_RIGHT" graphicTextGap="22.0" layoutX="1190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" stylesheets="@style.css">
+   		<graphic>
+      			<ImageView fitHeight="25" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+      				<image>
+      					<Image url="@../images/close.png" />
+      				</image>
+      			</ImageView>
+   		</graphic>
+   	</Button>
    </children>
 
 
