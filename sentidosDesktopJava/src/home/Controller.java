@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -175,11 +177,20 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     @FXML
     private TableColumn<ReservaTableItem, String> clHora;
     
+    @FXML
+    private TableColumn<ReservaTableItem, String> clReserva;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clEditar;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clEliminar;
+    
     Stage stage;    
   
     private HttpService http = new HttpService();
     private HttpReservaService httpReserva = new HttpReservaService();
-    
+
     @Override
 	public void handle(ActionEvent actionEvent) {
 	/*	// TODO Auto-generated method stub
@@ -661,10 +672,75 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
             } 
          }; 
          
+         EventHandler<MouseEvent> evcentClickReserva = new EventHandler<MouseEvent>() { 
+             @Override 
+             public void handle(MouseEvent event) {
+             	System.out.println("clickeo en reserva: "+ tbReservacion.getSelectionModel().getSelectedItem().toString());                
+
+             } 
+          }; 
+         
+          EventHandler<MouseEvent> evcentClickEliminar = new EventHandler<MouseEvent>() { 
+              @Override 
+              public void handle(MouseEvent event) {
+              	System.out.println("clickeo en eliminar");
+              } 
+           }; 
+           
+           EventHandler<MouseEvent> evcentClickEditar = new EventHandler<MouseEvent>() { 
+               @Override 
+               public void handle(MouseEvent event) {
+               	System.out.println("clickeo en editar");
+               } 
+            }; 
+         private Button getNewEliminarButton() {
+        	 Button btn = new Button();
+        	 Image imgRemove = new Image("/images/remove.png");
+        	 ImageView eliminar = new ImageView();
+        	 eliminar.setImage(imgRemove);
+        	 //eliminar.setScaleX(0.5);
+        	 //eliminar.setScaleY(0.5);
+        	 btn.setGraphic(eliminar);
+        	 btn.setPrefWidth(20);
+        	 btn.setPrefHeight(20);
+        	 btn.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickReserva);
+        	 return  btn;
+         }
+         
+         private Button getNewEeditarButton() {
+        	 Button btn = new Button();
+        	 Image imgEdit = new Image("/images/edit.png");
+        	 ImageView editar = new ImageView();
+        	 editar.setImage(imgEdit);
+        	 //editar.setScaleX(0.5);
+        	 //editar.setScaleY(0.5);
+        	 btn.setGraphic(editar);
+        	 btn.setPrefWidth(20);
+        	 btn.setPrefHeight(20);
+        	 btn.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickReserva);
+        	 
+        	 return  btn;
+         }
+         
+         private Button getNewReservaButton() { ///sentidosDesktopJava/src/images/reservation.png
+        	 Button btn = new Button();
+        	 Image imgReserva = new Image("/images/reservation.png");
+        	 ImageView reserva = new ImageView();        	 
+        	 reserva.setImage(imgReserva);
+        	 //reserva.setScaleX(0.5);
+        	 //reserva.setScaleY(0.5);        	
+        	 btn.setGraphic(reserva);
+        	 btn.setPrefWidth(20);
+        	 btn.setPrefHeight(20);
+        	 btn.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickReserva);
+        	 return  btn;
+         }
+         
+         
          private void actualizarTablaReservas() {
         	 List<ReservaTableItem> reservas = new ArrayList<>();
         	 ((List<Reservations>) Main.contexto.get("reservas")).forEach(r ->{
-        		ReservaTableItem item = new ReservaTableItem(r.getTable(), r.getUsername(), r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour()); 
+        		ReservaTableItem item = new ReservaTableItem(getNewReservaButton(), r.getTable(), r.getUsername(), r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour(),getNewEeditarButton(),getNewEliminarButton()); 
         		reservas.add(item);
         	 });
         	 ObservableList<ReservaTableItem> datos = FXCollections.observableList(reservas);       	 
@@ -680,7 +756,13 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
         	     clTe_comida.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Te_Comida"));
         	    
         	     clHora.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Hora"));
-        	    
+
+        	     clReserva.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Reserva"));
+        	     
+        	     clEditar.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Editar"));
+
+        	     clEliminar.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Eliminar"));
+
         	 /*TableColumn<ReservaTableItem, String> mesa = new TableColumn<>("Mesa");
         	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Mesa"));
         	 

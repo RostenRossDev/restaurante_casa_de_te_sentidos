@@ -2,28 +2,38 @@ package model;
 
 import java.util.Date;
 
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+
 public class ReservaTableItem {
+	private Button reserva;
 	private Long Mesa;
 	private String Usuario;
 	private String Fecha;
 	private Boolean Confirmado;
 	private Boolean Te_Comida;
 	private Boolean Hora;
+	private Button eliminar;
+	private Button editar;
+
 	
 	
 	
 	public ReservaTableItem() {
 		super();
 	}
-	public ReservaTableItem(Long mesa, String usuario, String fecha, Boolean confirmado, Boolean te_Comida,
-			Boolean hora) {
+	public ReservaTableItem(Button reserva, Long mesa, String usuario, String fecha, Boolean confirmado,
+			Boolean te_Comida, Boolean hora, Button eliminar, Button editar) {
 		super();
+		this.reserva = reserva;
 		Mesa = mesa;
 		Usuario = usuario;
 		Fecha = fecha;
 		Confirmado = confirmado;
 		Te_Comida = te_Comida;
 		Hora = hora;
+		this.eliminar = eliminar;
+		this.editar = editar;
 	}
 	public Long getMesa() {
 		return Mesa;
@@ -60,6 +70,25 @@ public class ReservaTableItem {
 	}
 	public void setHora(Boolean hora) {
 		Hora = hora;
+	}
+	
+	public Button getReserva() {
+		return reserva;
+	}
+	public void setReserva(Button reserva) {
+		this.reserva = reserva;
+	}
+	public Button getEliminar() {
+		return eliminar;
+	}
+	public void setEliminar(Button eliminar) {
+		this.eliminar = eliminar;
+	}
+	public Button getEditar() {
+		return editar;
+	}
+	public void setEditar(Button editar) {
+		this.editar = editar;
 	}
 	@Override
 	public String toString() {
