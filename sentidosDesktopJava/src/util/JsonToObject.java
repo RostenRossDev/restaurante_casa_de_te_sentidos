@@ -6,6 +6,7 @@ import model.Customer;
 import model.LoginResponse;
 import model.OrderList;
 import model.ReservaList;
+import model.Reservations;
 
 public class JsonToObject {
 
@@ -33,8 +34,15 @@ public class JsonToObject {
 	
 	public static ReservaList jsonToReservaResponse(String json) {
 		Gson gson=new Gson();
+		System.out.println("json : "+json);
 		ReservaList list =gson.fromJson(json, ReservaList.class);
 		System.out.println("json objeto: "+list.toString());
 		return list;
+	}
+	
+	public static String reservaToJson(Reservations res) {
+		Gson gson=new Gson();
+		String json =gson.toJson(res);
+		return json;
 	}
 }

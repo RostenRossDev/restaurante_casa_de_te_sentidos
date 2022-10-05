@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Reservations {
 
+	private Long id;
 	private Long table;
 	private Date dateReservation;
 	private Date create_at;
@@ -19,10 +20,13 @@ public class Reservations {
 	public Reservations() {
 		super();
 	}
-	public Reservations(Long table, Date dateReservation, Date create_at, String username,
+	
+	
+	public Reservations(Long id, Long table, Date dateReservation, Date create_at, String username,
 			String dateReservationString, Boolean confirmed, Boolean isTea, Boolean hour, Boolean disabled,
 			String location) {
 		super();
+		this.id = id;
 		this.table = table;
 		this.dateReservation = dateReservation;
 		this.create_at = create_at;
@@ -34,7 +38,19 @@ public class Reservations {
 		this.disabled = disabled;
 		this.location = location;
 	}
-	
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 	public Long getTable() {
 		return table;
 	}
@@ -95,12 +111,16 @@ public class Reservations {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Reservas [table=" + table + ", dateReservation=" + dateReservation + ", create_at=" + create_at
-				+ ", username=" + username + ", dateReservationString=" + dateReservationString + ", confirmed="
-				+ confirmed + ", isTea=" + isTea + ", hour=" + hour + ", disabled=" + disabled + ", location="
-				+ location + "]";
+		return "Reservations [id=" + id + ", table=" + table + ", dateReservation=" + dateReservation + ", create_at="
+				+ create_at + ", username=" + username + ", dateReservationString=" + dateReservationString
+				+ ", confirmed=" + confirmed + ", isTea=" + isTea + ", hour=" + hour + ", disabled=" + disabled
+				+ ", location=" + location + "]";
 	}
+			
+	
 	
 }

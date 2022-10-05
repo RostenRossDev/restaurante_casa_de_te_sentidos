@@ -25,6 +25,6 @@ public class ReservaList {
 
 	@Override
 	public String toString() {
-		return "ReservasList [reservas=" + reservations + "]";
+		return reservations.toString();
 	}
 }

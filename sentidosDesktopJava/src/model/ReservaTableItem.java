@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import Servicios.HttpReservaService;
+import home.Main;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -10,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class ReservaTableItem {
+	private Long id;
 	private Button reserva;
 	private Long Mesa;
 	private String Usuario;
@@ -21,9 +24,10 @@ public class ReservaTableItem {
 	private Button editar;
 
 	
-	public ReservaTableItem(Long mesa, String usuario, String fecha, Boolean confirmado,
+	public ReservaTableItem(Long id,Long mesa, String usuario, String fecha, Boolean confirmado,
 			Boolean te_Comida, Boolean hora) {
 		super();
+		this.id=id;
 		this.reserva = getNewReservaButton();
 		reserva.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickReserva);
 		Mesa = mesa;
@@ -91,8 +95,12 @@ public class ReservaTableItem {
 		this.editar = editar;
 	}
 	
-	
-	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "ReservaTableItem [Mesa=" + Mesa + ", Usuario=" + Usuario + ", Fecha=" + Fecha + ", Confirmado="
@@ -149,9 +157,12 @@ public class ReservaTableItem {
 	};
 
 	EventHandler<MouseEvent> evcentClickEliminar = new EventHandler<MouseEvent>() {
+		
 		@Override
 		public void handle(MouseEvent event) {
 			System.out.println("clickeo en eliminar");
+			HttpReservaService reservaService = new HttpReservaService();
+			reservaService.borrarReserva("{id:"+id+"}");
 		}
 	};
 

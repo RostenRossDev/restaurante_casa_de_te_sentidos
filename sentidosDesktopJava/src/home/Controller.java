@@ -160,6 +160,9 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 
 	@FXML
 	private TableColumn<ReservaTableItem, String> clMesa;
+	
+	@FXML
+	private TableColumn<ReservaTableItem, String> clId;
 
 	@FXML
 	private TableColumn<ReservaTableItem, String> clUsuario;
@@ -299,32 +302,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		} else {
 			textLoginError.setText("Usted no cuenta con permisos para ingresar al sistema. \nIntente con otra cuenta.");
 		}
-		/*
-		 * if(roles.contains("ROLE_ADMIN")) { //System.out.println("seccion admin");
-		 * //btnCustomers.setVisible(true); //btnMenus.setVisible(true);
-		 * //btnOverview.setVisible(true); //btnOrders.setVisible(true);
-		 * //btnPackages.setVisible(true); //btnSignout.setVisible(true);
-		 * //pnLogin.setVisible(false);
-		 * //pnlOverview.setStyle("-fx-background-color : #02030A");
-		 * //pnlOverview.toFront(); //rellenarOrdenes();
-		 * 
-		 * }else if (roles.contains("ROLE_MOZO")) { System.out.println("seccion mozo");
-		 * 
-		 * btnOrders.setVisible(true); pnLogin.setVisible(false); pnlOrders.toFront();
-		 * pnlOrders.setVisible(true); pnlOverview.setVisible(false); rellenarOrdenes();
-		 * 
-		 * }else if(roles.contains("ROLE_MAITRE")) {
-		 * System.out.println("seccion maitre");
-		 * 
-		 * pnLogin.setVisible(false); pnlMenus.toFront(); pnlMenus.setVisible(true);
-		 * 
-		 * pnlOverview.setVisible(false); btnMenus.setVisible(true); }else
-		 * if(roles.contains("ROLE_CAJA")) { System.out.println("seccion caja");
-		 * 
-		 * pnLogin.setVisible(false); pnlCustomer.setVisible(true);
-		 * pnlCustomer.toFront(); pnlOverview.setVisible(false);
-		 * btnCustomers.setVisible(true); }
-		 */
+		
 		actualizarTablaReservas();
 
 	}
@@ -656,13 +634,15 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		List<ReservaTableItem> reservas = new ArrayList<>();
 		((List<Reservations>) Main.contexto.get("reservas")).forEach(r -> {
 			//Button btnReserva = getNewReservaButton();
-			ReservaTableItem item = new ReservaTableItem(r.getTable(), r.getUsername(),
+			ReservaTableItem item = new ReservaTableItem(r.getId(), r.getTable(), r.getUsername(),
 					r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour());
 			reservas.add(item);
 		});
 		ObservableList<ReservaTableItem> datos = FXCollections.observableList(reservas);
 
 		clMesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Mesa"));
+		
+		clId.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Id"));
 
 		clUsuario.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Usuario"));
 

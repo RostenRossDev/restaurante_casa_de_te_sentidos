@@ -36,4 +36,14 @@ public class ReservationService {
 	public List<Reservation> findByReservationDateAndDisabledAndIsTeaAndHour(Date reservationDate, Boolean disabled, Boolean isTea, Boolean hour ){
 		return reservationDao.findByReservationDateAndDisabledAndIsTeaAndHour(reservationDate, disabled, isTea, hour);
 	}
+	
+	public boolean deleteById(Long id) {
+		try {
+			reservationDao.deleteById(id);
+			return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
 }

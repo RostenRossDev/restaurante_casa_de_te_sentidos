@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sentidos.api.dao.IReservation;
+import com.sentidos.api.dto.ReservationDesktopDto;
 import com.sentidos.api.dto.ReservationDto;
 import com.sentidos.api.enitiesWrapper.ReservationWrapper;
 import com.sentidos.api.entities.Customer;
@@ -130,4 +132,27 @@ public class ReservationController {
 		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 	} 
 	
+	@DeleteMapping("")
+	public ResponseEntity<HashMap<String, Object>> delete(@RequestBody Long id){
+		HashMap<String, Object> response = new HashMap<>();
+		if(reservationService.deleteById(id)) {
+			log.info("Reserva eliminada");
+			return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
+		}
+		log.info("No se encontro");
+		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);		
+	}
+	
+	@GetMapping("/desktop/all")
+	public ResponseEntity<HashMap<String,Object>> allDesktop(){
+		HashMap<String, Object> response = new HashMap<>();
+		List<Reservation> reservations = reservationService.findAll();
+		List<ReservationDesktopDto> reservationsDto = new ArrayList<>();
+		reservations.forEach(reservation ->{
+			ReservationDesktopDto newReservationDto = ReservationWrapper.entityToDtoDesktop(reservation);
+			reservationsDto.add(newReservationDto);
+		});
+		response.put("reservations", reservationsDto);		
+		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
+	} 
 }

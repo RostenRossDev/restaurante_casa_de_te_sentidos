@@ -144,6 +144,7 @@
             <TableView id="tbOrden" fx:id="tbReservacion" layoutY="183.0" prefHeight="394.0" prefWidth="958.0">
                <columns>
                   <TableColumn fx:id="clReserva" maxWidth="83.0" prefWidth="83.0" text="reserva" />
+                  <TableColumn fx:id="clId" maxWidth="83.0" prefWidth="83.0" text="id" />
                   <TableColumn fx:id="clMesa" maxWidth="140.0" prefWidth="77.0" text="mesa" />
                   <TableColumn fx:id="clUsuario" prefWidth="178.0" text="usuario" />
                   <TableColumn fx:id="clFecha" maxWidth="161.0" prefWidth="117.0" text="fecha" />

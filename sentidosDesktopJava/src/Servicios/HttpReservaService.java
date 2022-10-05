@@ -31,14 +31,14 @@ public class HttpReservaService {
 	}
 	
 	private ReservaList todasLasReservasResponse(String token) {
-		String reservasUrl = Constantes.BASE_URL+Constantes.RESERVAS+"all";
+		String reservasUrl = Constantes.BASE_URL+Constantes.RESERVAS+"/desktop/all";
 		System.out.println("token: "+token);
 		try {
 			URL url = new URL(reservasUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			//conn.setRequestProperty("Content-Type", "application/json");
-			conn.setRequestProperty("Authorization", token);
+			conn.setRequestProperty("Authorization", "Bearer "+ token);
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			StringBuilder sb = new StringBuilder();
@@ -62,5 +62,35 @@ public class HttpReservaService {
 			 		
 		}
 		return  new ReservaList();
+	}
+	
+	public Boolean borrarReserva(String id) {
+		String reservasUrl = Constantes.BASE_URL+Constantes.RESERVAS+"";
+		LoginResponse user = (LoginResponse) Main.contexto.get("login");
+
+		try {
+			URL url = new URL(reservasUrl);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("DELETE");
+			//conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("Authorization", "Bearer "+user.getAccess_token());
+			conn.setDoOutput(true);
+			OutputStream os = conn.getOutputStream();
+			os.write(id.getBytes());
+			os.flush();
+			
+			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+				
+				System.out.println("response: ok");
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("response: no ok");
+
+			 return false;
+			 		
+		}
+		return  false;
 	}
 }
