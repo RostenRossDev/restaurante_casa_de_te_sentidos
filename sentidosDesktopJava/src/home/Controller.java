@@ -157,6 +157,23 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
     @FXML
     private TableView<ReservaTableItem> tbReservacion;
     
+    @FXML
+    private TableColumn<ReservaTableItem, String> clMesa;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clUsuario;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clFecha;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clConfirmado;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clTe_comida;
+    
+    @FXML
+    private TableColumn<ReservaTableItem, String> clHora;
     
     Stage stage;    
   
@@ -645,7 +662,6 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
          }; 
          
          private void actualizarTablaReservas() {
-        	 
         	 List<ReservaTableItem> reservas = new ArrayList<>();
         	 ((List<Reservations>) Main.contexto.get("reservas")).forEach(r ->{
         		ReservaTableItem item = new ReservaTableItem(r.getTable(), r.getUsername(), r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour()); 
@@ -653,11 +669,46 @@ public class Controller implements Initializable , EventHandler<ActionEvent>{
         	 });
         	 ObservableList<ReservaTableItem> datos = FXCollections.observableList(reservas);       	 
         	 
-        	 TableColumn<ReservaTableItem, String> mesa = new TableColumn<>("Mesa");
+        	 	clMesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Mesa"));
+        	    
+        	    clUsuario.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Usuario"));
+        	    
+        	    clFecha.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Fecha"));
+        	    
+        	    clConfirmado.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Confirmado"));
+        	    
+        	     clTe_comida.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Te_Comida"));
+        	    
+        	     clHora.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Hora"));
+        	    
+        	 /*TableColumn<ReservaTableItem, String> mesa = new TableColumn<>("Mesa");
         	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Mesa"));
         	 
-        	 tbReservacion.getColumns().add(mesa);
-        	 tbReservacion.setItems(datos);
+        	  TableColumn<ReservaTableItem, String> usuario = new TableColumn<>("Usuario");
+        	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Usuario"));
+        	 
+        	 
+       	  	TableColumn<ReservaTableItem, String> fecha = new TableColumn<>("Fecha");
+        	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Fecha"));
+        	 
+        	 TableColumn<ReservaTableItem, String> confirmado = new TableColumn<>("Confirmado");
+        	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Confirmado"));
+        	 
+        	 TableColumn<ReservaTableItem, Boolean> te_Comida = new TableColumn<>("Te_Comida");
+        	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Te_Comida"));
+        	 
+        	 TableColumn<ReservaTableItem, String> hora = new TableColumn<>("Hora");
+        	 mesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Hora"));       	 
+        	*/
+        	 
+        /*	 tbReservacion.getColumns().add(mesa);
+        	 tbReservacion.getColumns().add(usuario);
+        	 tbReservacion.getColumns().add(fecha);
+        	 tbReservacion.getColumns().add(confirmado);
+        	 tbReservacion.getColumns().add(te_Comida);
+        	 tbReservacion.getColumns().add(hora);*/
+        	 datos.forEach(d -> tbReservacion.getItems().add(d));
+        	 //tbReservacion.setItems(datos);
         	
          	//tbReservacion.setItems(reservas);
          	

@@ -142,18 +142,14 @@
 
          <children>
             <TableView id="tbOrden" fx:id="tbReservacion" layoutY="183.0" prefHeight="394.0" prefWidth="972.0">
-              <columns>
-                <TableColumn id="tdOrden" prefWidth="85.0" text="Reserva" />
-                <TableColumn id="tdMesa" prefWidth="65.0" text="Mesa" />
-                  <TableColumn id="tdFecha" prefWidth="119.0" text="Fecha" />
-                  <TableColumn id="tdUsuario" prefWidth="271.0" text="Usuario" />
-                  <TableColumn id="tdConfirmado" prefWidth="93.0" text="Confirmado" />
-                  <TableColumn id="tdTe" prefWidth="102.0" text="Te/Comida" />
-                  <TableColumn id="tdHora" prefWidth="98.0" text="Hora" />
-                  <TableColumn id="tdHora" maxWidth="75.0" prefWidth="207.0" text="Eliminar" />
-                  <TableColumn id="tdHora" maxWidth="75.0" prefWidth="150.0" text="Editar" />
-              </columns>
-            </TableView>
+               <columns>
+                  <TableColumn fx:id="clMesa" prefWidth="75.0" text="mesa" />
+                  <TableColumn fx:id="clUsuario" prefWidth="75.0" text="usuario" />
+                  <TableColumn fx:id="clFecha" prefWidth="75.0" text="fecha" />
+                  <TableColumn fx:id="clConfirmado" prefWidth="75.0" text="confirmado" />
+                  <TableColumn fx:id="clTe_comida" prefWidth="75.0" text="te_Comida" />
+                  <TableColumn fx:id="clHora" prefWidth="75.0" text="hora" />
+               </columns></TableView>
             <Pane fx:id="pnNuevoReserva" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">
                <children>
                   <ImageView fx:id="imgNuevoResarvacion">
