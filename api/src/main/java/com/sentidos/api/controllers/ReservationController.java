@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +54,13 @@ public class ReservationController {
 	@Autowired
 	private UserService userService;
 	
+	@PutMapping("")
+	public ResponseEntity<HashMap<String,Object>> update(@RequestBody ReservationDto reservationDto){
+		HashMap<String, Object> response = new HashMap<>();
+		
+		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
+	}
+ 
 	
 	@PostMapping("")
 	public ResponseEntity<HashMap<String,Object>> save(@RequestBody ReservationDto reservationDto){
@@ -92,7 +100,7 @@ public class ReservationController {
 			User user = userService.findByUsername(reservationDto.getUsername()); 
 			Customer customer = customerService.findByUser(user);
 			Reservation reservation = ReservationWrapper.dtoToEntity(reservationDto);
-			
+			reservation.setConfirmed(Boolean.FALSE);
 			reservation.setCustomer(customer);
 			reservation.setRestaurantTable(table);
 			reservation.setDisabled(Boolean.FALSE);

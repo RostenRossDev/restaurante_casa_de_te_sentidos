@@ -16,6 +16,7 @@ import model.LoginResponse;
 import model.OrderList;
 import model.OrderResponse;
 import model.ReservaList;
+import model.ReservaTableItem;
 import model.Reservations;
 import util.JsonToObject;
 public class HttpReservaService {
@@ -64,6 +65,10 @@ public class HttpReservaService {
 		}
 		return  new ReservaList();
 	}
+	
+	public Boolean actualizarReserva() {
+		return Boolean.TRUE;
+	} 
 	
 	public Boolean borrarReserva(String id) {
 		String reservasUrl = Constantes.BASE_URL+Constantes.RESERVAS+"";

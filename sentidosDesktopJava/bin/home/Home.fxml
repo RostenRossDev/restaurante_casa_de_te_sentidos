@@ -343,7 +343,7 @@
       			</ImageView>
    		</graphic>
    	</Button>
-      <Pane id="pnOrden" fx:id="pnEditarReserva" layoutX="550.0" layoutY="30.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" visible="false">
+      <Pane id="pnOrden" fx:id="pnEditarReserva" layoutX="550.0" layoutY="30.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;">
          <children>
             <Text fx:id="pnEditarReserva" layoutX="170.0" layoutY="41.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Reservacion" x="-60.0">
                <font>
@@ -353,6 +353,7 @@
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
                         <Stop color="#a304ff" />
+                        <Stop color="#a304ff" offset="0.007662835249042145" />
                         <Stop color="#ff04c4" offset="1.0" />
                      </stops>
                   </LinearGradient>

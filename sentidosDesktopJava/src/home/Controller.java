@@ -642,6 +642,69 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		}
 	};
 	
+	EventHandler<MouseEvent> enviarReservaEditada = new EventHandler<MouseEvent>() {
+		String usuario;
+		Integer mesa;
+		Date fecha; 
+		Boolean confirmado;
+		Boolean isTea;
+		Boolean hora;		
+		@Override
+		public void handle(MouseEvent event) {
+			Pane pane = (Pane)((Button)((Text)event.getTarget()).getParent()).getParent();
+			pane.setVisible(false);
+			
+			
+			pane.getChildren().forEach(c ->{
+				
+				if("mesa".equals(c.getId())) {
+					TextField txtMesa = (TextField) c;
+					mesa=Integer.parseInt(txtMesa.getText());
+				}else if("usuario".equals(c.getId())) {
+					TextField txtUsuario = (TextField) c;
+					usuario=txtUsuario.getText();
+				}else if("fecha".equals(c.getId())) {
+					DatePicker dateP=(DatePicker) c;
+					LocalDate lclDate = dateP.getValue();
+					fecha = new Date(lclDate.getYear(), lclDate.getMonthValue(), lclDate.getDayOfMonth());
+				}else if("confirmado".equals(c.getId())) {
+					ComboBox<String> combo = (ComboBox<String>) c;
+					Boolean valor=null;
+					if("Si".equals(combo.getValue())) {
+						valor=Boolean.TRUE;
+					}else if("No".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}
+					confirmado=valor;
+				}else if("isTea".equals(c.getId())) {
+					ComboBox<String> combo = (ComboBox<String>) c;
+					Boolean valor=null;
+					if("Té".equals(combo.getValue())) {
+						valor=Boolean.TRUE;
+					}else if("Comida".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}
+					isTea= valor;
+				}else if("hora".equals(c.getId())) {
+					ComboBox<String> combo = (ComboBox<String>) c;
+					Boolean valor=null;
+					if("8:00 - 11:00".equals(combo.getValue())) {
+						valor=Boolean.TRUE;
+					}else if("11:00 - 15:00".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}else if("15:00 - 19:00".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}else if("19:00 - 00:00".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}
+					hora= valor;
+				}
+				
+			});;
+			
+		}
+	};
+	
 	private void actualizarTablaReservas() {
 		List<ReservaTableItem> reservas = new ArrayList<>();
 		((List<Reservations>) Main.contexto.get("reservas")).forEach(r -> {
@@ -657,7 +720,21 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			Button aceptar = new Button("ACEPTAR");
 			Button cancelar = new Button("CANCELAR");
 			cancelar.addEventFilter(MouseEvent.MOUSE_CLICKED, ocultarEditar);
+			aceptar.addEventFilter(MouseEvent.MOUSE_CLICKED, enviarReservaEditada);
+			
+			TextField inputUsuario = new TextField();
+			inputUsuario.setPromptText("Numero de mesa");
+			inputUsuario.setId("mesa");
+			Text txtUsuario = new  Text("Nro° Mesa :");
+			
+			TextField inputTable = new TextField();
+			inputTable.setPromptText("Nombre de usuario");
+			inputTable.setId("usuario");
+			Text txtTable = new  Text("Usuario");
+			
+			
 			DatePicker date = new DatePicker();
+			date.setId("fecha");
 			System.out.println("fecha: "+r.getDateReservationString());
 			String[] result = r.getDateReservationString().split("-");
 			System.out.println("dia: "+result[0]);
@@ -667,6 +744,12 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			ComboBox<String> comboComida = new ComboBox<>(FXCollections.observableArrayList("Té", "Comida"));
 			ComboBox<String> comboHora = new ComboBox<>(FXCollections.observableArrayList("8:00 - 11:00",
 					"11:00 - 15:00", "15:00 - 19:00", "19:00 - 00:00"));
+			comboConfim.setId("confirmado");
+			comboComida.setId("isTea");
+			comboHora.setId("hora");
+			comboConfim.setValue(r.getConfirmed()?"Si":"No");
+			comboComida.setValue(r.getIsTea()?"Té":"Comida");
+			comboHora.setValue(r.getIsTea()?(r.getHour()?"8:00 - 11:00":"15:00 - 19:00"):(r.getHour()?"11:00 - 15:00":"19:00 - 00:00"));
 			Text fecha = new Text("Fecha :");
 			Text comida = new Text("Té / Comida :");
 			Text hora = new Text("Hora :");
@@ -678,19 +761,21 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			stops.add(new Stop(0, color1));
 			stops.add(new Stop(1, color2));
 			LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-			titulo.setFill(gradient);
-			// titulo.setStrokeWidth(3);
-			// titulo.setStroke(Color.CADETBLUE);
+			titulo.setFill(gradient);			
 			titulo.setStyle("-fx-font: 24 arial;");
 			comida.setFill(gradient);
 			hora.setFill(gradient);
 			fecha.setFill(gradient);
 			confirm.setFill(gradient);
+			txtUsuario.setFill(gradient);
+
 
 			comboConfim.setValue("Seleccionar");
 			comboComida.setValue("Seleccionar");
 			comboHora.setValue("Seleccionar");
 
+			pane.getChildren().add(txtUsuario);
+			pane.getChildren().add(inputUsuario);
 			pane.getChildren().add(date);
 			pane.getChildren().add(comboConfim);
 			pane.getChildren().add(comboComida);
@@ -723,7 +808,13 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			comboHora.setLayoutX(150);
 			comboHora.setLayoutY(300);
 			hora.setLayoutX(30);
-			hora.setLayoutY(330);
+			hora.setLayoutY(320);
+			
+			inputUsuario.setLayoutX(150);
+			inputUsuario.setLayoutY(350);
+			inputUsuario.setText(r.getUsername());
+			txtUsuario.setLayoutX(30);
+			txtUsuario.setLayoutY(360);
 
 			aceptar.setLayoutX(50);
 			aceptar.setLayoutY(450);

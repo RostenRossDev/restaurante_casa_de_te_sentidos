@@ -85,26 +85,26 @@ INSERT INTO `tables` (number) VALUES (19);
 /*INSERT RESERVATIONS*/
 
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-25', 0, 1, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-26', 1, 1, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-25', 0, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-26', 1, 1, 0, 1);
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (2, 2, CURRENT_TIMESTAMP, '2022-09-25', 1, 0, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (1, 2, CURRENT_TIMESTAMP, '2022-09-26', 0, 0, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 2, CURRENT_TIMESTAMP, '2022-09-25', 1, 0, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (1, 2, CURRENT_TIMESTAMP, '2022-09-26', 0, 0, 0, 1);
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (6, 3, CURRENT_TIMESTAMp, '2022-09-25', 0, 1, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (5, 3, CURRENT_TIMESTAMP, '2022-09-27', 1, 0, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (6, 3, CURRENT_TIMESTAMp, '2022-09-25', 0, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (5, 3, CURRENT_TIMESTAMP, '2022-09-27', 1, 0, 0, 1);
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (5, 4, CURRENT_TIMESTAMP, '2022-09-29', 0, 1, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (6, 4, CURRENT_TIMESTAMP, '2022-09-29', 1, 0, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (5, 4, CURRENT_TIMESTAMP, '2022-09-29', 0, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (6, 4, CURRENT_TIMESTAMP, '2022-09-29', 1, 0, 0, 1);
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (5, 4, CURRENT_TIMESTAMP, '2022-09-27', 1, 1, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (6, 4, CURRENT_TIMESTAMP, '2022-09-27', 1, 1, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (5, 4, CURRENT_TIMESTAMP, '2022-09-27', 1, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (6, 4, CURRENT_TIMESTAMP, '2022-09-27', 1, 1, 0, 1);
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-30', 1, 1, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-30', 1, 1, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-30', 1, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-30', 1, 1, 0, 1);
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (19, 4, CURRENT_TIMESTAMP, '2022-09-25', 0, 1, 0);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled) VALUES (30, 3, CURRENT_TIMESTAMP, '2022-09-26', 1, 1, 0);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (19, 4, CURRENT_TIMESTAMP, '2022-09-25', 0, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (30, 3, CURRENT_TIMESTAMP, '2022-09-26', 1, 1, 0, 1);
 
 /*INSERT MENU_TYPE*/
 
