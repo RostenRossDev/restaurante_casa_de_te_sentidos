@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { TitleStyles } from "./ReusableStyles";
 export default function Newsletter() {
+
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`The email you entered was: ${email}`);
+    setEmail("");
+  }
+
   return (
     <Section id="newsletter">
       <div className="title">
         <h1>
-          <span>Subscribe</span> Newsletter
+          <span>Suscribirse</span> a las novedades
         </h1>
+        
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid quas
-          perferendis nesciunt illum, voluptas nulla laborum alias similique
-          praesentium quam.
+          Puedes suscribirte a nuestras novedades para recibir información de importantes eventos y degustaciones en nuestro local.
         </p>
       </div>
-      <div className="container">
-        <input type="text" placeholder="Search for food ..." />
-        <button>Search</button>
-      </div>
+      <form className="container" onSubmit={handleSubmit}>
+        <input 
+        type="email" 
+        placeholder="Ingresa tu e-mail..." 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}/>
+        <button type="submit">Enviar</button>
+      </form>
     </Section>
   );
 }
@@ -31,7 +43,7 @@ const Section = styled.section`
   align-items: center;
   ${TitleStyles};
   .container {
-    background: linear-gradient(to right, #fc4958, #e85d04, #fc4958);
+    background: linear-gradient(to right, #fc4958, #CC99CC);
     padding: 0.3vw;
     input {
       border: none;

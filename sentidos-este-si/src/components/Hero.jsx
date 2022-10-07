@@ -1,29 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import hero from "../assets/hero.jpg";
-import heroDesign from "../assets/HeroDesign.png";
+import imagen1 from "../assets/imagen1.jpg";
+import SignInForm from "./SignInForm";
+
 export default function Hero() {
   return (
     <Section id="home">
       <div className="background">
-        <img src={hero} alt="Background Image" />
+        <img src={imagen1} alt="Background Image" />
       </div>
       <div className="content">
-        <div className="sale">
-          <img src={heroDesign} alt="" />
-          <h1>
-            EFECTIVO
-            <span>50% OFF</span>
-          </h1>
-        </div>
         <div className="info">
           <h2>Ordenar</h2>
           <em>
-            Para reservar mesas o ordenar un envio por favor registrese y autentiquese en el sistema.
+            Para reservar mesas o solicitar un envío por favor regístrese e ingrese al sistema.
             <br/>
-            Aceptamos pagos en efectivo y todas las tarjetas de debito y credito.
+            Aceptamos pagos en efectivo y todas las tarjetas de débito y crédito.
           </em>
-          <button>Llevame ahi</button>
+          <button onClick={SignInForm}>Llevame ahi</button>
         </div>
       </div>
     </Section>
@@ -51,34 +45,16 @@ const Section = styled.section`
     justify-content: space-between;
     height: 100%;
     width: 100%;
-    .sale {
-      position: relative;
-      left: 10%;
-      img {
-        height: 70vh;
-      }
-      h1 {
-        color: white;
-        position: absolute;
-        top: 25vh;
-        left: 15vh;
-        font-size: 4.5rem;
-        span {
-          display: block;
-          font-size: 5vw;
-        }
-      }
-    }
     .info {
       position: absolute;
-      top: 40%;
+      top: 20%;
       right: 10%;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       gap: 1rem;
       h2 {
-        color: #f9c74f;
+        color: #F37F9F;
         font-size: 4rem;
         letter-spacing: 0.5rem;
       }
@@ -86,22 +62,23 @@ const Section = styled.section`
         color: white;
         width: 60%;
         text-align: end;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         line-height: 2rem;
         letter-spacing: 0.1rem;
       }
       button {
         padding: 1rem 2rem;
         font-size: 1.4rem;
-        background-color: #fc4958;
+        background-color: #CC6699;
         border: none;
         color: white;
         font-weight: 800;
         letter-spacing: 0.2rem;
         transition: 0.3s ease-in-out;
         cursor: pointer;
+        border-radius: 1rem;
         &:hover {
-          background-color: #f9c74f;
+          background-color: #CC99CC;
         }
       }
     }

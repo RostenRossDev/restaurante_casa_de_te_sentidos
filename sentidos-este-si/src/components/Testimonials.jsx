@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import avatar1 from "../assets/avatar1.jpeg";
 import { imageZoomEffect, TitleStyles } from "./ReusableStyles";
 import Post from "./Post";
 import PostService from "../Service/PostService";
@@ -39,12 +38,13 @@ export default function Testimonials() {
 
 const Section = styled.section`
   margin: 5vw;
-  background: linear-gradient(to right, #fc4958, #e85d04, #fc4958);
+  background: linear-gradient(to right, #fc4958, #CC99CC);
   padding: 0.2rem;
   border-radius: 1.5rem;
   position: relative;
   .container {
-    margin: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     padding-top: 1vw;
     padding-bottom: 4vw;
     background-color: white;

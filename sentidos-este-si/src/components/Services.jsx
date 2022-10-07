@@ -8,9 +8,9 @@ export default function Services() {
   return (
     <Section id="services">
       <div className="title">
-        <h1 className="yellow">¿Qué hacemos?</h1>
+        <h1 className="yellow" style={{"color": "#F37F9F"}}>¿Qué hacemos?</h1>
         <p>
-        Buscamos atraer la atención de nuestros clientes a travéz de experiencias inspiradoras en la 
+        Buscamos atraer la atención de nuestros clientes a través de experiencias inspiradoras en la 
         seducción de los sentidos para que disfrute de un momento de bienestar, en total armonía.
         </p>
       </div>
@@ -18,11 +18,11 @@ export default function Services() {
         <div className="service">
           <img src={Services2} alt="" />
           <p>
-            Inovación y sabores exoticos en nuestros platos
+            Innovación y sabores exquisitos en nuestros platos
           </p>
           <button>Read More</button>
         </div>
-        <div className="service yellow">
+        <div className="service">
           <img src={Services1} alt="" />
           <p>
             Especial atención a los pequeños detalles
@@ -74,7 +74,7 @@ const Section = styled.section`
         background-color: #fc4958;
         transition: 0.3s ease-in-out;
         &:hover {
-          background-color: #f9c74f;
+          background-color: #CC99CC;
         }
       }
     }
