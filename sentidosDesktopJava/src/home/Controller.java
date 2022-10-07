@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
@@ -25,6 +27,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.LoginResponse;
@@ -37,6 +42,7 @@ import model.Reservations;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -160,7 +166,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 
 	@FXML
 	private TableColumn<ReservaTableItem, String> clMesa;
-	
+
 	@FXML
 	private TableColumn<ReservaTableItem, String> clId;
 
@@ -302,7 +308,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		} else {
 			textLoginError.setText("Usted no cuenta con permisos para ingresar al sistema. \nIntente con otra cuenta.");
 		}
-		
+
 		actualizarTablaReservas();
 
 	}
@@ -629,19 +635,117 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		}
 	};
 
+	EventHandler<MouseEvent> ocultarEditar = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			((Pane)((Button)((Text)event.getTarget()).getParent()).getParent()).setVisible(false);
+		}
+	};
 	
 	private void actualizarTablaReservas() {
 		List<ReservaTableItem> reservas = new ArrayList<>();
 		((List<Reservations>) Main.contexto.get("reservas")).forEach(r -> {
-			//Button btnReserva = getNewReservaButton();
+			// Button btnReserva = getNewReservaButton();
+			Pane pane = new Pane();
+			pane.setPrefWidth(400);
+			pane.setPrefHeight(500);
+			pane.setMaxWidth(1500);
+			pane.setMaxHeight(1500);
+			pane.setLayoutX(250);
+			pane.setLayoutY(30);
+
+			Button aceptar = new Button("ACEPTAR");
+			Button cancelar = new Button("CANCELAR");
+			cancelar.addEventFilter(MouseEvent.MOUSE_CLICKED, ocultarEditar);
+			DatePicker date = new DatePicker();
+			System.out.println("fecha: "+r.getDateReservationString());
+			String[] result = r.getDateReservationString().split("-");
+			System.out.println("dia: "+result[0]);
+			LocalDate lclDate = LocalDate.of(Integer.parseInt(result[0]), Integer.parseInt(result[1]), Integer.parseInt(result[2]));
+			date.setValue(lclDate);
+			ComboBox<String> comboConfim = new ComboBox<>(FXCollections.observableArrayList("Si", "No"));
+			ComboBox<String> comboComida = new ComboBox<>(FXCollections.observableArrayList("Té", "Comida"));
+			ComboBox<String> comboHora = new ComboBox<>(FXCollections.observableArrayList("8:00 - 11:00",
+					"11:00 - 15:00", "15:00 - 19:00", "19:00 - 00:00"));
+			Text fecha = new Text("Fecha :");
+			Text comida = new Text("Té / Comida :");
+			Text hora = new Text("Hora :");
+			Text confirm = new Text("Confirmado :");
+			Text titulo = new Text("Editar Reserva");
+			List<Stop> stops = new ArrayList<>();
+			Color color2 = Color.rgb(122, 4, 255);
+			Color color1 = Color.rgb(255, 4, 196);
+			stops.add(new Stop(0, color1));
+			stops.add(new Stop(1, color2));
+			LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+			titulo.setFill(gradient);
+			// titulo.setStrokeWidth(3);
+			// titulo.setStroke(Color.CADETBLUE);
+			titulo.setStyle("-fx-font: 24 arial;");
+			comida.setFill(gradient);
+			hora.setFill(gradient);
+			fecha.setFill(gradient);
+			confirm.setFill(gradient);
+
+			comboConfim.setValue("Seleccionar");
+			comboComida.setValue("Seleccionar");
+			comboHora.setValue("Seleccionar");
+
+			pane.getChildren().add(date);
+			pane.getChildren().add(comboConfim);
+			pane.getChildren().add(comboComida);
+			pane.getChildren().add(comboHora);
+			pane.getChildren().add(fecha);
+			pane.getChildren().add(comida);
+			pane.getChildren().add(hora);
+			pane.getChildren().add(confirm);
+			pane.getChildren().add(cancelar);
+			pane.getChildren().add(aceptar);
+			pane.getChildren().add(titulo);
+			pane.setVisible(false);
+			pane.setStyle("-fx-background-color: #ffffff");
+
+			date.setLayoutX(150);
+			date.setLayoutY(150);
+			fecha.setLayoutX(30);
+			fecha.setLayoutY(170);
+
+			comboConfim.setLayoutX(150);
+			comboConfim.setLayoutY(200);
+			confirm.setLayoutX(30);
+			confirm.setLayoutY(220);
+
+			comboComida.setLayoutX(150);
+			comboComida.setLayoutY(250);
+			comida.setLayoutX(30);
+			comida.setLayoutY(270);
+
+			comboHora.setLayoutX(150);
+			comboHora.setLayoutY(300);
+			hora.setLayoutX(30);
+			hora.setLayoutY(330);
+
+			aceptar.setLayoutX(50);
+			aceptar.setLayoutY(450);
+
+			cancelar.setLayoutX(300);
+			cancelar.setLayoutY(450);
+
+			titulo.setLayoutX(100);
+			titulo.setLayoutY(100);
+			// padre.getChildren().add(pane);
+
+			pane.toBack();
+			pnReservacion.getChildren().add(pane);
 			ReservaTableItem item = new ReservaTableItem(r.getId(), r.getTable(), r.getUsername(),
 					r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour());
+			item.setPanelEditar(pane);
 			reservas.add(item);
 		});
 		ObservableList<ReservaTableItem> datos = FXCollections.observableList(reservas);
 
 		clMesa.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Mesa"));
-		
+
 		clId.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Id"));
 
 		clUsuario.setCellValueFactory(new PropertyValueFactory<ReservaTableItem, String>("Usuario"));

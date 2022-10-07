@@ -138,21 +138,21 @@
             <PasswordField fx:id="textPassword" layoutX="381.0" layoutY="354.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su contraseña" />
          </children>
       </Pane>
-      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;">
+      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;" visible="false">
 
          <children>
             <TableView id="tbOrden" fx:id="tbReservacion" layoutY="183.0" prefHeight="394.0" prefWidth="958.0">
                <columns>
-                  <TableColumn fx:id="clReserva" maxWidth="83.0" prefWidth="83.0" text="reserva" />
-                  <TableColumn fx:id="clId" maxWidth="83.0" prefWidth="83.0" text="id" />
-                  <TableColumn fx:id="clMesa" maxWidth="140.0" prefWidth="77.0" text="mesa" />
-                  <TableColumn fx:id="clUsuario" prefWidth="178.0" text="usuario" />
-                  <TableColumn fx:id="clFecha" maxWidth="161.0" prefWidth="117.0" text="fecha" />
-                  <TableColumn fx:id="clConfirmado" maxWidth="185.0" prefWidth="139.0" text="confirmado" />
-                  <TableColumn fx:id="clTe_comida" maxWidth="141.0" prefWidth="117.0" text="te_Comida" />
-                  <TableColumn fx:id="clHora" maxWidth="124.0" prefWidth="89.0" text="hora" />
-                  <TableColumn fx:id="clEditar" maxWidth="83.0" minWidth="0.0" prefWidth="81.0" text="editar" />
-                  <TableColumn fx:id="clEliminar" maxWidth="83.0" prefWidth="83.0" text="eliminar" />
+                  <TableColumn fx:id="clReserva" maxWidth="83.0" prefWidth="60.0" text="reserva" />
+                  <TableColumn fx:id="clId" maxWidth="83.0" prefWidth="55.0" text="id" />
+                  <TableColumn fx:id="clMesa" maxWidth="140.0" prefWidth="65.0" text="mesa" />
+                  <TableColumn fx:id="clUsuario" prefWidth="195.0" text="usuario" />
+                  <TableColumn fx:id="clFecha" maxWidth="187.0" prefWidth="105.0" text="fecha" />
+                  <TableColumn fx:id="clConfirmado" maxWidth="197.0" prefWidth="93.0" text="confirmado" />
+                  <TableColumn fx:id="clTe_comida" maxWidth="188.0" prefWidth="114.0" text="te_Comida" />
+                  <TableColumn fx:id="clHora" maxWidth="149.0" prefWidth="81.0" text="hora" />
+                  <TableColumn fx:id="clEditar" maxWidth="100.0" minWidth="0.0" prefWidth="81.0" text="editar" />
+                  <TableColumn fx:id="clEliminar" maxWidth="100.0" prefWidth="89.0" text="eliminar" />
                </columns></TableView>
             <Pane fx:id="pnNuevoReserva" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">
                <children>
@@ -343,6 +343,109 @@
       			</ImageView>
    		</graphic>
    	</Button>
+      <Pane id="pnOrden" fx:id="pnEditarReserva" layoutX="550.0" layoutY="30.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" visible="false">
+         <children>
+            <Text fx:id="pnEditarReserva" layoutX="170.0" layoutY="41.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Reservacion" x="-60.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#ff04c4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+            <Text layoutX="83.0" layoutY="130.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Nro de Mesa :" x="-60.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#a304ff" offset="0.007662835249042145" />
+                        <Stop color="#d330ce" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="83.0" layoutY="170.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario :" x="-60.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#ff04c4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="83.0" layoutY="210.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha :" x="-60.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#ff04c4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="83.0" layoutY="250.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmado :" x="-60.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#ff04c4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="83.0" layoutY="290.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Té/Comida" x="-60.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#ff04c4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="83.0" layoutY="330.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora" x="-60.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#a304ff" />
+                        <Stop color="#ff04c4" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnCancelarEditarReserva" layoutX="108.0" layoutY="423.0" mnemonicParsing="false" text="Cancelar" />
+            <Button fx:id="btnEditarReserva" layoutX="234.0" layoutY="423.0" mnemonicParsing="false" text="Aceptar" />
+            <TextField fx:id="cbMesa" layoutX="170.0" layoutY="110.0" />
+            <TextField fx:id="cbUsuario" layoutX="170.0" layoutY="150.0" />
+            <DatePicker fx:id="cbFecha" layoutX="170.0" layoutY="190.0" />
+            <ChoiceBox fx:id="cbConfirmado" layoutX="169.0" layoutY="230.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="cbComida" layoutX="169.0" layoutY="270.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="cbHora" layoutX="169.0" layoutY="310.0" prefWidth="150.0" />
+         </children></Pane>
    </children>
 
 

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sentidos.api.dao.IReservation;
+import com.sentidos.api.dto.LongDto;
 import com.sentidos.api.dto.ReservationDesktopDto;
 import com.sentidos.api.dto.ReservationDto;
 import com.sentidos.api.enitiesWrapper.ReservationWrapper;
@@ -133,9 +134,9 @@ public class ReservationController {
 	} 
 	
 	@DeleteMapping("")
-	public ResponseEntity<HashMap<String, Object>> delete(@RequestBody Long id){
+	public ResponseEntity<HashMap<String, Object>> delete(@RequestBody LongDto id){
 		HashMap<String, Object> response = new HashMap<>();
-		if(reservationService.deleteById(id)) {
+		if(reservationService.deleteById(id.getId())) {
 			log.info("Reserva eliminada");
 			return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 		}

@@ -3,6 +3,7 @@ package Servicios;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -67,23 +68,26 @@ public class HttpReservaService {
 	public Boolean borrarReserva(String id) {
 		String reservasUrl = Constantes.BASE_URL+Constantes.RESERVAS+"";
 		LoginResponse user = (LoginResponse) Main.contexto.get("login");
-
+		System.out.println(id);
 		try {
 			URL url = new URL(reservasUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("DELETE");
 			//conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "Bearer "+user.getAccess_token());
+			conn.setRequestProperty("Content-Type", "application/json");
+
 			conn.setDoOutput(true);
-			OutputStream os = conn.getOutputStream();
+			OutputStream  os =conn.getOutputStream();
 			os.write(id.getBytes());
-			os.flush();
+			os.flush();			
 			
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
 				
-				System.out.println("response: ok");
+				System.out.println("response: "+HttpURLConnection.HTTP_OK);
 				return true;
 			}
+			System.out.println("response: ok");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("response: no ok");
