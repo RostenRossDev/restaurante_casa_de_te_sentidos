@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sentidos.api.dao.IReservation;
 import com.sentidos.api.dto.LongDto;
+import com.sentidos.api.dto.ReservationDesktop;
 import com.sentidos.api.dto.ReservationDesktopDto;
 import com.sentidos.api.dto.ReservationDto;
 import com.sentidos.api.enitiesWrapper.ReservationWrapper;
@@ -55,10 +56,38 @@ public class ReservationController {
 	private UserService userService;
 	
 	@PutMapping("")
-	public ResponseEntity<HashMap<String,Object>> update(@RequestBody ReservationDto reservationDto){
+	public ResponseEntity<HashMap<String,Object>> update(@RequestBody ReservationDesktop reservationDesktopDto){
+		log.info("por actualizar");
 		HashMap<String, Object> response = new HashMap<>();
+		Reservation findR = reservationService.findById(reservationDesktopDto.getId());
 		
-		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
+		User u = userService.findByUsername(reservationDesktopDto.getUsername());
+		Customer c = customerService.findByUser(u);
+		findR.setCustomer(c);
+		RestaurantTable table = tableService.findByNumber(reservationDesktopDto.getTable());
+		log.info("reservationDesktopDto: "+reservationDesktopDto.toString());
+		if(findR.getId()!= null) {
+			findR.setConfirmed(reservationDesktopDto.getConfirmado());
+			findR.setHour(reservationDesktopDto.getHora());
+			findR.setIsTea(reservationDesktopDto.getIsTea());
+			findR.setReservationDate(reservationDesktopDto.getFecha());
+			findR.setRestaurantTable(table);
+		}
+		
+		findR=reservationService.save(findR);
+		List<Reservation> reservations = reservationService.findAll();
+		List<ReservationDesktopDto> reservationsDto = new ArrayList<>();
+		reservations.forEach(reservation ->{
+			log.info(reservation.toString());
+			ReservationDesktopDto newReservationDto = ReservationWrapper.entityToDtoDesktop(reservation);
+			reservationsDto.add(newReservationDto);
+		});
+		response.put("reservations", reservationsDto);		
+
+		if(findR.getId() != null) {
+			return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
+		}
+		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
  
 	
@@ -134,6 +163,7 @@ public class ReservationController {
 		List<Reservation> reservations = reservationService.findAll();
 		List<ReservationDto> reservationsDto = new ArrayList<>();
 		reservations.forEach(reservation ->{
+			log.info(reservation.toString());
 			ReservationDto newReservationDto = ReservationWrapper.entityToDto(reservation);
 			reservationsDto.add(newReservationDto);
 		});
@@ -158,6 +188,8 @@ public class ReservationController {
 		List<Reservation> reservations = reservationService.findAll();
 		List<ReservationDesktopDto> reservationsDto = new ArrayList<>();
 		reservations.forEach(reservation ->{
+			log.info(reservation.toString());
+
 			ReservationDesktopDto newReservationDto = ReservationWrapper.entityToDtoDesktop(reservation);
 			reservationsDto.add(newReservationDto);
 		});

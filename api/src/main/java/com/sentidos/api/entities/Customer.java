@@ -199,6 +199,10 @@ public class Customer implements Serializable{
 	}
 	public void setPotho(String potho) {
 		this.potho = potho;
+	}
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", lastname=" + lastname + "]";
 	}			
 	
 }

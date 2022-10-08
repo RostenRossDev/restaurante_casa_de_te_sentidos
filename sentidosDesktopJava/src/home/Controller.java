@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -23,7 +20,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -34,19 +30,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.LoginResponse;
 import model.OrderDetail;
-import model.OrderList;
 import model.OrderResponse;
 import model.ReservaList;
 import model.ReservaTableItem;
 import model.Reservations;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -353,87 +345,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 
 	}
 
-	private void rellenarOrdenes() {
-		OrderList orders = http.orders();
-		List<OrderResponse> orderList = orders.getOrders();
-		System.out.println("longitud : " + orders);
-
-		if (orderList != null && orderList.size() > 0) {
-			Node[] nodes = new Node[orderList.size()];
-			for (int i = 0; i < nodes.length; i++) {
-				OrderResponse order = orderList.get(i);
-				try {
-
-					final int j = i;
-
-					HBox load = FXMLLoader.load(getClass().getResource("Item.fxml"));
-					ObservableList<Node> childs = load.getChildren();
-
-					System.out.println("0: " + childs.get(0).getId());
-					System.out.println("1: " + childs.get(1).getId());
-					System.out.println("2: " + childs.get(2).getId());
-					System.out.println("3: " + childs.get(3).getId());
-					System.out.println("4: " + childs.get(4).getId());
-					System.out.println("5: " + childs.get(5).getId());
-
-					Label mesa = (Label) childs.get(1);
-					Label fecha = (Label) childs.get(2);
-					Label usuario = (Label) childs.get(3);
-					Label total = (Label) childs.get(4);
-					Button estado = (Button) childs.get(5);
-					// Label orden = (Label) childs.get(0);
-
-					childs.clear();
-
-					System.out.println("1 mesa");
-					mesa.setText("1");
-					childs.add(mesa);
-
-					System.out.println("2 fecha");
-					Date date = order.getCreateAt();
-					Calendar calendar = new GregorianCalendar();
-					calendar.setTime(date);
-					int year = calendar.get(Calendar.YEAR);
-					// Add one to month {0 - 11}
-					int month = calendar.get(Calendar.MONTH) + 1;
-					int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-					fecha.setText(day + "/" + month + "/" + year);
-
-					childs.add(fecha);
-
-					System.out.println("3 usuario");
-					usuario.setText(order.getCustomerDto().getUsername());
-					childs.add(usuario);
-
-					System.out.println("4 total");
-					total.setText("$".concat(totalOrder(order)));
-					childs.add(total);
-
-					System.out.println("5 estado");
-					estado.setText(stateToString(order.getState()));
-					childs.add(estado);
-
-					System.out.println("0 orden");
-
-					System.out.println("\n");
-					// nodes[i] = FXMLLoader.load(getClass().getResource("Item.fxml"));
-					nodes[i] = (Node) load;
-
-					// give the items some effect
-					nodes[i].setOnMouseEntered(event -> {
-						nodes[j].setStyle("-fx-background-color : #0A0E3F");
-					});
-					nodes[i].setOnMouseExited(event -> {
-						nodes[j].setStyle("-fx-background-color : #02030A");
-					});
-					pnItems.getChildren().add(nodes[i]);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+	
 
 	/// nueva aplicacion
 	private Boolean verificarNombreDeUsuario() {
@@ -644,20 +556,24 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	
 	EventHandler<MouseEvent> enviarReservaEditada = new EventHandler<MouseEvent>() {
 		String usuario;
+		Long id;
 		Integer mesa;
-		Date fecha; 
+		String fecha; 
 		Boolean confirmado;
 		Boolean isTea;
 		Boolean hora;		
 		@Override
 		public void handle(MouseEvent event) {
-			Pane pane = (Pane)((Button)((Text)event.getTarget()).getParent()).getParent();
-			pane.setVisible(false);
-			
-			
+			System.out.println((((Text)event.getTarget()).getParent()).getParent().getId());
+			Pane pane =  (Pane)((Button)((Text)event.getTarget()).getParent()).getParent();
+			pane.setVisible(false);			
 			pane.getChildren().forEach(c ->{
-				
-				if("mesa".equals(c.getId())) {
+				System.out.println(c.toString());
+				if("id".equals(c.getId())) {
+					Text txtid = (Text) c;
+					id=Long.parseLong(txtid.getText());
+				}
+				else if("mesa".equals(c.getId())) {
 					TextField txtMesa = (TextField) c;
 					mesa=Integer.parseInt(txtMesa.getText());
 				}else if("usuario".equals(c.getId())) {
@@ -666,7 +582,14 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 				}else if("fecha".equals(c.getId())) {
 					DatePicker dateP=(DatePicker) c;
 					LocalDate lclDate = dateP.getValue();
-					fecha = new Date(lclDate.getYear(), lclDate.getMonthValue(), lclDate.getDayOfMonth());
+					LocalDate localDate = LocalDate.now();
+					String dateFormat = "yyyy-MM-dd";
+					String formattedDate = lclDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					String[] dateArray= formattedDate.split("-");
+					System.out.println("LONG format: " + formattedDate);
+					
+					fecha = formattedDate;
+					
 				}else if("confirmado".equals(c.getId())) {
 					ComboBox<String> combo = (ComboBox<String>) c;
 					Boolean valor=null;
@@ -698,18 +621,40 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 						valor=Boolean.FALSE;
 					}
 					hora= valor;
-				}
-				
-			});;
-			
+				}				
+			});
+			System.out.println("antes de ingreso");
+			System.out.println("hora: "+hora+", es te:" +isTea+", confirmado: "+confirmado+", fecha"+fecha+", usuario: "+usuario
+					+", mesa"+mesa);
+
+			if(hora!= null && isTea!=null && confirmado!=null && fecha!= null && usuario != null && mesa != null ) {
+									
+				String json = "{"
+					    +"\"id\":"+id+","
+					    +"\"table\":"+mesa+","
+					    +"\"fecha\":"+"\""+fecha+"\","
+					    +"\"username\":"+"\""+usuario+"\","
+					    +"\"confirmado\":"+confirmado+","
+					    +"\"isTea\":"+isTea+","
+					    +"\"hora\":"+hora
+					    +"}";
+				if(httpReserva.actualizarReserva(json)) {
+					System.out.println("ingreso");
+					actualizarTablaReservas();
+				}		
+				System.out.println("no ingreso");
+
+			}			
 		}
 	};
 	
 	private void actualizarTablaReservas() {
+		tbReservacion.getItems().clear();
 		List<ReservaTableItem> reservas = new ArrayList<>();
 		((List<Reservations>) Main.contexto.get("reservas")).forEach(r -> {
 			// Button btnReserva = getNewReservaButton();
 			Pane pane = new Pane();
+			pane.setId("panelEditar");
 			pane.setPrefWidth(400);
 			pane.setPrefHeight(500);
 			pane.setMaxWidth(1500);
@@ -721,17 +666,18 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			Button cancelar = new Button("CANCELAR");
 			cancelar.addEventFilter(MouseEvent.MOUSE_CLICKED, ocultarEditar);
 			aceptar.addEventFilter(MouseEvent.MOUSE_CLICKED, enviarReservaEditada);
+			cancelar.setId("btnCancelar");
+			aceptar.setId("btnAceptar");
+			TextField inputTable = new TextField();
+			inputTable.setPromptText("Numero de mesa");
+			inputTable.setId("mesa");
+			inputTable.setText(r.getTable()+"");
+			Text txtTable = new  Text("Nro° Mesa :");
 			
 			TextField inputUsuario = new TextField();
-			inputUsuario.setPromptText("Numero de mesa");
-			inputUsuario.setId("mesa");
-			Text txtUsuario = new  Text("Nro° Mesa :");
-			
-			TextField inputTable = new TextField();
-			inputTable.setPromptText("Nombre de usuario");
-			inputTable.setId("usuario");
-			Text txtTable = new  Text("Usuario");
-			
+			inputUsuario.setPromptText("Nombre de usuario");
+			inputUsuario.setId("usuario");
+			Text txtUsuario = new  Text("Usuario");			
 			
 			DatePicker date = new DatePicker();
 			date.setId("fecha");
@@ -751,6 +697,9 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			comboComida.setValue(r.getIsTea()?"Té":"Comida");
 			comboHora.setValue(r.getIsTea()?(r.getHour()?"8:00 - 11:00":"15:00 - 19:00"):(r.getHour()?"11:00 - 15:00":"19:00 - 00:00"));
 			Text fecha = new Text("Fecha :");
+			Text id = new Text(r.getId()+"");
+			id.setId("id");
+			id.setVisible(false);
 			Text comida = new Text("Té / Comida :");
 			Text hora = new Text("Hora :");
 			Text confirm = new Text("Confirmado :");
@@ -768,12 +717,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			fecha.setFill(gradient);
 			confirm.setFill(gradient);
 			txtUsuario.setFill(gradient);
-
-
-			comboConfim.setValue("Seleccionar");
-			comboComida.setValue("Seleccionar");
-			comboHora.setValue("Seleccionar");
-
+		
 			pane.getChildren().add(txtUsuario);
 			pane.getChildren().add(inputUsuario);
 			pane.getChildren().add(date);
@@ -787,6 +731,8 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			pane.getChildren().add(cancelar);
 			pane.getChildren().add(aceptar);
 			pane.getChildren().add(titulo);
+			pane.getChildren().add(id);
+			pane.getChildren().add(inputTable);
 			pane.setVisible(false);
 			pane.setStyle("-fx-background-color: #ffffff");
 
@@ -828,6 +774,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 
 			pane.toBack();
 			pnReservacion.getChildren().add(pane);
+			
 			ReservaTableItem item = new ReservaTableItem(r.getId(), r.getTable(), r.getUsername(),
 					r.getDateReservationString(), r.getConfirmed(), r.getIsTea(), r.getHour());
 			item.setPanelEditar(pane);

@@ -12,4 +12,5 @@ import com.sentidos.api.entities.User;
 public interface ICustomerDao  extends CrudRepository<Customer, Long>{
 	
 	List<Customer> findByUser(User user);
+	
 }

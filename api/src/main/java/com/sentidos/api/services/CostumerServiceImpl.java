@@ -30,4 +30,5 @@ public class CostumerServiceImpl implements ICustomerService {
 	public Customer findByUser(User user) {
 		return customerDao.findByUser(user).get(0);
 	}
+	
 }

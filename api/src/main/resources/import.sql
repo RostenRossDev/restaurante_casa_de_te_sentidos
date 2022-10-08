@@ -85,7 +85,7 @@ INSERT INTO `tables` (number) VALUES (19);
 /*INSERT RESERVATIONS*/
 
 
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (1, 1, CURRENT_TIMESTAMP, '2022-09-25', 0, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-27', 1, 1, 0, 1);
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-26', 1, 1, 0, 1);
 
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 2, CURRENT_TIMESTAMP, '2022-09-25', 1, 0, 0, 1);

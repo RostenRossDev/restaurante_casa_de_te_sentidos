@@ -1,6 +1,8 @@
 package com.sentidos.api.enitiesWrapper;
 
 
+import java.util.Date;
+
 import com.sentidos.api.dto.ReservationDesktopDto;
 import com.sentidos.api.dto.ReservationDto;
 import com.sentidos.api.entities.Reservation;
@@ -35,6 +37,16 @@ public class ReservationWrapper {
 		ReservationDesktopDto reservationDto = new ReservationDesktopDto();
 		reservationDto.setId(reservation.getId());
 		reservationDto.setDateReservation(reservation.getReservationDate());
+
+		if(reservation.getReservationDate() != null) {
+			
+			Date f = reservation.getReservationDate();
+			reservationDto.setDateReservationString(f.getYear()+"-"+f.getMonth()+"-"+f.getDate());
+			reservationDto.setDateReservation(reservation.getReservationDate());
+
+		}else {
+			reservationDto.setDateReservation(reservation.getReservationDate());
+		}
 		reservationDto.setTable(reservation.getRestaurantTable().getNumber());
 		reservationDto.setUsername(reservation.getCustomer().getUser().getUsername());
 		reservationDto.setConfirmed(reservation.getConfirmed());

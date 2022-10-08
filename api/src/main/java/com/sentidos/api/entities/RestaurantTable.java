@@ -55,6 +55,11 @@ public class RestaurantTable implements Serializable{
 
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
-	}	
+	}
 
+	@Override
+	public String toString() {
+		return "RestaurantTable [id=" + id + ", number=" + number + "]";
+	}	
+	
 }

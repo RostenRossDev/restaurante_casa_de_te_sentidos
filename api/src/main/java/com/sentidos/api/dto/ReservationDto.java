@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReservationDto {
 	private Logger log = LoggerFactory.getLogger(ReservationDto.class);
-	private Integer table;
 	
+	private Integer table;	
     @DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dateReservation;
     @DateTimeFormat(pattern="yyyy-MM-dd")

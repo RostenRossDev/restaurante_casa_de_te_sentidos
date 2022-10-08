@@ -46,4 +46,9 @@ public class ReservationService {
 			return false;
 		}
 	}
+	
+	public Reservation findById(Long id) {
+		return reservationDao.findById(id).orElse(new Reservation());
+		
+	}
 }
