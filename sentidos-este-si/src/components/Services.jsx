@@ -4,6 +4,7 @@ import Services1 from "../assets/Services1.png";
 import Services2 from "../assets/Services2.png";
 import Services3 from "../assets/Services3.png";
 import { TitleStyles } from "./ReusableStyles";
+
 export default function Services() {
   return (
     <Section id="services">

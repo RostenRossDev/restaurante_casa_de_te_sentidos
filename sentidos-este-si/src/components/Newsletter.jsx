@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { TitleStyles } from "./ReusableStyles";
+import Swal from "sweetalert2";
+
 export default function Newsletter() {
 
   const [email, setEmail] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`The email you entered was: ${email}`);
+    Swal.fire({
+      icon: 'success',
+      title: 'Suscripción realizada',
+      showConfirmButton: false,
+      timer: 2000
+    });
     setEmail("");
   }
 
