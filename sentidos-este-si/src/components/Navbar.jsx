@@ -7,6 +7,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import Context from "../context/userContext";
 import UserService from "../Service/UserService";
 import Swal from "sweetalert2";
+import { Link, Router, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
@@ -20,7 +21,9 @@ export default function Navbar() {
   const [photo, setPhoto] = useState(sessionStorage.getItem("photo"));
   const [username, setUsername] = useState(sessionStorage.getItem("username"));
   const [comments, setComments] = useState([]);
+  const location = useLocation();
 
+  console.log(location);
   const login = async (login, pass)=>{
     try {
         const response = await UserService.getTokenByAxios(login, pass);
@@ -83,18 +86,19 @@ export default function Navbar() {
         </div>
         <ul className="links">
           <li>
-            <a href="#home" className="active">
-              Inicio
-            </a>
+            {location.pathname=="/" ? <Link to={"/"} className="active">Inicio</Link> : <Link to={"/"}>Inicio</Link>}                
           </li>
           <li>
-            <a href="#services">Nuestros Servicios</a>
+            {location.pathname=="/aboutUs" ? <Link to={"/aboutUs"} className="active">Sobre Nosotros</Link> : <Link to={"/aboutUs"}>Sobre Nosotros</Link>}
           </li>
           <li>
-            <a href="#testimonials">Testimonios</a>
+            {location.pathname=="/services" ? <Link to={"/services"} className="active">Nuestros Servicios</Link> : <Link to={"/services"}>Nuestros Servicios</Link>}
           </li>
           <li>
-            <a href="#products">Productos</a>
+            {location.pathname=="/review" ? <Link to={"/review"} className="active">Reseñas</Link> : <Link to={"/review"}>Reseñas</Link>} 
+          </li>
+          <li>
+            {location.pathname=="/contact"? <Link to={"/contact"} className="active">Contacto</Link> : <Link to={"/contact"}>Contacto</Link>}
           </li>
           <a href="#"><button onClick={SignInForm}>Ingresar</button></a>
         </ul>
@@ -112,17 +116,22 @@ export default function Navbar() {
           </li>
           <li>
             <a href="#services" onClick={() => setNavbarState(false)}>
-              Nuestros Servicios
+              Sobre Nosotros
             </a>
           </li>
           <li>
             <a href="#testimonials" onClick={() => setNavbarState(false)}>
-              Testimonios
+              Nuestros Servicios
             </a>
           </li>
           <li>
             <a href="#products" onClick={() => setNavbarState(false)}>
-              Productos
+              Reseñas
+            </a>
+          </li>
+          <li>
+            <a href="#products" onClick={() => setNavbarState(false)}>
+              Contacto
             </a>
           </li>
           <li>

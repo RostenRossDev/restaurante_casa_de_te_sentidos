@@ -8,10 +8,13 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import Login from "./pages/Login";
+import Usuario from "./pages/Usuario";
+import Contact from "./pages/Contact";
+import Review from "./pages/Review";
+import AboutUs from "./pages/AboutUs";
+import Services from "./pages/Services";
 
-
-import Login from "./pages/Login"
-import Usuario from "./pages/Usuario"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +30,22 @@ const router = createBrowserRouter([
     path: "usuario",
     element: <Usuario />,
   },
-  
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "/review",
+    element: <Review />,
+  },
+  {
+    path: "/aboutUs",
+    element: <AboutUs />,
+  },
+  {
+    path: "/services",
+    element: <Services />,
+  },
 ]);
 
 ReactDOM.render(
