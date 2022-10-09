@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import background from "../assets/portfolio.jpg";
+import imagen8 from "../assets/imagen8.jpg";
+import sentidosLogo from "../assets/sentidosLetraTransaparente.png";
+
 export default function Portfolio() {
   return (
     <Section id="portfolio">
       <div className="background">
-        <img src={background} alt="" />
+        <img src={imagen8} alt="Room Image" />
       </div>
       <div className="content">
-        <h1>Buy Premium Pan Free Hand Toast!</h1>
+        <img src={sentidosLogo} alt="Logo" />
         <h2>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi,
-          molestias!
+          Trabajar con alegría, ilusión, inteligencia e intuición es nuestra mejor receta para poder transmitir los sabores a los paladares sedientos de una experiencia gastronómica inolvidable.
         </h2>
-        <button>Buy Now</button>
       </div>
     </Section>
   );
@@ -46,7 +46,7 @@ const Section = styled.section`
   }
   .content {
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 10%;
     color: white;
     display: flex;
@@ -54,26 +54,9 @@ const Section = styled.section`
     gap: 1rem;
     justify-content: center;
     align-items: flex-start;
-    h1 {
-      font-size: 3rem;
-      width: 60%;
-    }
     h2 {
       width: 60%;
     }
-    button {
-      border: none;
-      padding: 1rem 4rem;
-      font-size: 1.4rem;
-      color: white;
-      border-radius: 4rem;
-      transition: 0.5s ease-in-out;
-      cursor: pointer;
-      background: linear-gradient(to right, #fc4958, #e85d04);
-      text-transform: uppercase;
-      &:hover {
-        background: linear-gradient(to right, #e85d04, #fc4958);
-      }
     }
   }
   @media screen and (min-width: 260px) and (max-width: 1080px) {

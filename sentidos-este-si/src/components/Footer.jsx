@@ -1,24 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../assets/FoodYummy.png";
 import sentidosLogo from "../assets/sentidosLetraTransaparente.png";
 import { AiFillInstagram } from "react-icons/ai";
 import { BsTwitter } from "react-icons/bs";
 import { FaFacebookF } from "react-icons/fa";
 import { GrLinkedinOption } from "react-icons/gr";
 
-import { Link } from "react-router-dom";
-
 export default function Footer() {
   return (
     <div className="footer">
       <Section>
         <div className="brand container">
-          <img src={sentidosLogo} alt="" />
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis,
-            repudiandae.
-          </p>
+          <img src={sentidosLogo} alt="Logo" />
           <ul>
             <li>
               <a href="https://www.instagram.com" target={"_blank"}>
@@ -44,21 +37,18 @@ export default function Footer() {
         </div>
         <div className="about container">
           <div className="title">
-            <h3>About Us</h3>
+            <h3>Sobre nosotros</h3>
           </div>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam,
-            eligendi repellat laudantium blanditiis iure nulla, ut aliquam
-            itaque unde nesciunt cum veritatis perferendis vel expedita! Nam
+            Desde 1990 brindando la mejor experiencia gastronómica basada en los más altos estándares de calidad en nuestros productos y los mejores profesionales.
           </p>
         </div>
         <div className="contact container">
           <div className="title">
-            <h3>Contact Us</h3>
+            <h3>Contacto</h3>
           </div>
           <p>+54 362-154203121</p>
-          <p>sentidos@gmail.com</p>
-          <p>@sentidos</p>
+          <p>sentidos_contacto@gmail.com</p>
           <p>Av. Sarmiento 453, Resistencia, Chaco</p>
         </div>
       </Section>
@@ -73,7 +63,7 @@ export default function Footer() {
 
 const Section = styled.footer`
   margin: 0;
-  background: linear-gradient(to right, #fc4958, #e85d04);
+  background: linear-gradient(to right, #fc4958, #CC99CC);
   color: white;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -116,6 +106,8 @@ const Section = styled.footer`
   img {
     filter: brightness(0) invert(1);
     width: 10vw;
+    margin-left: 35%;
+    margin-top: 10%;
   }
   .container {
     display: flex;

@@ -4,11 +4,12 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
 import Portfolio from "./components/Portfolio";
-import Products from "./components/Products";
+import Gallery from "./components/Gallery";
 import ScrollToTop from "./components/ScrollToTop";
 import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
 import scrollreveal from "scrollreveal";
+
 export default function App() {
   useEffect(() => {
     const sr = scrollreveal({
@@ -24,7 +25,7 @@ export default function App() {
         #services,
         #portfolio,
         #testimonials,
-        #products,
+        #gallery,
         #newsletter,
         .footer
     `,
@@ -42,7 +43,7 @@ export default function App() {
       <Services />
       <Portfolio />
       <Testimonials />
-      <Products />
+      <Gallery />
       <Newsletter />
       <Footer />
     </>

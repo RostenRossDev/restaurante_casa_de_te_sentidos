@@ -1,13 +1,68 @@
-import React, { useState, useEffect } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
-import foodYummy from "../assets/FoodYummy.png";
+import SignInForm from "./SignInForm";
 import sentidosLogo from "../assets/sentidos.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
+import Context from "../context/userContext";
+import UserService from "../Service/UserService";
+import Swal from "sweetalert2";
+
 export default function Navbar() {
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
+  const context = useContext(Context);
+  const [user, setUser] = useState(context.user);
+  const [token, setToken]=useState(user.token);
+  const [loged, setLoged] =useState(user.loged);
+  const refPostValue = useRef("");
+  const [photo, setPhoto] = useState(sessionStorage.getItem("photo"));
+  const [username, setUsername] = useState(sessionStorage.getItem("username"));
+  const [comments, setComments] = useState([]);
+
+  const login = async (login, pass)=>{
+    try {
+        const response = await UserService.getTokenByAxios(login, pass);
+        if (response.status===200) {
+            setUsername(await response.data.username);
+            setToken(response.data.access_token);
+            setLoged(true);
+            //window.sessionStorage.setItem("token",response.data.access_token)
+            //window.sessionStorage.setItem("username",response.data.username)
+
+            const userDateRes = await UserService.getUserDate(response.data.access_token, response.data.username);
+
+            setUser({
+                username: response.data.username, 
+                name: userDateRes.name, 
+                lastname: userDateRes.lastname, 
+                loged: true, 
+                token: response.data.access_token, 
+                photo: userDateRes.photo, 
+                email: userDateRes.email
+            });
+
+            setPhoto(await userDateRes.photo);
+            await Swal.fire({
+                icon: 'success',
+                title: 'Usuario creado',
+                showConfirmButton: false,
+                timer: 2000
+            });
+          console.log("submit");
+          Swal.close();
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ha ocurrido un error',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        console.log(error);
+      }               
+}
   return (
     <>
       <Nav>
@@ -36,17 +91,12 @@ export default function Navbar() {
             <a href="#services">Nuestros Servicios</a>
           </li>
           <li>
-            <a href="#portfolio">Portafolio</a>
-          </li>
-          <li>
             <a href="#testimonials">Testimonios</a>
           </li>
           <li>
             <a href="#products">Productos</a>
           </li>
-          <li>
-            <a href="#newsletter">Novedades</a>
-          </li>
+          <a href="#"><button onClick={SignInForm}>Ingresar</button></a>
         </ul>
       </Nav>
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
@@ -66,11 +116,6 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#portfolio" onClick={() => setNavbarState(false)}>
-              Portafolio
-            </a>
-          </li>
-          <li>
             <a href="#testimonials" onClick={() => setNavbarState(false)}>
               Testimonios
             </a>
@@ -82,7 +127,7 @@ export default function Navbar() {
           </li>
           <li>
             <a href="#newsletter" onClick={() => setNavbarState(false)}>
-              Novedades
+              Ingresar
             </a>
           </li>
         </ul>
@@ -110,6 +155,7 @@ const Nav = styled.nav`
     list-style-type: none;
     gap: 2rem;
     li {
+      padding-top: 2rem;
       a {
         color: #fc4958;
         font-weight: 600;
@@ -118,11 +164,27 @@ const Nav = styled.nav`
         letter-spacing: 0.2rem;
         transition: 0.3s ease-in-out;
         &:hover {
-          color: #f9c74f;
+          color: #CC99CC;
         }
       }
       .active {
-        color: #f9c74f;
+        color: #CC99CC;
+      }
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      background-color: #CC6699;
+      border: none;
+      color: white;
+      font-weight: 800;
+      letter-spacing: 0.2rem;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+      border-radius: 1rem;
+      &:hover {
+        background-color: #CC99CC;
       }
     }
   }
