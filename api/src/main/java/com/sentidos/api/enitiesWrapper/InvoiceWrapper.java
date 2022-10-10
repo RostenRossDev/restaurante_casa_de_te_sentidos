@@ -1,7 +1,9 @@
 package com.sentidos.api.enitiesWrapper;
 
+import com.sentidos.api.dto.InvoiceDesktopDto;
 import com.sentidos.api.dto.InvoiceDetailDto;
 import com.sentidos.api.dto.InvoiceDto;
+import com.sentidos.api.dto.MenuDto;
 import com.sentidos.api.entities.Invoice;
 import com.sentidos.api.entities.InvoiceDetail;
 
@@ -17,6 +19,31 @@ public class InvoiceWrapper {
 	
 	public static InvoiceDto entityToDto(Invoice invoice) {
 		InvoiceDto dto= new InvoiceDto();
+		
+		return dto;
+	}
+	
+	public static InvoiceDesktopDto entityToDtoDesktop(Invoice invoice) {
+		InvoiceDesktopDto dto = new InvoiceDesktopDto();
+		
+		dto.setCreateAt(invoice.getCreateAt());
+		dto.setFechaPago(invoice.getPaymentDate());
+		dto.setId(invoice.getId());
+		dto.setMetodoPago(invoice.getPaymentMethod());
+		dto.setPagado(invoice.getIsPayment());
+		dto.setUsuario(invoice.getCustomer().getUser().getUsername());
+		
+		for (InvoiceDetail id : invoice.getDetails()) {
+			InvoiceDetailDto invDet = new InvoiceDetailDto();
+			MenuDto menuDto = new MenuDto();
+			menuDto.setName(id.getMenu().getName());
+			menuDto.setPrice(id.getMenu().getPrice());
+			menuDto.setMenuType(id.getMenu().getMenuType().getType());
+			invDet.setMenu(menuDto);
+			invDet.setQuantity(id.getQuantity());
+			dto.getInvoicesDetail().add(invDet);
+		}		
+			
 		
 		return dto;
 	}

@@ -33,7 +33,7 @@ public class Reservation  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne()
     @JoinColumn(name = "restaurant_table_id")
 	private RestaurantTable restaurantTable;

@@ -66,5 +66,9 @@ public class InvoiceDetail implements Serializable{
 	public void setInvoice(Invoice invoice) {
 		this.invoice = invoice;
 	}
+	@Override
+	public String toString() {
+		return "InvoiceDetail [id=" + id + ", quantity=" + quantity + ", menu=" + menu.getName() + "]";
+	}
 	
 }

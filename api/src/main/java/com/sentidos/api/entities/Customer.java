@@ -55,6 +55,9 @@ public class Customer implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Order> orders;
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+   	private List<Invoice> invoice;
+    
 	@ManyToOne()
     @JoinColumn(name = "streetName_id")
 	private StreetName streetName;

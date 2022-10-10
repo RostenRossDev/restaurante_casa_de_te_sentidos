@@ -5,9 +5,7 @@ import com.sentidos.api.entities.Menu;
 
 public class InvoiceDetailDto {
 
-	private Integer quantity;
-	
-	private InvoiceDto invoice;
+	private Integer quantity;	
 	
 	private MenuDto menu;
 
@@ -17,15 +15,7 @@ public class InvoiceDetailDto {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
-
-	public InvoiceDto getInvoice() {
-		return invoice;
-	}
-
-	public void setInvoice(InvoiceDto invoice) {
-		this.invoice = invoice;
-	}
+	}	
 
 	public MenuDto getMenu() {
 		return menu;
@@ -33,6 +23,10 @@ public class InvoiceDetailDto {
 
 	public void setMenu(MenuDto menu) {
 		this.menu = menu;
-	}	
-	
+	}
+
+	@Override
+	public String toString() {
+		return "InvoiceDetailDto [quantity=" + quantity + ", menu=" + menu + "]";
+	}		
 }

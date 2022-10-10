@@ -104,7 +104,7 @@ INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reserva
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (2, 1, CURRENT_TIMESTAMP, '2022-09-30', 1, 1, 0, 1);
 
 INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (19, 4, CURRENT_TIMESTAMP, '2022-09-25', 0, 1, 0, 1);
-INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (30, 3, CURRENT_TIMESTAMP, '2022-09-26', 1, 1, 0, 1);
+INSERT INTO `reservations` (restaurant_table_id, customer_id, create_at, reservation_date, is_tea, hour_reservation, disabled, confirmed) VALUES (30, 3, CURRENT_TIMESTAMP, '2022-10-26', 1, 1, 0, 1);
 
 /*INSERT MENU_TYPE*/
 
@@ -181,3 +181,42 @@ INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (1, 6, 12);
 INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (5, 6, 13);
 INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (2, 6, 14);
 INSERT INTO `orders_detail` (quantity, order_id, menu_id) VALUES (3, 6, 15);
+
+
+/* INVERT INVOICE*/
+
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (1, CURRENT_TIMESTAMP, 'debito', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (2, CURRENT_TIMESTAMP, 'credito', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (3, CURRENT_TIMESTAMP, 'efectivo', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (4, CURRENT_TIMESTAMP, 'debito', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (1, CURRENT_TIMESTAMP, 'efectivo', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (2, CURRENT_TIMESTAMP, 'credito', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (3, CURRENT_TIMESTAMP, 'efectivo', CURRENT_TIMESTAMP, 1);
+INSERT INTO `invoices` (customer_id, create_at, payment_method, payment_date, is_payment) VALUES (4, CURRENT_TIMESTAMP, 'debito', CURRENT_TIMESTAMP, 1);
+
+/* INSERT INVOICE DETAIL*/
+
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (1, 1, 3);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 2, 13);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (3, 3, 12);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 4, 11);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (3, 5, 4);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 6, 2);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (4, 7, 7);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (4, 8, 9);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (1, 1, 16);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (3, 2, 21);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (3, 3, 2);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 4, 1);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (4, 5, 13);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (1, 6, 15);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 7, 21);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (3, 8, 10);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (4, 1, 6);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 2, 2);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (1, 3, 3);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (2, 4, 19);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (1, 5, 11);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (3, 6, 17);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (1, 7, 18);
+INSERT INTO `invoice_details` (quantity, invoice_id, menu_id) VALUES (4, 8, 5);

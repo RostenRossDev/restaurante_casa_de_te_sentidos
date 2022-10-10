@@ -97,4 +97,10 @@ public class Menu implements Serializable{
 	public void addInvoiceDetails(InvoiceDetail orderDetails) {
 		this.invoiceDetails.add(orderDetails);
 	}
+	@Override
+	public String toString() {
+		return "Menu [id=" + id + ", name=" + name + ", price=" + price + ", isEnabled=" + isEnabled + ", menuType="
+				+ menuType + ", invoiceDetails=" + invoiceDetails + ", orderDetails=" + orderDetails + "]";
+	}
+	
 }
