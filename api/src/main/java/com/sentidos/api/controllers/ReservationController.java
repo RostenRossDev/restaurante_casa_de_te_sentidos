@@ -175,7 +175,15 @@ public class ReservationController {
 	public ResponseEntity<HashMap<String, Object>> delete(@RequestBody LongDto id){
 		HashMap<String, Object> response = new HashMap<>();
 		if(reservationService.deleteById(id.getId())) {
-			log.info("Reserva eliminada");
+			List<Reservation> reservations = reservationService.findAll();
+			List<ReservationDesktopDto> reservationsDto = new ArrayList<>();
+			reservations.forEach(reservation ->{
+				log.info(reservation.toString());
+
+				ReservationDesktopDto newReservationDto = ReservationWrapper.entityToDtoDesktop(reservation);
+				reservationsDto.add(newReservationDto);
+			});
+			response.put("reservations", reservationsDto);	
 			return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 		}
 		log.info("No se encontro");

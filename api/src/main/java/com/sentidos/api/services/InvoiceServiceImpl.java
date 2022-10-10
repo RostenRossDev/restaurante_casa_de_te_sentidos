@@ -20,5 +20,21 @@ public class InvoiceServiceImpl {
 		return (ArrayList<Invoice>) invoiceDao.findAll();
 	}
 	
+	public Invoice findById(Long id) {
+		return invoiceDao.findById(id).orElse(new Invoice());
+	}
 	
+	public Invoice save (Invoice invoice) {
+		return invoiceDao.save(invoice);
+	}
+	
+	public Boolean deleteById(Long id) {
+		try {
+			invoiceDao.deleteById(id);
+			return Boolean.TRUE;
+		}catch (Exception e) {
+			// TODO: handle exception
+			return Boolean.FALSE;
+		}
+	}
 }

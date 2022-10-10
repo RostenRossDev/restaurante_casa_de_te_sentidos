@@ -1,6 +1,6 @@
 package com.sentidos.api.enitiesWrapper;
 
-import com.sentidos.api.dto.InvoiceDesktopDto;
+import com.sentidos.api.dto.InvoiceListDesktopDto;
 import com.sentidos.api.dto.InvoiceDetailDto;
 import com.sentidos.api.dto.InvoiceDto;
 import com.sentidos.api.dto.MenuDto;
@@ -23,8 +23,8 @@ public class InvoiceWrapper {
 		return dto;
 	}
 	
-	public static InvoiceDesktopDto entityToDtoDesktop(Invoice invoice) {
-		InvoiceDesktopDto dto = new InvoiceDesktopDto();
+	public static InvoiceListDesktopDto entityToDtoDesktop(Invoice invoice) {
+		InvoiceListDesktopDto dto = new InvoiceListDesktopDto();
 		
 		dto.setCreateAt(invoice.getCreateAt());
 		dto.setFechaPago(invoice.getPaymentDate());

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class InvoiceDesktopDto {
+public class InvoiceListDesktopDto {
 	private Long id;
 	private String usuario;
 	private Boolean pagado;
@@ -56,7 +56,7 @@ public class InvoiceDesktopDto {
 	public void setInvoicesDetail(List<InvoiceDetailDto> invoicesDto) {
 		this.invoicesDetail = invoicesDto;
 	}
-	public InvoiceDesktopDto() {
+	public InvoiceListDesktopDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
