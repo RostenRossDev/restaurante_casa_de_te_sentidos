@@ -27,7 +27,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1239.0" style="-fx-background-color: #02030A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="home.Controller">
 
    <children>
-      <Pane id="pnFondo" fx:id="pnFondo" layoutX="-7.0" prefHeight="582.0" prefWidth="1246.0" style="-fx-background-image: #02030A;" visible="false">
+      <Pane id="pnFondo" fx:id="pnFondo" layoutX="-7.0" prefHeight="582.0" prefWidth="1246.0" style="-fx-background-image: #02030A;">
 
          <children>
             <ImageView fitHeight="582.0" fitWidth="1239.0" layoutX="6.0">
@@ -76,7 +76,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane id="pnLogin" fx:id="pnLogin" layoutX="561.0" layoutY="34.0" prefHeight="540.0" prefWidth="636.0" visible="false">
+      <Pane id="pnLogin" fx:id="pnLogin" layoutX="561.0" layoutY="34.0" prefHeight="540.0" prefWidth="636.0">
 
          <children>
             <TextField id="textUser" fx:id="textUser" layoutX="381.0" layoutY="266.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su usuario" />
@@ -174,15 +174,16 @@
          <children>
             <TableView id="tbTicket" fx:id="tbTicket" layoutY="183.0" prefHeight="394.0" prefWidth="972.0" style="-fx-background-color: #02030A;">
                <columns>
-                  <TableColumn id="tdTicket" prefWidth="85.0" style="-fx-background-color: #02030A;" text="Ticket" />
-                  <TableColumn id="tdFechaCreacion" prefWidth="110.0" text="fecha de creacion" />
-                  <TableColumn id="tdTotal" minWidth="0.0" prefWidth="82.0" text="Total" />
-                  <TableColumn id="tdUsuario" prefWidth="250.0" text="Usuario" />
-                  <TableColumn id="tdPagado" minWidth="0.0" prefWidth="84.0" text="Pagado" />
-                  <TableColumn id="tdMetodo" prefWidth="139.0" text="Metodo de pago" />
-                  <TableColumn id="tdFechaPago" prefWidth="100.0" text="fecha de pago" />
-                  <TableColumn id="tdEliminar" maxWidth="100.0" prefWidth="66.0" text="eliminar" />
-                  <TableColumn id="tdEditar" maxWidth="100.0" prefWidth="54.0" text="editar" />
+                  <TableColumn id="tdTicket" fx:id="clTicketVer" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #02030A;" text="Ticket" />
+                  <TableColumn id="tdTicket" fx:id="clTicketId" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #02030A;" text="id" />
+                  <TableColumn id="tdFechaCreacion" fx:id="clTicketCreacion" prefWidth="110.0" text="fecha de creacion" />
+                  <TableColumn id="tdTotal" fx:id="clTicketTotal" minWidth="0.0" prefWidth="50.0" text="Total" />
+                  <TableColumn id="tdUsuario" fx:id="clTicketUsuario" prefWidth="200.0" text="Usuario" />
+                  <TableColumn id="tdPagado" fx:id="clTicketPagado" minWidth="0.0" prefWidth="60.0" text="Pagado" />
+                  <TableColumn id="tdMetodo" fx:id="clTicketMetodo" prefWidth="125.0" text="Metodo de pago" />
+                  <TableColumn id="tdFechaPago" fx:id="clTicketFechaPago" prefWidth="100.0" text="fecha de pago" />
+                  <TableColumn id="tdEliminar" fx:id="clTicketBtnEliminar" maxWidth="100.0" prefWidth="100.0" text="eliminar" />
+                  <TableColumn id="tdEditar" fx:id="clTicketBtnEditar" maxWidth="100.0" prefWidth="100.0" text="editar" />
                </columns>
             </TableView>
             <Pane fx:id="pnNuevoTicket" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">
@@ -230,7 +231,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane id="pnLateral" fx:id="pnLateral" layoutY="161.0" prefHeight="255.0" prefWidth="261.0" scaleX="1.045" scaleY="2.26" style="-fx-background-color: linear-gradient(to right, #9B52FF,#FF52B3);">
+      <Pane id="pnLateral" fx:id="pnLateral" layoutY="161.0" prefHeight="255.0" prefWidth="261.0" scaleX="1.045" scaleY="2.26" style="-fx-background-color: linear-gradient(to right, #9B52FF,#FF52B3);" visible="false">
          <children>
             <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" layoutY="190.0" pickOnBounds="true">
                <image>
@@ -343,7 +344,7 @@
       			</ImageView>
    		</graphic>
    	</Button>
-      <Pane id="pnOrden" fx:id="pnEditarReserva" layoutX="550.0" layoutY="30.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;">
+      <Pane id="pnOrden" fx:id="pnEditarReserva" layoutX="550.0" layoutY="30.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" visible="false">
          <children>
             <Text fx:id="pnEditarReserva" layoutX="170.0" layoutY="41.0" lineSpacing="10.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Reservacion" x="-60.0">
                <font>

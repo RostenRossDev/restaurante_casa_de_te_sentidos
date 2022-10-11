@@ -7,6 +7,6 @@ public class Constantes {
 	public static String BASE_URL =DEVELOP_URL;
 	public static String RESERVAS ="reservation";
 	public static String ORDENES ="orders";
-	public static String Ticket ="";
+	public static String TICKET ="invoice";
 	
 }
