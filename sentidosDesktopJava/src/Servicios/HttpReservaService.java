@@ -19,6 +19,7 @@ import model.OrderResponse;
 import model.ReservaList;
 import model.ReservaTableItem;
 import model.Reservations;
+import model.TicketList;
 import util.JsonToObject;
 
 public class HttpReservaService {
@@ -53,7 +54,7 @@ public class HttpReservaService {
 
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
 				System.out.println("respuesta: " + sb.toString());
-				ReservaList reservasList = JsonToObject.jsonToReservaResponse(sb.toString());
+				ReservaList reservasList = JsonToObject.jsonToReservaList(sb.toString());
 
 				System.out.println("response: " + reservasList.toString());
 				return reservasList;
@@ -89,6 +90,18 @@ public class HttpReservaService {
 
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
 
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+				br.close();
+				
+				ReservaList reservasList = JsonToObject.jsonToReservaList(sb.toString());
+				Main.contexto.put("reservas", reservasList.getReservas());
 				System.out.println("response: " + HttpURLConnection.HTTP_OK);
 				return true;
 			}
@@ -130,7 +143,7 @@ public class HttpReservaService {
 				sb.append(line + "\n");												
 			} 
 			br.close();
-			ReservaList reservasList = JsonToObject.jsonToReservaResponse(sb.toString());
+			ReservaList reservasList = JsonToObject.jsonToReservaList(sb.toString());
 			System.out.println(sb.toString());
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
 				Main.contexto.put("reservas", reservasList.getReservas());

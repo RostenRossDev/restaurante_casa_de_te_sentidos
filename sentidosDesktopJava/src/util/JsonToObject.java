@@ -7,6 +7,8 @@ import model.LoginResponse;
 import model.OrderList;
 import model.ReservaList;
 import model.Reservations;
+import model.Ticket;
+import model.TicketList;
 
 public class JsonToObject {
 
@@ -32,15 +34,33 @@ public class JsonToObject {
 	
 	//reservation response
 	
-	public static ReservaList jsonToReservaResponse(String json) {
+	public static ReservaList jsonToReservaList (String json) {
 		Gson gson=new Gson();
-		System.out.println("json : "+json);
+		System.out.println("json reserva : "+json);
 		ReservaList list =gson.fromJson(json, ReservaList.class);
 		System.out.println("json objeto: "+list.toString());
 		return list;
 	}
 	
 	public static String reservaToJson(Reservations res) {
+		Gson gson=new Gson();
+		String json =gson.toJson(res);
+		return json;
+	}
+	
+	
+	
+	// tikcet response	
+	public static TicketList jsonToTicketList (String json) {
+		Gson gson=new Gson();
+		System.out.println("json ticket : "+json);
+		TicketList list =gson.fromJson(json, TicketList.class);
+		System.out.println("cantidad de items en lista tikets: "+list.getTickets().size());
+		System.out.println("json objeto: "+list.toString());
+		return list;
+	}
+	
+	public static String ticketToJson(Ticket res) {
 		Gson gson=new Gson();
 		String json =gson.toJson(res);
 		return json;

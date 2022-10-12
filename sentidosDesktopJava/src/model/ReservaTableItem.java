@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 import Servicios.HttpReservaService;
+import home.Controller;
 import home.Main;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -34,8 +35,7 @@ public class ReservaTableItem {
 	private Boolean Te_Comida;
 	private Boolean Hora;
 	private Button eliminar;
-	private Button editar;
-	
+	private Button editar;	
 	private Pane panelEditar; 
 	
 	
@@ -44,7 +44,7 @@ public class ReservaTableItem {
 		super();
 		this.id = id;
 		this.reserva = getNewReservaButton();
-		reserva.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickReserva);
+		reserva.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickReserva);
 		Mesa = mesa;
 		Usuario = usuario;
 		Fecha = fecha;
@@ -159,7 +159,7 @@ public class ReservaTableItem {
 		btn.setScaleY(0.5);
 		btn.setStyle(
 				"-fx-padding:-5px;-fx-border-insets: -5px;-fx-background-insets: -5px; -fx-background-color: transparent;");
-		btn.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickEliminar);
+		btn.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickEliminar);
 		btn.setCursor(Cursor.HAND);
 		return btn;
 	}
@@ -172,7 +172,7 @@ public class ReservaTableItem {
 		btn.setGraphic(editar);
 		btn.setScaleX(0.5);
 		btn.setScaleY(0.5);
-		btn.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickEditar);
+		btn.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickEditar);
 		btn.setStyle(
 				"-fx-padding:-5px;-fx-border-insets: -5px;-fx-background-insets: -5px; -fx-background-color: transparent;");
 		btn.setCursor(Cursor.HAND);
@@ -187,14 +187,14 @@ public class ReservaTableItem {
 		btn.setGraphic(reserva);
 		btn.setScaleX(0.5);
 		btn.setScaleY(0.5);
-		btn.addEventFilter(MouseEvent.MOUSE_CLICKED, evcentClickReserva);
+		btn.addEventFilter(MouseEvent.MOUSE_CLICKED, eventClickReserva);
 		btn.setStyle(
 				"-fx-padding:-5px;-fx-border-insets: -5px;-fx-background-insets: -5px; -fx-background-color: transparent;");
 		btn.setCursor(Cursor.HAND);
 		return btn;
 	}
 
-	EventHandler<MouseEvent> evcentClickReserva = new EventHandler<MouseEvent>() {
+	EventHandler<MouseEvent> eventClickReserva = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
 			System.out.println("clickeo en reserva: " + this);
@@ -202,7 +202,7 @@ public class ReservaTableItem {
 		}
 	};
 
-	EventHandler<MouseEvent> evcentClickEliminar = new EventHandler<MouseEvent>() {
+	EventHandler<MouseEvent> eventClickEliminar = new EventHandler<MouseEvent>() {
 
 		@Override
 		public void handle(MouseEvent event) {
@@ -217,7 +217,8 @@ public class ReservaTableItem {
 				pushNot.setMessage("Reserva eliminada con exito!");
 				pushNot.setAnimationType(AnimationType.POPUP);
 				pushNot.showAndDismiss(Duration.seconds(2)); 
-				pushNot.showAndWait();
+				pushNot.showAndWait(); 
+				((Controller) Main.contexto.get("controller")).actualizarTablaReservas();				
 			} else {
 				NotificationType notification = NotificationType.ERROR;
 
@@ -231,17 +232,14 @@ public class ReservaTableItem {
 			}
 		}
 	};
-	public void print (String m) {
-		System.out.println(m);
-	}
-	EventHandler<MouseEvent> evcentClickEditar = new EventHandler<MouseEvent>() {
+	
+	EventHandler<MouseEvent> eventClickEditar = new EventHandler<MouseEvent>() {
 		
 		@Override
 		public void handle(MouseEvent event) {
-			System.out.println("clickeo en editar");
 			panelEditar.setVisible(true);
 			panelEditar.toFront();	
-			System.out.println("clickeo en editar");
+			System.out.println("clickeo en editar reserva");
 		}
 	};
 }
