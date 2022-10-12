@@ -1,11 +1,18 @@
 package model;
 
 public class Menu {
+<<<<<<< HEAD
 	private String name;
 	
 	private Double price;
 	
 	private String menuType;
+=======
+
+	private String name;
+    private Double price;
+    private String menuType;
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 
 	public String getName() {
 		return name;
@@ -22,7 +29,10 @@ public class Menu {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 	public String getMenuType() {
 		return menuType;
 	}
@@ -30,6 +40,7 @@ public class Menu {
 	public void setMenuType(String menuType) {
 		this.menuType = menuType;
 	}
+<<<<<<< HEAD
 
 	public Menu(String name, Double price, String menuType) {
 		super();
@@ -43,6 +54,9 @@ public class Menu {
 		// TODO Auto-generated constructor stub
 	}
 
+=======
+	
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 	@Override
 	public String toString() {
 		return "Menu [name=" + name + ", price=" + price + ", menuType=" + menuType + "]";

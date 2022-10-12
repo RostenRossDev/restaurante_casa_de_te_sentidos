@@ -3,7 +3,11 @@ package model;
 import java.util.List;
 
 public class TicketList {
+<<<<<<< HEAD
 	private List<Ticket> tickets;
+=======
+    private List<Ticket> tickets;
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 
 	
 	public TicketList() {

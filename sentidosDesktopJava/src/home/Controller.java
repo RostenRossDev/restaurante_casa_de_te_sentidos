@@ -380,7 +380,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 
 	private Boolean verificarClave() {
 		// Regex to check valid password.
-		String regex = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%._-]).{8,20})";
+		String regex = "((?=.\\d)(?=.[a-z])(?=.[A-Z])(?=.[@#$%._-]).{8,20})";
 		String regexMin = "(?=.*[a-z])";
 		String regexMay = "(?=.*[A-Z])";
 		String regexNum = "(?=.*\\\\d)";
@@ -599,7 +599,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 				}else if("isTea".equals(c.getId())) {
 					ComboBox<String> combo = (ComboBox<String>) c;
 					Boolean valor=null;
-					if("Té".equals(combo.getValue())) {
+					if("TÃ©".equals(combo.getValue())) {
 						valor=Boolean.TRUE;
 					}else if("Comida".equals(combo.getValue())) {
 						valor=Boolean.FALSE;
@@ -665,7 +665,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			inputTable.setPromptText("Numero de mesa");
 			inputTable.setId("mesa");
 			inputTable.setText(r.getTable()+"");
-			Text txtTable = new  Text("Nro° Mesa :");
+			Text txtTable = new  Text("NroÂ° Mesa :");
 			
 			TextField inputUsuario = new TextField();
 			inputUsuario.setPromptText("Nombre de usuario");
@@ -679,20 +679,20 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			LocalDate lclDate = LocalDate.of(Integer.parseInt(result[0]), Integer.parseInt(result[1]), Integer.parseInt(result[2]));
 			date.setValue(lclDate);
 			ComboBox<String> comboConfim = new ComboBox<>(FXCollections.observableArrayList("Si", "No"));
-			ComboBox<String> comboComida = new ComboBox<>(FXCollections.observableArrayList("Té", "Comida"));
+			ComboBox<String> comboComida = new ComboBox<>(FXCollections.observableArrayList("TÃ©", "Comida"));
 			ComboBox<String> comboHora = new ComboBox<>(FXCollections.observableArrayList("8:00 - 11:00",
 					"11:00 - 15:00", "15:00 - 19:00", "19:00 - 00:00"));
 			comboConfim.setId("confirmado");
 			comboComida.setId("isTea");
 			comboHora.setId("hora");
 			comboConfim.setValue(r.getConfirmed()?"Si":"No");
-			comboComida.setValue(r.getIsTea()?"Té":"Comida");
+			comboComida.setValue(r.getIsTea()?"TÃ©":"Comida");
 			comboHora.setValue(r.getIsTea()?(r.getHour()?"8:00 - 11:00":"15:00 - 19:00"):(r.getHour()?"11:00 - 15:00":"19:00 - 00:00"));
 			Text fecha = new Text("Fecha :");
 			Text id = new Text(r.getId()+"");
 			id.setId("id");
 			id.setVisible(false);
-			Text comida = new Text("Té / Comida :");
+			Text comida = new Text("TÃ© / Comida :");
 			Text hora = new Text("Hora :");
 			Text confirm = new Text("Confirmado :");
 			Text titulo = new Text("Editar Reserva");
@@ -803,6 +803,225 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		datos.forEach(d -> tbReservacion.getItems().add(d));
 		
 		
+<<<<<<< HEAD
+=======
+	}
+	
+	
+	
+	//ordenes logica
+	
+	
+	EventHandler<MouseEvent> ocultarEditarTicket = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			((Pane)((Button)((Text)event.getTarget()).getParent()).getParent()).setVisible(false);
+		}
+	};
+	
+	EventHandler<MouseEvent> enviarReservaEditadaTicket = new EventHandler<MouseEvent>() {
+		String usuario;
+		String metodoPago;
+		Long id;
+		String fechaPago; 
+		Boolean pagado;
+		@Override
+		public void handle(MouseEvent event) {
+			System.out.println(((Button)((Text)event.getTarget()).getParent()).getParent().getId());
+			Pane pane =  (Pane)((Button)((Text)event.getTarget()).getParent()).getParent();
+			System.out.println("editando ticket");
+			pane.setVisible(false);			
+			pane.getChildren().forEach(c ->{
+				if("id".equals(c.getId())) {
+					Text txtid = (Text) c;
+					id=Long.parseLong(txtid.getText());
+				}else if("usuario".equals(c.getId())) {
+					TextField txtUsuario = (TextField) c;
+					usuario=txtUsuario.getText();
+				}else if("fechaPago".equals(c.getId())) {
+					DatePicker dateP=(DatePicker) c;
+					LocalDate lclDate = dateP.getValue();
+					LocalDate localDate = LocalDate.now();
+					String formattedDate = lclDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					String[] dateArray= formattedDate.split("-");
+					System.out.println("fecha: "+formattedDate);
+					fechaPago = formattedDate;					
+				}else if("pagado".equals(c.getId())) {
+					ComboBox<String> combo = (ComboBox<String>) c;
+					Boolean valor=null;
+					if("Si".equals(combo.getValue())) {
+						valor=Boolean.TRUE;
+					}else if("No".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}
+					pagado=valor;
+				}else if("metodo".equals(c.getId())) {
+					ComboBox<String> combo = (ComboBox<String>) c;					
+					metodoPago=combo.getValue();
+				}
+			});
+			
+
+			if( pagado!=null && fechaPago!= null && usuario != null) {
+									
+				String json = "{"
+					    +"\"id\":"+id+","
+					    +"\"fechaPago\":"+"\""+fechaPago+"\","
+					    +"\"username\":"+"\""+usuario+"\","
+					    +"\"confirmado\":"+pagado+","
+					    +"\"metodoPago\":"+"\""+metodoPago+"\""
+					    +"}";
+				if(httpTicketService.actualizarTicket(json)) {
+					actualizarTablaTickets();
+				}		
+				System.out.println("no ingreso la edicion de ticket");
+				 
+			}			
+		}
+	};
+	
+	public void actualizarTablaTickets () {
+		tbTicket.getItems().clear();
+		List<TicketTableItem> tickets = new ArrayList<>();
+		((List<Ticket>) Main.contexto.get("tickets")).forEach(r -> {
+			// Button btnReserva = getNewReservaButton();
+			Pane pane = new Pane();
+			pane.setId("panelTicketEditar");
+			pane.setStyle("-fx-background-color:#BFAAFF");
+			pane.setPrefWidth(400);
+			pane.setPrefHeight(500);
+			pane.setMaxWidth(1500);
+			pane.setMaxHeight(1500);
+			pane.setLayoutX(250);
+			pane.setLayoutY(30);
+
+			Button aceptar = new Button("ACEPTAR");
+			Button cancelar = new Button("CANCELAR");
+			cancelar.addEventFilter(MouseEvent.MOUSE_CLICKED, ocultarEditarTicket);
+			aceptar.addEventFilter(MouseEvent.MOUSE_CLICKED, enviarReservaEditadaTicket);
+			cancelar.setId("btnCancelarTicket");
+			aceptar.setId("btnAceptarTicket");
+			
+			TextField inputUsuario = new TextField();
+			inputUsuario.setPromptText("Nombre de usuario");
+			inputUsuario.setId("usuario");
+			inputUsuario.setText(r.getUsuario());			
+			Text txtUsuario = new  Text("Usuario :");			
+						
+			DatePicker date = new DatePicker();
+			date.setId("fechaPago");
+			String fechaPago =r.getFechaPago().getYear()+"-"+r.getFechaPago().getMonth()+"-"+r.getFechaPago().getDate();
+			String[] result = fechaPago.split("-");
+			Integer year = r.getFechaPago().getYear()+1900;
+			Integer month =r.getFechaPago().getMonth();
+			Integer day = r.getFechaPago().getDate();
+			System.out.println("aÃ±o : "+year);
+			System.out.println("fecha Pago: "+year+"-"+month+"-"+day);
+			LocalDate lclDate = LocalDate.of((1900+year), (month+2), day);
+			date.setValue(lclDate);
+			Text fecha = new Text("Fecha del pago :");
+			ComboBox<String> comboPagado= new ComboBox<>(FXCollections.observableArrayList("Si", "No"));			
+			comboPagado.setId("pagado");
+			comboPagado.setValue(r.getPagado()?"Si":"No");
+			
+			Text metodo = new Text("Metodo de pago :");
+			ComboBox<String> comboMetodo =new ComboBox<>(FXCollections.observableArrayList("Efectivo", "Credito", "Debito"));			
+			comboMetodo.setId("metodo");
+			comboMetodo.setValue(r.getMetodoPago().equals("efectivo")?"Efectivo":r.getMetodoPago().equals("credito")?"credito":"debito");
+			
+			Text id = new Text(r.getId()+"");
+			id.setId("id");
+			id.setVisible(false);
+			Text pagado = new Text("Pagado :");
+			Text titulo = new Text("Editar Reserva");
+
+			List<Stop> stops = new ArrayList<>();
+			Color color2 = Color.rgb(122, 4, 255);
+			Color color1 = Color.rgb(255, 4, 196);
+			stops.add(new Stop(0, color1));
+			stops.add(new Stop(1, color2));
+			LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+			titulo.setFill(gradient);			
+			titulo.setStyle("-fx-font: 24 arial;");
+			fecha.setFill(gradient);
+			pagado.setFill(gradient);
+			txtUsuario.setFill(gradient);
+			
+			pane.getChildren().add(txtUsuario);
+			pane.getChildren().add(inputUsuario);
+			pane.getChildren().add(date);
+			pane.getChildren().add(fecha);
+			pane.getChildren().add(pagado);
+			pane.getChildren().add(comboPagado);
+			pane.getChildren().add(cancelar);
+			pane.getChildren().add(aceptar);
+			pane.getChildren().add(titulo);
+			pane.getChildren().add(id);
+			pane.getChildren().add(metodo);
+			pane.getChildren().add(comboMetodo);
+			pane.setVisible(false);
+			pane.setStyle("-fx-background-color: #ffffff");
+
+			date.setLayoutX(150);
+			date.setLayoutY(100);
+			fecha.setLayoutX(30);
+			fecha.setLayoutY(120);
+
+			comboPagado.setLayoutX(150);
+			comboPagado.setLayoutY(150);
+			pagado.setLayoutX(30);
+			pagado.setLayoutY(170);	
+			
+			metodo.setLayoutX(150);
+			metodo.setLayoutY(245);
+			comboMetodo.setLayoutX(150);
+			comboMetodo.setLayoutY(225);
+			
+			inputUsuario.setLayoutX(150);
+			inputUsuario.setLayoutY(300);
+			txtUsuario.setLayoutX(30);
+			txtUsuario.setLayoutY(320);
+			
+			aceptar.setLayoutX(50);
+			aceptar.setLayoutY(450);
+
+			cancelar.setLayoutX(300);
+			cancelar.setLayoutY(450);
+
+			titulo.setLayoutX(110);
+			titulo.setLayoutY(50);
+			// padre.getChildren().add(pane);
+
+			pane.toBack();
+			pnTicket.getChildren().add(pane);
+			
+			TicketTableItem item = new TicketTableItem(r.getId() , r.getCreateAt(), r.getUsuario(), r.getTotal(),
+					r.getPagado(), r.getMetodoPago(), r.getFechaPago());
+			item.setPanelEditar(pane);
+			tickets.add(item);
+		});
+		ObservableList<TicketTableItem> datos = FXCollections.observableList(tickets);		
+
+		clTicketVer.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("ticket"));
+
+		clTicketId.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("id"));
+
+		clTicketCreacion.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("fechaCreacion"));
+
+		clTicketTotal.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("total"));
+
+		clTicketUsuario.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("usuario"));
+
+		clTicketPagado.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("pagado"));
+
+		clTicketFechaPago.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("metodoPago"));
+
+		clTicketBtnEliminar.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("eliminar"));
+
+		clTicketBtnEditar.setCellValueFactory(new PropertyValueFactory<TicketTableItem, String>("editar"));
+		 
+		datos.forEach(d -> tbTicket.getItems().add(d));
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 	}
 	
 	

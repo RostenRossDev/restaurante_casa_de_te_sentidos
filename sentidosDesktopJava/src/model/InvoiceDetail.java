@@ -1,8 +1,12 @@
 package model;
 
 public class InvoiceDetail {
+<<<<<<< HEAD
 	
 	private Integer quantity;	
+=======
+    private Integer quantity;	
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 	
 	private Menu menu;
 
@@ -37,5 +41,8 @@ public class InvoiceDetail {
 	public String toString() {
 		return "InvoiceDetail [quantity=" + quantity + ", menu=" + menu + "]";
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 }

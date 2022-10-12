@@ -15,8 +15,12 @@ import model.TicketList;
 import util.JsonToObject;
 
 public class HttpTicketService {
+<<<<<<< HEAD
 	
 	public TicketList todosLosTickets() {
+=======
+    public TicketList todosLosTickets() {
+>>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 		System.out.println("tickets");
 		String userToken = ((LoginResponse) Main.contexto.get("login")).getAccess_token();
 
