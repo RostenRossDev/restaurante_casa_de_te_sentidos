@@ -3,7 +3,8 @@ FROM openjdk:17
 RUN mkdir /app
 
 COPY src /app
+COPY library/javafx-sdk-14.0.2.1 javafx-sdk-14.0.2.1
 
 WORKDIR /app/home
 CMD dir
-CMD java --module-path ..\openjfx-18.0.2_windows-x64_bin-sdk\javafx-sdk-18.0.2\lib --add-modules javafx.controls,javafx.fxml Main.java
+CMD java java --module-path C:\Users\nesto\Downloads\openjfx-18.0.2_windows-x64_bin-sdk\javafx-sdk-18.0.2\lib --add-modules javafx.controls,javafx.fxml -jar sentidosDesktop.jar Main.java

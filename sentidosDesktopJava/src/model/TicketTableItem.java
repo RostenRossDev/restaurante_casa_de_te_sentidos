@@ -23,11 +23,7 @@ import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
 
 public class TicketTableItem {
-<<<<<<< HEAD
-	private Button ticket;
-=======
-    private Button ticket;
->>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
+	private Button ticket;   
 	private Long id;
 	private Date fechaCreacion;
 	private String usuario;
@@ -226,9 +222,5 @@ public class TicketTableItem {
 			panelEditar.toFront();	
 			System.out.println("clickeo en editar ticket");
 		}
-	};
-<<<<<<< HEAD
-	
-=======
->>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
+	};	
 }

@@ -35,11 +35,7 @@ public class ReservaTableItem {
 	private Boolean Te_Comida;
 	private Boolean Hora;
 	private Button eliminar;
-<<<<<<< HEAD
-	private Button editar;	
-=======
 	private Button editar;
->>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 	private Pane panelEditar; 
 	
 	
@@ -221,13 +217,9 @@ public class ReservaTableItem {
 				pushNot.setMessage("Reserva eliminada con exito!");
 				pushNot.setAnimationType(AnimationType.POPUP);
 				pushNot.showAndDismiss(Duration.seconds(2)); 
-<<<<<<< HEAD
-				pushNot.showAndWait(); 
-				((Controller) Main.contexto.get("controller")).actualizarTablaReservas();				
-=======
+
 				pushNot.showAndWait();
 				((Controller) Main.contexto.get("controller")).actualizarTablaReservas();
->>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 			} else {
 				NotificationType notification = NotificationType.ERROR;
 				TrayNotification pushNot = new TrayNotification();

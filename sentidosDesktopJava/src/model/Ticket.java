@@ -3,14 +3,8 @@ package model;
 import java.util.Date;
 import java.util.List;
 
-<<<<<<< HEAD
-
-public class Ticket {
-	private Long id;
-=======
 public class Ticket {
     private Long id;
->>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
 	private String usuario;
 	private Boolean pagado;
 	private List<InvoiceDetail> invoicesDetail;
@@ -87,9 +81,6 @@ public class Ticket {
 	public String toString() {
 		return "Ticket [id=" + id + ", usuario=" + usuario + ", pagado=" + pagado + ", invoicesDetail=" + invoicesDetail
 				+ ", metodoPago=" + metodoPago + ", fechaPago=" + fechaPago + ", createAt=" + createAt + "]";
-<<<<<<< HEAD
 	}   
-=======
-	}
->>>>>>> 462d7f38d540769c5f2c284744df3f5be1748b90
+
 }
