@@ -65,4 +65,14 @@ public class JsonToObject {
 		String json =gson.toJson(res);
 		return json;
 	}
+	
+	// ordern
+	public static OrderList jsonToOrderList (String json) {
+		Gson gson=new Gson();
+		System.out.println("json OrderList : "+json);
+		OrderList list =gson.fromJson(json, OrderList.class);
+		System.out.println("cantidad de items en lista tikets: "+list.getOrders().size());
+		System.out.println("json objeto: "+list.toString());
+		return list;
+	}
 }

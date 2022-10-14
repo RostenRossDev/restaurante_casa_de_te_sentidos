@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sentidos.api.dto.MenuDto;
+import com.sentidos.api.dto.OrderDesktopDto;
+import com.sentidos.api.dto.OrderDetailDesktopDto;
 import com.sentidos.api.dto.OrderDto;
 import com.sentidos.api.enitiesWrapper.OrderWrapper;
 import com.sentidos.api.entities.Order;
@@ -56,5 +59,29 @@ public class OrderController {
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
 		}
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@GetMapping("/all/desktop")
+	public ResponseEntity<HashMap<String, Object>> allDesktop(){
+		HashMap<String, Object> response = new HashMap<>();
+		List<Order> orders = orderService.findAll();
+		List<OrderDesktopDto> ordedrsDesktopDto = new ArrayList<>();
+		orders.forEach(o ->{
+			OrderDesktopDto dto = new OrderDesktopDto();
+			dto.setId(o.getId());
+			dto.setIsDelivered(o.getIsDelivered());
+			dto.setState(o.getState());
+			o.getOrderDetails().forEach(od->{
+				OrderDetailDesktopDto odDetail =new  OrderDetailDesktopDto();
+				odDetail.setName(od.getMenu().getName());
+				odDetail.setMenuType(od.getMenu().getMenuType().getType());
+				odDetail.setPrice(od.getMenu().getPrice());
+				odDetail.setQuantity(od.getQuantity());
+				dto.getOrderDetails().add(odDetail);
+			});
+		});
+		
+		response.put("orders", ordedrsDesktopDto);
+		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 	}
 }
