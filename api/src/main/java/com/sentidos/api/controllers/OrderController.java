@@ -22,8 +22,13 @@ import com.sentidos.api.dto.OrderDesktopDto;
 import com.sentidos.api.dto.OrderDetailDesktopDto;
 import com.sentidos.api.dto.OrderDto;
 import com.sentidos.api.enitiesWrapper.OrderWrapper;
+import com.sentidos.api.entities.Customer;
 import com.sentidos.api.entities.Order;
+import com.sentidos.api.entities.User;
+import com.sentidos.api.services.CostumerServiceImpl;
+import com.sentidos.api.services.ICustomerService;
 import com.sentidos.api.services.OrderServiceImpl;
+import com.sentidos.api.services.UserService;
 
 @RequestMapping("/api/v1/order/")
 @RestController
@@ -31,6 +36,11 @@ public class OrderController {
 	private Logger log = LoggerFactory.getLogger(OrderController.class);
 	@Autowired
 	private OrderServiceImpl orderService;
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CostumerServiceImpl customerServiceImpl;
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping("")
@@ -61,16 +71,18 @@ public class OrderController {
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping("/all/desktop")
+	@GetMapping("desktop/all")
 	public ResponseEntity<HashMap<String, Object>> allDesktop(){
 		HashMap<String, Object> response = new HashMap<>();
 		List<Order> orders = orderService.findAll();
 		List<OrderDesktopDto> ordedrsDesktopDto = new ArrayList<>();
 		orders.forEach(o ->{
+			
 			OrderDesktopDto dto = new OrderDesktopDto();
 			dto.setId(o.getId());
 			dto.setIsDelivered(o.getIsDelivered());
 			dto.setState(o.getState());
+			dto.setUsername(o.getCustomer().getUser().getUsername());
 			o.getOrderDetails().forEach(od->{
 				OrderDetailDesktopDto odDetail =new  OrderDetailDesktopDto();
 				odDetail.setName(od.getMenu().getName());
@@ -79,8 +91,9 @@ public class OrderController {
 				odDetail.setQuantity(od.getQuantity());
 				dto.getOrderDetails().add(odDetail);
 			});
+			ordedrsDesktopDto.add(dto);
 		});
-		
+		log.info(ordedrsDesktopDto.toString());
 		response.put("orders", ordedrsDesktopDto);
 		return new ResponseEntity<HashMap<String, Object>>(response, HttpStatus.OK);
 	}

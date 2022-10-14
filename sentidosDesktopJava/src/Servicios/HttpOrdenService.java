@@ -21,7 +21,7 @@ public class HttpOrdenService {
 
 		System.out.println("EL LOGGGGIN : " + ((LoginResponse) Main.contexto.get("login")));
 		OrderList orderList = todosLasOrdenesResponse(userToken);
-		Main.contexto.put("tickets", orderList.getOrders());
+		Main.contexto.put("ordenes", orderList.getOrders());
 		return orderList;
 	}
 
@@ -33,7 +33,6 @@ public class HttpOrdenService {
 			URL url = new URL(ticketUrl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
-			// conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "Bearer " + token);
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -41,14 +40,15 @@ public class HttpOrdenService {
 			String line;
 
 			while ((line = br.readLine()) != null) {
+				System.out.println("line: "+line);
 				sb.append(line + "\n");
 			}
 			br.close();
 
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-				System.out.println("respuesta tickets: " + sb.toString());
+				System.out.println("respuesta ordenes: " + sb.toString());
 				OrderList orderList = JsonToObject.jsonToOrderList(sb.toString());
-				System.out.println("ticketsList: " +orderList);
+				System.out.println("orderList: " +orderList);
 
 				return orderList;
 			}
@@ -92,7 +92,7 @@ public class HttpOrdenService {
 			TicketList ticketList = JsonToObject.jsonToTicketList(sb.toString());
 			System.out.println(sb.toString());
 			if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-				Main.contexto.put("tickets", ticketList.getTickets());
+				Main.contexto.put("ordenes", ticketList.getTickets());
 				return true;
 			}			
 		}catch (Exception e) {

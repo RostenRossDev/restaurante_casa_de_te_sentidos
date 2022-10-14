@@ -29,8 +29,10 @@ import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.LoginResponse;
+import model.Order;
 import model.OrderDetail;
 import model.OrderResponse;
+import model.OrderTableItem;
 import model.ReservaList;
 import model.ReservaTableItem;
 import model.Reservations;
@@ -46,6 +48,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Servicios.HttpOrdenService;
 import Servicios.HttpReservaService;
 import Servicios.HttpTicketService;
 
@@ -163,6 +166,9 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	private TableView<TicketTableItem> tbTicket;
 	
 	@FXML
+	private TableView<OrderTableItem> tbOrden;
+	
+	@FXML
 	private TableColumn<ReservaTableItem, String> clMesa;
 
 	@FXML
@@ -212,12 +218,31 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	private TableColumn<TicketTableItem, String> clTicketBtnEliminar;
 	@FXML
 	private TableColumn<TicketTableItem, String> clTicketBtnEditar;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenVer;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenId;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenUsuario;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenTotal;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenMesa;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenEstado;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenEntrega;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenEliminar;
+	@FXML
+	private TableColumn<OrderTableItem, String> clOrdenEditar;
 	
 	Stage stage;
 
 	private HttpService http = new HttpService();
 	private HttpReservaService httpReserva = new HttpReservaService();
 	private HttpTicketService httpTicketService = new HttpTicketService();
+	private HttpOrdenService httpOrdenService = new HttpOrdenService();
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		/*
@@ -239,8 +264,8 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		
 		if (login.getAccess_token() != null) {
 			httpReserva.todasLasReservas();
-			System.out.println("Antes de los tikets");
 			httpTicketService.todosLosTickets();
+			httpOrdenService.todasLasOrdenes();
 			setBtnVisible();
 
 		} else {
@@ -332,6 +357,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 
 		actualizarTablaReservas();
 		actualizarTablaTickets();
+		actualizarTablaOrdenes();
 	}
 
 	public void handleClicks(ActionEvent actionEvent) {
@@ -805,7 +831,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	}	
 
 	
-	//ordenes logica
+	//ticket logica
 	
 	
 	EventHandler<MouseEvent> ocultarEditarTicket = new EventHandler<MouseEvent>() {
@@ -1019,6 +1045,208 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		datos.forEach(d -> tbTicket.getItems().add(d));
 	}
 
+	
+	
+	// ordenes 
+	
+	EventHandler<MouseEvent> ocultarEditarOrden = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			((Pane)((Button)((Text)event.getTarget()).getParent()).getParent()).setVisible(false);
+		}
+	};
+	
+	EventHandler<MouseEvent> enviarReservaEditadaOrden = new EventHandler<MouseEvent>() {
+		String usuario;
+		Long id;
+		Long mesa; 
+		Integer estado;
+		Boolean esDelivery;
+		@Override
+		public void handle(MouseEvent event) {
+			System.out.println(((Button)((Text)event.getTarget()).getParent()).getParent().getId());
+			Pane pane =  (Pane)((Button)((Text)event.getTarget()).getParent()).getParent();
+			System.out.println("editando orden");
+			pane.setVisible(false);			
+			pane.getChildren().forEach(c ->{
+				if("id".equals(c.getId())) {
+					Text txtid = (Text) c;
+					id=Long.parseLong(txtid.getText());
+				}else if("usuario".equals(c.getId())) {
+					TextField txtUsuario = (TextField) c;
+					usuario=txtUsuario.getText();
+				}else if("mesa".equals(c.getId())) {
+					TextField txtMesa = (TextField) c;
+					System.out.println("mesa: "+txtMesa.getText());
+					mesa = Long.parseLong(txtMesa.getText());
+				}else if("esDelivery".equals(c.getId())) {
+					ComboBox<String> combo = (ComboBox<String>) c;
+					Boolean valor=null;
+					if("Si".equals(combo.getValue())) {
+						valor=Boolean.TRUE;
+					}else if("No".equals(combo.getValue())) {
+						valor=Boolean.FALSE;
+					}
+				}else if("estado".equals(c.getId())) {
+					TextField txtEstado = (TextField) c;;					
+					estado=Integer.parseInt(txtEstado.getText());
+				}
+			});
+			
+
+			if( mesa!=null && estado!= null && usuario != null && esDelivery != null) {
+									
+				String json = "{"
+					    +"\"id\":"+id+","
+					    +"\"estado\":"+estado+","
+					    +"\"mesa\":"+mesa+","
+					    +"\"username\":"+"\""+usuario+"\","
+					    +"\"esDelivery\":"+esDelivery
+					    +"}";
+				if(httpTicketService.actualizarTicket(json)) {
+					actualizarTablaTickets();
+				}		
+				System.out.println("no ingreso la edicion de orden");
+				 
+			}			
+		}
+	};
+	
+	public void actualizarTablaOrdenes () {
+		tbOrden.getItems().clear();
+		List<OrderTableItem> ordenes = new ArrayList<>();
+		((List<OrderResponse>) Main.contexto.get("ordenes")).forEach(r -> {
+			r.calculateTotal();
+			// Button btnReserva = getNewReservaButton();
+			Pane pane = new Pane();
+			pane.setId("panelTicketEditar");
+			pane.setStyle("-fx-background-color:#BFAAFF");
+			pane.setPrefWidth(400);
+			pane.setPrefHeight(500);
+			pane.setMaxWidth(1500);
+			pane.setMaxHeight(1500);
+			pane.setLayoutX(250);
+			pane.setLayoutY(30);
+
+			Button aceptar = new Button("ACEPTAR");
+			Button cancelar = new Button("CANCELAR");
+			cancelar.addEventFilter(MouseEvent.MOUSE_CLICKED, ocultarEditarOrden);
+			aceptar.addEventFilter(MouseEvent.MOUSE_CLICKED, enviarReservaEditadaOrden);
+			cancelar.setId("btnCancelarTicket");
+			aceptar.setId("btnAceptarTicket");
+			
+			TextField inputUsuario = new TextField();
+			inputUsuario.setPromptText("Nombre de usuario");
+			inputUsuario.setId("usuario");
+			inputUsuario.setText(r.getUsername());			
+			Text txtUsuario = new  Text("Usuario :");			
+					
+			TextField mesa = new TextField();
+			mesa.setPromptText("Ingrese la mesa");
+			inputUsuario.setText(r.getTableId() +"");			
+			Text txtMesa = new  Text("Nº Mesa :");			
+
+			TextField estado = new TextField();
+			estado.setPromptText("Ingrese el estado");
+			inputUsuario.setText(r.getTableId()+"");			
+			Text txtEstado = new  Text("Estado de la orden :");	
+			
+			Text esDeliveryTxt = new Text("Es delivery :");
+			ComboBox<String> comboDelivery= new ComboBox<>(FXCollections.observableArrayList("Si", "No"));			
+			comboDelivery.setId("esDelivery");
+			comboDelivery.setValue(r.getIsDelivered()?"Si":"No");
+			
+			
+			Text id = new Text(r.getId()+"");
+			id.setId("id");
+			id.setVisible(false);
+			
+			Text titulo = new Text("Editar Orden");
+
+			List<Stop> stops = new ArrayList<>();
+			Color color2 = Color.rgb(122, 4, 255);
+			Color color1 = Color.rgb(255, 4, 196);
+			stops.add(new Stop(0, color1));
+			stops.add(new Stop(1, color2));
+			LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+			titulo.setFill(gradient);			
+			titulo.setStyle("-fx-font: 24 arial;");
+			txtUsuario.setFill(gradient);
+			
+			pane.getChildren().add(txtUsuario);
+			pane.getChildren().add(inputUsuario);
+			pane.getChildren().add(esDeliveryTxt);
+			pane.getChildren().add(comboDelivery);
+			pane.getChildren().add(mesa);
+			pane.getChildren().add(txtMesa);
+			pane.getChildren().add(estado);
+			pane.getChildren().add(txtEstado);
+			pane.getChildren().add(cancelar);
+			pane.getChildren().add(aceptar);
+			pane.getChildren().add(titulo);
+			pane.getChildren().add(id);
+			pane.setVisible(false);
+			pane.setStyle("-fx-background-color: #ffffff");
+
+			
+			inputUsuario.setLayoutX(150);
+			inputUsuario.setLayoutY(300);
+			txtUsuario.setLayoutX(30);
+			txtUsuario.setLayoutY(320);
+			
+			mesa.setLayoutX(150);
+			mesa.setLayoutY(250);
+			txtMesa.setLayoutX(30);
+			txtMesa.setLayoutY(220);
+			
+			estado.setLayoutX(150);
+			estado.setLayoutY(150);
+			txtEstado.setLayoutX(30);
+			txtEstado.setLayoutY(130);
+			
+			aceptar.setLayoutX(50);
+			aceptar.setLayoutY(450);
+
+			cancelar.setLayoutX(300);
+			cancelar.setLayoutY(450);
+
+			titulo.setLayoutX(110);
+			titulo.setLayoutY(50);
+			// padre.getChildren().add(pane);
+
+			pane.toBack();
+			pnTicket.getChildren().add(pane);
+			
+			OrderTableItem item = new OrderTableItem(r.getId() , r.getIsDelivered(), r.getState(), r.getUsername(),
+					r.getTableId(), r.getFechaEntrega(), r.getTotal());
+			item.setPanelEditar(pane);
+			ordenes.add(item);
+		});
+		ObservableList<OrderTableItem> datos = FXCollections.observableList(ordenes);		
+
+		clOrdenVer.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("orden"));
+
+		clOrdenId.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("id"));
+
+		clOrdenUsuario.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("usuario"));
+
+		clOrdenTotal.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("total"));
+
+		clOrdenMesa.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("mesa"));
+
+		clOrdenEstado.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("estado"));
+
+		clOrdenEntrega.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("fechaEntrega"));
+
+		clOrdenEliminar.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("eliminar"));
+
+		clOrdenEditar.setCellValueFactory(new PropertyValueFactory<OrderTableItem, String>("editar"));
+		 
+		datos.forEach(d -> tbOrden.getItems().add(d));
+	}
+	
+	
+	
 //btn close
 	EventHandler<MouseEvent> cerrar = new EventHandler<MouseEvent>() {
 		@Override

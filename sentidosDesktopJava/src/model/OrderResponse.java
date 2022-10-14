@@ -4,19 +4,49 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderResponse {
-
-	public Date createAt;
-    public List<OrderDetail> orderDetails;
-    public int state;
-    public boolean isDelivered;
-    public Customer customerDto;
 	
-	public Date getCreateAt() {
-		return createAt;
+	private Long id;
+	private Date fechaEntrega;
+	private List<OrderDetail> orderDetails;
+	private int state;
+	private boolean isDelivered;
+	private String username;
+	private Long tableId;	
+	private Double total;
+	public OrderResponse() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	
+	public OrderResponse(Long id, Date fechaEntrega, List<OrderDetail> orderDetails, int state, boolean isDelivered,
+			String username, Long tableId) {
+		super();
+		this.id = id;
+		this.fechaEntrega = fechaEntrega;
+		this.orderDetails = orderDetails;
+		this.state = state;
+		this.isDelivered = isDelivered;
+		this.username = username;
+		this.tableId = tableId;		
+		
 	}
+	
+	public void calculateTotal() {
+		Double tot =0.0;
+		for (OrderDetail o : orderDetails) {
+			tot += o.getPrice() * o.getQuantity();
+		}
+		System.out.println("total calculado: "+tot);
+		this.total=tot;
+	}
+	public Date getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+	public void setFechaEntrega(Date fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
+
 	public Integer getState() {
 		return state;
 	}
@@ -35,22 +65,46 @@ public class OrderResponse {
 	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	public Customer getCustomerDto() {
-		return customerDto;
+	public String getUsername() {
+		return username;
 	}
-	public void setCustomerDto(Customer customerDto) {
-		this.customerDto = customerDto;
+	public void setUsername(String customerDto) {
+		this.username = customerDto;
 	}
 	public void setState(int state) {
 		this.state = state;
 	}
 	public void setDelivered(boolean isDelivered) {
 		this.isDelivered = isDelivered;
+	}	
+	
+	public Long getTableId() {
+		return tableId;
 	}
+	public void setTableId(Long tableId) {
+		this.tableId = tableId;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}	
+	
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderResponse [createAt=" + createAt + ", orderDetails=" + orderDetails + ", state=" + state
-				+ ", isDelivered=" + isDelivered + ", customerDto=" + customerDto + "]";
+		return "OrderResponse [id=" + id + ", createAt=" + fechaEntrega + ", orderDetails=" + orderDetails + ", state="
+				+ state + ", isDelivered=" + isDelivered + ", username=" + username + ", tableId=" + tableId + "]";
 	}
+	
+	
 }
 

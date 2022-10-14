@@ -206,14 +206,15 @@
          <children>
             <TableView id="tbOrden" fx:id="tbOrden" layoutY="183.0" prefHeight="394.0" prefWidth="972.0">
                <columns>
-                  <TableColumn id="tdOrden" prefWidth="96.0" text="Orden" />
-                  <TableColumn id="tdMesa" prefWidth="275.0" text="Usuario" />
-                  <TableColumn id="tdFecha" prefWidth="141.0" text="Total" />
-                  <TableColumn id="tdUsuario" prefWidth="57.0" text="Mesa" />
-                  <TableColumn id="tdConfirmado" prefWidth="141.0" text="Estado" />
-                  <TableColumn id="tdTe" maxWidth="300.0" prefWidth="129.0" text="Fecha de Entrega" />
-                  <TableColumn id="tdTe" maxWidth="100.0" prefWidth="67.0" text="Eliminar" />
-                  <TableColumn id="tdTe" maxWidth="100.0" prefWidth="74.0" text="Editar" />
+                  <TableColumn id="tdOrden" fx:id="clOrdenVer" prefWidth="96.0" text="Orden" />
+                  <TableColumn id="tdMesa" fx:id="clOrdenId" maxWidth="250.0" prefWidth="50.0" text="id" />
+                  <TableColumn id="tdMesa" fx:id="clOrdenUsuario" maxWidth="200.0" prefWidth="200.0" text="Usuario" />
+                  <TableColumn id="tdFecha" fx:id="clOrdenTotal" prefWidth="141.0" text="Total" />
+                  <TableColumn id="tdUsuario" fx:id="clOrdenMesa" prefWidth="57.0" text="Mesa" />
+                  <TableColumn id="tdConfirmado" fx:id="clOrdenEstado" prefWidth="141.0" text="Estado" />
+                  <TableColumn id="tdTe" fx:id="clOrdenEntrega" maxWidth="300.0" prefWidth="129.0" text="Fecha de Entrega" />
+                  <TableColumn id="tdTe" fx:id="clOrdenEliminar" maxWidth="100.0" prefWidth="67.0" text="Eliminar" />
+                  <TableColumn id="tdTe" fx:id="clOrdenEditar" maxWidth="100.0" prefWidth="74.0" text="Editar" />
                </columns>
             </TableView>
             <Pane fx:id="pnNuevoOrden" layoutX="850.0" layoutY="145.0" prefHeight="33.0" prefWidth="117.0">

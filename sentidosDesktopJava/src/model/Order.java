@@ -46,7 +46,24 @@ public class Order {
 	}
 	public void setState(Integer state) {
 		this.state = state;
+	}	
+	
+	public String getUsername() {
+		return username;
 	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(Long tableId) {
+		this.tableId = tableId;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", orderDetails=" + orderDetails + ", isDelivered=" + isDelivered + ", state="

@@ -42,6 +42,11 @@ public class OrderDetailDesktopDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public String toString() {
+		return "OrderDetailDesktopDto [quantity=" + quantity + ", name=" + name + ", price=" + price + ", menuType="
+				+ menuType + "]";
+	}
 	 
 	 
 }
