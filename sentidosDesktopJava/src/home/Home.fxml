@@ -62,12 +62,6 @@
                <image>
                   <Image url="@../images/sentidosLetraTransaparente.png" />
                </image>
-               <effect>
-                  <DropShadow blurType="TWO_PASS_BOX" color="#8f1ff8" height="41.77" radius="21.0625" spread="0.4" width="44.48">
-                     <input>
-                        <Shadow blurType="GAUSSIAN" color="#bc56ad" height="1.0" radius="0.0" width="0.0" />
-                     </input></DropShadow>
-               </effect>
             </ImageView>
             <ImageView fitHeight="133.0" fitWidth="200.0" layoutX="83.0" layoutY="445.0">
                <image>
@@ -79,26 +73,29 @@
       <Pane id="pnLogin" fx:id="pnLogin" layoutX="561.0" layoutY="34.0" prefHeight="540.0" prefWidth="636.0">
 
          <children>
-            <TextField id="textUser" fx:id="textUser" layoutX="381.0" layoutY="266.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su usuario" />
-            <Text fill="#ff8ab1" layoutX="219.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
+            <TextField id="textUser" fx:id="textUser" layoutX="381.0" layoutY="266.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su usuario">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <Text fill="#1b1114" layoutX="219.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
                <font>
                   <Font size="22.0" />
                </font>
                <effect>
-                  <DropShadow color="#9812ff" height="44.72" radius="21.1175" spread="0.8" width="41.75" />
+                  <DropShadow color="#699ed7" height="43.24" radius="20.747500000000002" spread="0.8" width="41.75" />
                </effect>
             </Text>
-            <Text fill="#ff8ab1" layoutX="274.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inicio de sesión">
+            <Text fill="#1b1114" layoutX="274.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inicio de sesión">
                <font>
                   <Font size="40.0" />
                </font>
                <effect>
-                  <DropShadow color="#761ed3" height="32.87" radius="15.932499999999997" spread="0.63" width="32.86" />
+                  <DropShadow color="#699ed7" height="32.86" radius="15.93" spread="0.63" width="32.86" />
                </effect>
             </Text>
-            <Text fill="#ff8ab1" layoutX="219.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+            <Text fill="#1b1114" layoutX="219.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
                <effect>
-                  <DropShadow color="#9812ff" height="44.72" radius="21.1175" spread="0.8" width="41.75" />
+                  <DropShadow color="#699ed7" height="43.24" radius="20.747500000000002" spread="0.8" width="41.75" />
                </effect>
                <font>
                   <Font size="22.0" />
@@ -120,12 +117,12 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <Button layoutX="356.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#handleIngresar" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #9C45FE;" text="INGRESAR" textFill="#f8f7f7">
+            <Button layoutX="356.0" layoutY="450.0" mnemonicParsing="false" onMouseClicked="#handleIngresar" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #699ed7;" text="INGRESAR" textAlignment="CENTER" textFill="#1b1114">
                <effect>
                   <DropShadow color="#de01fc" />
                </effect>
                <font>
-                  <Font size="14.0" />
+                  <Font size="15.0" />
                </font></Button>
             <Text fx:id="textUsuarioError" fill="RED" layoutX="219.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error al autenticar. " visible="false">
                <effect>
@@ -135,10 +132,13 @@
                   <Font size="14.0" />
                </font>
             </Text>
-            <PasswordField fx:id="textPassword" layoutX="381.0" layoutY="354.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su contraseña" />
+            <PasswordField fx:id="textPassword" layoutX="381.0" layoutY="354.0" prefHeight="25.0" prefWidth="210.0" promptText="Ingrese su contraseña">
+               <font>
+                  <Font size="14.0" />
+               </font></PasswordField>
          </children>
       </Pane>
-      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;" visible="false">
+      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;" visible="false">
 
          <children>
             <TableView id="tbOrden" fx:id="tbReservacion" layoutY="183.0" prefHeight="394.0" prefWidth="958.0">
@@ -169,10 +169,10 @@
             </Pane>
          </children>
       </Pane>
-      <Pane id="pnCaja" fx:id="pnTicket" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;" visible="false">
+      <Pane id="pnCaja" fx:id="pnTicket" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;">
 
          <children>
-            <TableView id="tbTicket" fx:id="tbTicket" layoutY="183.0" prefHeight="394.0" prefWidth="972.0" style="-fx-background-color: #02030A;">
+            <TableView id="tbTicket" fx:id="tbTicket" layoutY="183.0" prefHeight="395.0" prefWidth="972.0">
                <columns>
                   <TableColumn id="tdTicket" fx:id="clTicketVer" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #02030A;" text="Ticket" />
                   <TableColumn id="tdTicket" fx:id="clTicketId" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #02030A;" text="id" />
@@ -201,7 +201,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane id="pnOrden" fx:id="pnOrden" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #7800FF;" visible="false">
+      <Pane id="pnOrden" fx:id="pnOrden" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;" visible="false">
 
          <children>
             <TableView id="tbOrden" fx:id="tbOrden" layoutY="183.0" prefHeight="394.0" prefWidth="972.0">
@@ -232,7 +232,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane id="pnLateral" fx:id="pnLateral" layoutY="161.0" prefHeight="255.0" prefWidth="261.0" scaleX="1.045" scaleY="2.26" style="-fx-background-color: linear-gradient(to right, #9B52FF,#FF52B3);" visible="false">
+      <Pane id="pnLateral" fx:id="pnLateral" layoutY="161.0" prefHeight="258.0" prefWidth="261.0" scaleX="1.045" scaleY="2.26" style="-fx-background-color: linear-gradient(to right, #EC7063,#F5B7B1);">
          <children>
             <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" layoutY="190.0" pickOnBounds="true">
                <image>
@@ -275,14 +275,20 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Text layoutX="115.0" layoutY="13.0" scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets" wrappingWidth="50.0" />
+                  <Text layoutX="115.0" layoutY="13.0" scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets" wrappingWidth="50.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Text>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Pane>
             <Pane fx:id="pnLateralOrden" layoutY="109.5" prefHeight="17.0" prefWidth="260.0">
                <children>
-                  <Text layoutX="115.0" layoutY="13.0" scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordenes" wrappingWidth="50.0" />
+                  <Text layoutX="115.0" layoutY="13.0" scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ordenes" wrappingWidth="50.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Text>
                   <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/icons8_Box_32px.png" />
@@ -300,7 +306,10 @@
                </cursor></Pane>
             <Pane fx:id="pnLateralReserva" layoutY="130.0" prefHeight="17.0" prefWidth="260.0">
                <children>
-                  <Text layoutX="115.0" layoutY="13.0" scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservas" wrappingWidth="50.0" />
+                  <Text layoutX="115.0" layoutY="13.0" scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservas" wrappingWidth="50.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Text>
                   <ImageView fitHeight="16.0" fitWidth="32.0" layoutX="30.0" pickOnBounds="true">
                      <image>
                         <Image url="@../images/icons8_Open_Envelope_32px.png" />
@@ -329,19 +338,25 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Text scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salir" wrappingWidth="50.0" x="115.0" y="13.0" />
+                  <Text scaleX="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salir" wrappingWidth="50.0" x="115.0" y="13.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Text>
                </children>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Pane>
          </children></Pane>
    
-         	<Button fx:id="btnClose" alignment="TOP_RIGHT" graphicTextGap="22.0" layoutX="1190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" stylesheets="@style.css">
+         	<Button fx:id="btnClose" alignment="TOP_RIGHT" graphicTextGap="22.0" layoutX="1196.0" layoutY="5.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="39.0" style="-fx-background-color: #F1948A;" stylesheets="@style.css" textAlignment="CENTER">
    		<graphic>
       			<ImageView fitHeight="25" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
       				<image>
       					<Image url="@../images/close.png" />
       				</image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
       			</ImageView>
    		</graphic>
    	</Button>
