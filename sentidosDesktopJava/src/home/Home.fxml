@@ -138,7 +138,7 @@
                </font></PasswordField>
          </children>
       </Pane>
-      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;" visible="false">
+      <Pane id="pnReservacion" fx:id="pnReservacion" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;">
 
          <children>
             <TableView id="tbOrden" fx:id="tbReservacion" layoutY="183.0" prefHeight="394.0" prefWidth="958.0">
@@ -172,7 +172,7 @@
       <Pane id="pnCaja" fx:id="pnTicket" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;">
 
          <children>
-            <TableView id="tbTicket" fx:id="tbTicket" layoutY="183.0" prefHeight="395.0" prefWidth="972.0">
+            <TableView id="tbTicket" fx:id="tbTicket" layoutY="183.0" prefHeight="397.0" prefWidth="972.0">
                <columns>
                   <TableColumn id="tdTicket" fx:id="clTicketVer" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #02030A;" text="Ticket" />
                   <TableColumn id="tdTicket" fx:id="clTicketId" maxWidth="50.0" prefWidth="50.0" style="-fx-background-color: #02030A;" text="id" />
@@ -201,7 +201,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane id="pnOrden" fx:id="pnOrden" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;" visible="false">
+      <Pane id="pnOrden" fx:id="pnOrden" layoutX="267.0" prefHeight="578.0" prefWidth="971.0" style="-fx-background-color: #F1948A;">
 
          <children>
             <TableView id="tbOrden" fx:id="tbOrden" layoutY="183.0" prefHeight="394.0" prefWidth="972.0">
