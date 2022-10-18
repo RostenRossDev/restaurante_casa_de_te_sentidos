@@ -60,6 +60,11 @@ public class OrderDetail  implements Serializable{
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderDetail [id=" + id + ", quantity=" + quantity + ", order=" + order + ", menu=" + menu + "]";
+	}
 	
 	
 }

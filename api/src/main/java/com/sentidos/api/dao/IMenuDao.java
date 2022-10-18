@@ -6,4 +6,5 @@ import com.sentidos.api.entities.Menu;
 @Repository
 public interface IMenuDao extends CrudRepository<Menu, Long>{
 
+	public Menu findMenuByName(String name);
 }

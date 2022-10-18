@@ -1,9 +1,14 @@
 package util;
 
+import java.util.HashMap;
+import java.util.Set;
+
 import com.google.gson.Gson;
 
 import model.Customer;
 import model.LoginResponse;
+import model.MenuList;
+import model.MsgResponse;
 import model.OrderList;
 import model.ReservaList;
 import model.Reservations;
@@ -74,5 +79,27 @@ public class JsonToObject {
 		System.out.println("cantidad de items en lista tikets: "+list.getOrders().size());
 		System.out.println("json objeto: "+list.toString());
 		return list;
+	}
+	
+	//menu
+	public static MenuList jsonToMenuList (String json) {
+		Gson gson=new Gson();
+		System.out.println("json MenuList : "+json);
+		MenuList list =gson.fromJson(json, MenuList.class);
+		System.out.println("cantidad de items en lista menues: "+list/*.getMenuList().size()*/);
+		System.out.println("json objeto: "+list.toString());
+		return list;
+	}
+	
+	public static String HashMapStringLongToJson (Set<HashMap<String, Integer>> menuSeleccionado) {
+		Gson gson=new Gson();
+		String ordenesStr = gson.toJson(menuSeleccionado);
+		return ordenesStr;
+	}
+	
+	
+	public static MsgResponse jsonToMsgResponse(String json) {
+		Gson gson = new Gson();
+		return gson.fromJson(json, MsgResponse.class);
 	}
 }

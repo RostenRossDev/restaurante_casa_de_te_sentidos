@@ -24,5 +24,10 @@ public class MenuService {
 	public Menu findById(Long id) {
 		return menuDao.findById(id).orElse(new Menu());
 	}
+	
+	public Menu findMenuByName(String name) {
+		return menuDao.findMenuByName(name);
+	}
+	
 }
 

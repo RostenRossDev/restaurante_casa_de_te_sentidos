@@ -6,11 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,7 +30,9 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.LoginResponse;
+import model.Menu;
 import model.Order;
 import model.OrderDetail;
 import model.OrderResponse;
@@ -38,16 +42,23 @@ import model.ReservaTableItem;
 import model.Reservations;
 import model.Ticket;
 import model.TicketTableItem;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
+import util.JsonToObject;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Servicios.HttpMenuService;
 import Servicios.HttpOrdenService;
 import Servicios.HttpReservaService;
 import Servicios.HttpTicketService;
@@ -243,6 +254,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	private HttpReservaService httpReserva = new HttpReservaService();
 	private HttpTicketService httpTicketService = new HttpTicketService();
 	private HttpOrdenService httpOrdenService = new HttpOrdenService();
+	private HttpMenuService httpOMenuService = new HttpMenuService();
 	@Override
 	public void handle(ActionEvent actionEvent) {
 		/*
@@ -266,6 +278,11 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			httpReserva.todasLasReservas();
 			httpTicketService.todosLosTickets();
 			httpOrdenService.todasLasOrdenes();
+			httpOMenuService.todasLosMenues();
+			pnNuevoOrden.addEventFilter(MouseEvent.MOUSE_CLICKED, nuevaOrden);
+			pnNuevoReserva.addEventFilter(MouseEvent.MOUSE_CLICKED, nuevaReserva);
+			pnNuevoTicket.addEventFilter(MouseEvent.MOUSE_CLICKED, nuevoTicket);
+			
 			setBtnVisible();
 
 		} else {
@@ -473,7 +490,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		public void handle(MouseEvent event) {
 			String id = ((Pane) event.getSource()).getId();
 			Pane panel = (Pane) event.getSource();
-			panel.setStyle("-fx-background-color:#7800FF;");
+			panel.setStyle("-fx-background-color:#fdedec;");
 		}
 	};
 
@@ -515,7 +532,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	EventHandler<MouseEvent> eventResaltarLetra = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent event) {
-			Color color = Color.web("#FF54B9", 1);
+			Color color = Color.web("#fdedec", 1);
 			DropShadow dropShadow = new DropShadow();
 			dropShadow.setBlurType(BlurType.GAUSSIAN);
 			dropShadow.setColor(color);
@@ -530,16 +547,16 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			if (id.equals("pnNuevoReserva")) {
 
 				imgNuevoResarvacion.setEffect(dropShadow);
-				txtNuevoReservacion.setStyle("-fx-fill:#FF54B9;");
+				txtNuevoReservacion.setStyle("-fx-fill:#fdedec;");
 
 			} else if (id.equals("pnNuevoTicket")) {
 				System.out.println("id: " + id);
 				imgNuevoTicket.setEffect(dropShadow);
-				txtNuevoTicket.setStyle("-fx-fill:#FF54B9;");
+				txtNuevoTicket.setStyle("-fx-fill:#fdedec;");
 			} else if (id.equals("pnNuevoOrden")) {
 				System.out.println("id: " + id);
 				imgNuevoOrden.setEffect(dropShadow);
-				txtNuevoOrden.setStyle("-fx-fill:#FF54B9;");
+				txtNuevoOrden.setStyle("-fx-fill:#fdedec;");
 			} else {
 				System.out.println("id: " + id);
 			}
@@ -1115,6 +1132,7 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 	public void actualizarTablaOrdenes () {
 		tbOrden.getItems().clear();
 		List<OrderTableItem> ordenes = new ArrayList<>();
+		System.out.println(((List<OrderResponse>) Main.contexto.get("ordenes")).toString());
 		((List<OrderResponse>) Main.contexto.get("ordenes")).forEach(r -> {
 			r.calculateTotal();
 			// Button btnReserva = getNewReservaButton();
@@ -1245,7 +1263,339 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 		datos.forEach(d -> tbOrden.getItems().add(d));
 	}
 	
+// panel nuevo ticket pnNuevoTicket
 	
+	EventHandler<MouseEvent> nuevoTicket = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			System.out.println("Nuevo ticket");
+			stage = (Stage)	 btnClose.getScene().getWindow(); 
+			stage.close();
+		}
+	};
+	
+	
+	EventHandler<MouseEvent> ordenAgredarOrdenDetail = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			System.out.println("orden Agredar Nuevo Orden Detail");
+			Pane pane = (Pane)((Button) event.getSource()).getParent();
+			Long id=null;
+			Integer cantidad=null;
+			ComboBox<String> combo = null;
+			ScrollPane sp = null;
+			VBox vbox =null;
+			for (Node c : pane.getChildren()) {
+				if("menu".equals(c.getId())) {
+					combo = (ComboBox<String>)c;
+				}else if("sp".equals(c.getId())) {
+					System.out.println("econtro el panel");
+					sp = (ScrollPane)c;
+					vbox =(VBox) sp.getContent();	
+					
+				}else if("cantidad".equals(c.getId())) {
+					try {
+						cantidad = Integer.parseInt( ((TextField)c).getText() );
+					} catch (Exception e) {
+						cantidad =1;
+					}
+				}
+			}
+			
+			if(combo != null && cantidad != null ) {
+				List<Menu> menues = (List<Menu>)Main.contexto.get("menues");
+				List<Order> orders = (List<Order>)Main.contexto.get("orders");
+				//Main.menuSeleccionado.add(cantidad+"X "+combo.getValue());
+				HashMap<String, Long> pedido = new HashMap<String, Long>();
+				Text menuDisplay = new Text();				
+				vbox.getChildren().clear();
+				System.out.println("se limpio vbox");
+				HashMap<String, Integer> menu = new HashMap<>();
+				menu.put(combo.getValue(), cantidad);
+				
+				HashMap<String, Integer> toRemove=null;
+				for (HashMap<String, Integer> m : Main.menuSeleccionado) {					
+					
+					if(m.keySet().contains(combo.getValue())) {
+						toRemove=m;
+						break;
+					}
+				};
+				Main.menuSeleccionado.remove(toRemove);
+				toRemove=null;
+
+				Main.menuSeleccionado.add(menu);				
+				
+				for (HashMap<String, Integer> order : Main.menuSeleccionado) {
+					String mensaje ="";
+					String key="";
+					Integer value;
+					for (String k : order.keySet()) {
+						key = k;
+					}
+					value= order.get(key);
+					mensaje =value+" x "+key;
+					vbox.getChildren().add(new Text(mensaje));
+				}
+				System.out.println("set: "+Main.menuSeleccionado.toString());
+				sp.setContent(vbox);
+
+			}
+		
+		}
+	};
+	
+	EventHandler<MouseEvent> ocultarCrearOrden = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			try {
+				((Pane)((Button)((Text)event.getTarget()).getParent()).getParent()).setVisible(false);
+			}catch(Exception e){
+				System.out.println("En el error capturado");
+				((Pane)(((Button)event.getTarget()).getParent())).setVisible(false);
+			}
+		}
+	};
+	EventHandler<MouseEvent> nuevaOrden = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			System.out.println("Nueva orden");
+			Pane pane = (Pane)((Pane) event.getSource()).getParent();
+			Pane panelNuevaOrden = new Pane();
+			panelNuevaOrden.setId("panelNuevaOrden ");
+			panelNuevaOrden.setStyle("-fx-background-color:#fadbd8");
+			panelNuevaOrden.setPrefWidth(400);
+			panelNuevaOrden.setPrefHeight(700);
+			panelNuevaOrden.setMaxWidth(1500);
+			panelNuevaOrden.setMaxHeight(2000);
+			panelNuevaOrden.setLayoutX(250);
+			panelNuevaOrden.setLayoutY(30);				
+			
+			
+			Text orden = new Text("Nueva Orden");
+			orden.setLayoutX(100);
+			orden.setLayoutY(30);
+			
+			Text estado = new Text("Estado :");
+			estado.setLayoutX(30);
+			estado.setLayoutY(100);
+			
+			ComboBox<String> comboEstado = new ComboBox<String>();
+			comboEstado.setItems(FXCollections.observableArrayList("Pendiente", "En proceso","Listo","Entregado","En camino")); 
+			comboEstado.setLayoutX(100);
+			comboEstado.setLayoutY(95);
+			comboEstado.setId("estado");
+
+			Text usuario = new Text("Usuario :");
+			usuario.setLayoutX(30);
+			usuario.setLayoutY(150);	
+			
+			TextField inputUsuario = new TextField();
+			inputUsuario.setPromptText("Ingrese el usuario");
+			inputUsuario.setLayoutX(100);
+			inputUsuario.setLayoutY(145);
+			inputUsuario.setId("usuario");
+			
+			Text cantidad = new Text("Cantidad :");
+			cantidad.setLayoutX(30);
+			cantidad.setLayoutY(315);
+			
+			TextField nrCantidad = new TextField();
+			nrCantidad.setPromptText("Ingrese la cantidad");
+			nrCantidad.setLayoutX(100);
+			nrCantidad.setLayoutY(300);
+			nrCantidad.setId("cantidad");
+			
+			Text mesa = new Text("Mesa :");
+			mesa.setLayoutX(30);
+			mesa.setLayoutY(215);
+			
+			ComboBox<String> mesaCombo = new ComboBox<>();
+			mesaCombo.setItems(FXCollections.observableArrayList("1", "2","3","4","5","6","7","8","9","10",
+					"11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
+					"28","29","30","31","32"));
+			mesaCombo.setId("mesa");
+			mesaCombo.setLayoutX(100);
+			mesaCombo.setLayoutY(200);
+			
+			Text agregarOrdenDetail = new Text("Agregar orden :");
+			/*agregarOrdenDetail.setLayoutX(30);
+			agregarOrdenDetail.setLayoutY(205);*/
+			agregarOrdenDetail.setLayoutX(30);
+			agregarOrdenDetail.setLayoutY(265);
+			Button btnAgregarOrdenDetail = new Button();
+			ComboBox<String> menu = new ComboBox<>();
+			menu.setId("menu");
+			List<Menu> menues = (List<Menu>)Main.contexto.get("menues");
+			List<String> menuesNombreArray = new ArrayList<>();
+			ObservableList<String> menuesNombre = FXCollections.observableList(menuesNombreArray);
+			menues.forEach(m -> {
+				menuesNombre.add(m.getName());
+			});
+			menu.setItems((ObservableList<String>) menuesNombre);
+			btnAgregarOrdenDetail.addEventFilter(MouseEvent.MOUSE_CLICKED, ordenAgredarOrdenDetail);
+			btnAgregarOrdenDetail.setText("Agregar");
+			menu.setLayoutX(120);
+			menu.setLayoutY(250);
+			menu.setPrefWidth(200);	
+			menu.setMinWidth(200);
+			
+			VBox vbox = new VBox();
+			vbox.setId("vbox");
+			for (HashMap<String, Integer> menuStr : Main.menuSeleccionado) {
+				Set<String> clave = menuStr.keySet();
+				String[] claveArr = (String[]) clave.toArray();
+				Integer cant= menuStr.get(claveArr[0]);
+				Text texto = new Text(cant+" x "+claveArr[0]);
+				texto.setId("texto");
+				vbox.getChildren().add(texto);
+			}
+			ScrollPane sp = new ScrollPane();
+			sp.setId("sp");
+		    sp.setContent(vbox);
+		  
+		    sp.setLayoutX(30);
+		    sp.setLayoutY(350);
+		    sp.setPrefWidth(350);
+		    sp.setPrefHeight(125);
+		    
+		    
+		    Button aceptar = new Button();
+		    aceptar.setText("Aceptar");
+		    aceptar.addEventFilter(MouseEvent.MOUSE_CLICKED, nuevoMenu);
+		    Button cancelar = new Button();
+		    cancelar.setText("Cancelar");
+		    
+		    aceptar.setLayoutY(500);
+		    aceptar.setLayoutX(30);
+		    cancelar.setLayoutY(500);
+		    cancelar.setLayoutX(300);
+		    cancelar.addEventFilter(MouseEvent.MOUSE_CLICKED, ocultarCrearOrden);
+			btnAgregarOrdenDetail.setLayoutX(325);
+			btnAgregarOrdenDetail.setLayoutY(250);
+			panelNuevaOrden.getChildren().add(orden);
+			panelNuevaOrden.getChildren().add(estado);
+			panelNuevaOrden.getChildren().add(usuario);
+			panelNuevaOrden.getChildren().add(mesa);
+			panelNuevaOrden.getChildren().add(menu);
+			panelNuevaOrden.getChildren().add(agregarOrdenDetail);
+			panelNuevaOrden.getChildren().add(btnAgregarOrdenDetail);
+			panelNuevaOrden.getChildren().add(sp);
+			panelNuevaOrden.getChildren().add(mesaCombo);
+			panelNuevaOrden.getChildren().add(cantidad);
+			panelNuevaOrden.getChildren().add(inputUsuario);
+			panelNuevaOrden.getChildren().add(comboEstado);
+			panelNuevaOrden.getChildren().add(nrCantidad);
+			panelNuevaOrden.getChildren().add(cancelar);
+			panelNuevaOrden.getChildren().add(aceptar);
+			pane.getChildren().add(panelNuevaOrden);			
+		}
+	};
+	
+	
+	EventHandler<MouseEvent> nuevaReserva = new EventHandler<MouseEvent>() {
+		@Override
+		public void handle(MouseEvent event) {
+			System.out.println("Nueva reserva");
+
+			stage = (Stage)	 btnClose.getScene().getWindow(); 
+			stage.close();
+		}
+	};
+	
+	EventHandler<MouseEvent> nuevoMenu = new EventHandler<MouseEvent>() {
+		String usuario;
+		Long mesa;
+		Integer estado;
+		@Override
+		public void handle(MouseEvent event) {		
+			Pane pane;
+			try {
+				//((Pane)((Button)((Text)event.getTarget()).getParent()).getParent()).setVisible(false);		
+				pane = ((Pane)((Button)((Text)event.getTarget()).getParent()).getParent());		
+			}catch(Exception e){
+				System.out.println("En el error capturado");
+				//((Pane)(((Button)event.getTarget()).getParent())).setVisible(false);	
+				pane= ((Pane)(((Button)event.getTarget()).getParent()));	
+			}
+			
+			System.out.println("creando orden");
+			pane.setVisible(false);			
+			pane.getChildren().forEach(c ->{
+				if("usuario".equals(c.getId())) {
+					usuario = ((TextField) c).getText();
+				}else if("mesa".equals(c.getId())) {
+					ComboBox<String> cmboMesa = (ComboBox<String>) c;
+					mesa=Long.parseLong(cmboMesa.getValue());
+				}else if("estado".equals(c.getId())) {
+					ComboBox<String> txtEstado = (ComboBox<String>) c;
+					System.out.println("estado: "+txtEstado.getValue());
+					//comboEstado.setItems(FXCollections.observableArrayList("Pendiente", "En proceso","Listo","Entregado","En camino")); 
+
+					if("Pendiente".equals(txtEstado.getValue())) {
+						estado = 1;
+
+					}else if("En proceso".equals(txtEstado.getValue())) {
+						estado = 2;
+
+					}else if("Listo".equals(txtEstado.getValue())) {
+											
+						estado = 3;
+				
+					}else if("Entregado".equals(txtEstado.getValue())) {
+						estado = 4;
+
+					}else if("En camino".equals(txtEstado.getValue())) {
+						estado = 5;
+					}else {
+						estado = 0;
+					}
+				}
+			});
+			
+			System.out.println("mesa: "+mesa);
+			System.out.println("usuario: "+usuario);
+			System.out.println("estado: "+estado);
+			System.out.println("orden: "+Main.menuSeleccionado);
+
+			if( mesa!=null && usuario != null && estado != null &&  Main.menuSeleccionado != null && Main.menuSeleccionado.size() >0) {
+									
+				String json = "{"
+					    +"\"orden\":"+JsonToObject.HashMapStringLongToJson(Main.menuSeleccionado)+","
+					    +"\"estado\":"+estado+","
+					    +"\"mesa\":"+mesa+","
+					    +"\"username\":"+"\""+usuario+"\""
+					    +"}";
+				System.out.println("json: "+json);
+				HashMap<String, Object> response = httpOrdenService.nuevaOrden(json);
+				if((Integer)response.get("code") == 200) {
+					NotificationType notification = NotificationType.SUCCESS;
+					TrayNotification pushNot = new TrayNotification();
+					pushNot.setNotificationType(notification);
+					pushNot.setTitle("Creación de Orden");
+					pushNot.setMessage("Se creo la orden con exito!!");
+					pushNot.setAnimationType(AnimationType.POPUP);
+					pushNot.showAndDismiss(Duration.seconds(2));
+					pushNot.showAndWait();
+					actualizarTablaOrdenes();
+				}else {
+					NotificationType notification = NotificationType.ERROR;
+					TrayNotification pushNot = new TrayNotification();
+					pushNot.setNotificationType(notification);
+					pushNot.setTitle("Orden");
+					pushNot.setMessage((String)response.get("msg"));
+					pushNot.setAnimationType(AnimationType.POPUP);
+					pushNot.showAndDismiss(Duration.seconds(2));
+					pushNot.showAndWait();
+				}
+				Main.menuSeleccionado.clear();				
+				 
+			}			
+
+			System.out.println("no ingreso la edicion de orden");
+
+		}
+	};
 	
 //btn close
 	EventHandler<MouseEvent> cerrar = new EventHandler<MouseEvent>() {

@@ -1,6 +1,7 @@
 package com.sentidos.api.controllers;
 
 import com.google.zxing.WriterException;
+import com.sentidos.api.dto.MenuDesktop;
 import com.sentidos.api.dto.MenuDto;
 import com.sentidos.api.dto.QRCodeGenerator;
 import com.sentidos.api.enitiesWrapper.MenuWrapper;
@@ -37,7 +38,7 @@ public class MenuController {
         return null;
     }
     
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public  ResponseEntity<Map<String, Object>> menuById(@PathVariable(value = "id") Long id){
     	Map<String, Object> response = new HashMap<String, Object>();
     	MenuDto menuDto = MenuWrapper.entityToDto(menuService.findById(id));
@@ -45,7 +46,7 @@ public class MenuController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/qr/{id}")
+    @GetMapping("qr/{id}")
     public ResponseEntity<Map<String, Object>> QrMenuById(){
     	Map<String, Object> response = new HashMap<>();
     	
@@ -54,7 +55,7 @@ public class MenuController {
     }
 
     
-    @GetMapping ("/all/qr") 
+    @GetMapping ("all/qr") 
     public ResponseEntity<Map<String, Object>> allQrMenu(){    	
     	Map<String, Object> response = new HashMap<>();
     	List<Menu> menues= menuService.allMenu();
@@ -82,4 +83,24 @@ public class MenuController {
     	 
     	return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
+    
+    
+    @GetMapping("/all/desktop")
+    public ResponseEntity<Map<String, Object>> allDesktop(){
+    	Map<String, Object> response = new HashMap<>();
+    	List<Menu> menues = menuService.allMenu();
+    	List<MenuDesktop> menuesDesktop= new ArrayList<>();
+    	menues.forEach(m->{
+    		MenuDesktop dto = new MenuDesktop();
+    		dto.setIsEnabled(dto.getIsEnabled());
+    		dto.setMenuType(m.getMenuType().getType());
+    		dto.setName(m.getName());
+    		dto.setPrice(m.getPrice());
+    		menuesDesktop.add(dto);
+    	});
+    	
+    	response.put("menues", menuesDesktop);
+    	return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
+ 
 }

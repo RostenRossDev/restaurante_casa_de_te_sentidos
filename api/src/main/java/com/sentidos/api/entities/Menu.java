@@ -100,7 +100,7 @@ public class Menu implements Serializable{
 	@Override
 	public String toString() {
 		return "Menu [id=" + id + ", name=" + name + ", price=" + price + ", isEnabled=" + isEnabled + ", menuType="
-				+ menuType + ", invoiceDetails=" + invoiceDetails + ", orderDetails=" + orderDetails + "]";
+				+ menuType +"]";
 	}
 	
 }

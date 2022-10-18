@@ -8,5 +8,6 @@ public class Constantes {
 	public static String RESERVAS ="reservation";
 	public static String ORDENES ="order";
 	public static String TICKET ="invoice";
+	public static String MENU ="menu";
 	
 }

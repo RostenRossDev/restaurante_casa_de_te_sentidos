@@ -21,6 +21,11 @@ public class OrderDetailDto {
 	public void setMenuDto(MenuDto menuDto) {
 		this.menuDto = menuDto;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderDetailDto [quantity=" + quantity + ", menuDto=" + menuDto + "]";
+	}
 	
 	
 }

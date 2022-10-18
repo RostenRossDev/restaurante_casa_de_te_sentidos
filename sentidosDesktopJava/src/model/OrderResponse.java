@@ -21,6 +21,7 @@ public class OrderResponse {
 	public OrderResponse(Long id, Date fechaEntrega, List<OrderDetail> orderDetails, int state, boolean isDelivered,
 			String username, Long tableId) {
 		super();
+		calculateTotal();
 		this.id = id;
 		this.fechaEntrega = fechaEntrega;
 		this.orderDetails = orderDetails;
@@ -34,6 +35,7 @@ public class OrderResponse {
 	public void calculateTotal() {
 		Double tot =0.0;
 		for (OrderDetail o : orderDetails) {
+			System.out.println("usuario: "+username+"pre total: "+o.getPrice()+", cantidad: "+o.getQuantity());
 			tot += o.getPrice() * o.getQuantity();
 		}
 		System.out.println("total calculado: "+tot);
@@ -92,6 +94,7 @@ public class OrderResponse {
 	}	
 	
 	public Double getTotal() {
+		System.out.println("total: "+total);
 		return total;
 	}
 

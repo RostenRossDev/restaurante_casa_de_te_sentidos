@@ -1,7 +1,11 @@
 package home;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +18,8 @@ public class Main extends Application {
     private double x, y;
     
     public static Map<String, Object> contexto = new HashMap<>();
+    public static Set<HashMap<String, Integer>> menuSeleccionado = new HashSet<>();
+ 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));

@@ -1,3 +1,5 @@
+
+
 /*create users*/
 INSERT INTO `users` (username, password, enabled) VALUES ('RostenRoss', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
 INSERT INTO `users` (username, password, enabled) VALUES ('RostenRossAdmin', '$2a$10$rJQv37vFTn6DQoOdx1bj1uL5/QZWD5lE6HpM2Oi9CQckblXBDnMiy', 1);
@@ -77,9 +79,19 @@ INSERT INTO `tables` (number) VALUES (16);
 INSERT INTO `tables` (number) VALUES (17);
 INSERT INTO `tables` (number) VALUES (18);
 INSERT INTO `tables` (number) VALUES (19);
-
-
-
+INSERT INTO `tables` (number) VALUES (20);
+INSERT INTO `tables` (number) VALUES (21);
+INSERT INTO `tables` (number) VALUES (22);
+INSERT INTO `tables` (number) VALUES (23);
+INSERT INTO `tables` (number) VALUES (24);
+INSERT INTO `tables` (number) VALUES (25);
+INSERT INTO `tables` (number) VALUES (26);
+INSERT INTO `tables` (number) VALUES (27);
+INSERT INTO `tables` (number) VALUES (28);
+INSERT INTO `tables` (number) VALUES (29);
+INSERT INTO `tables` (number) VALUES (30);
+INSERT INTO `tables` (number) VALUES (31);
+INSERT INTO `tables` (number) VALUES (32);
 
 
 /*INSERT RESERVATIONS*/

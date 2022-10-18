@@ -118,4 +118,12 @@ public class Order  implements Serializable{
 	public void addOrderDetails(OrderDetail orderDetails) {
 		this.orderDetails.add(orderDetails);
 	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customer=" + customer + ", isDelivered=" + isDelivered + ", state=" + state
+				+ ", orderDetails=" + orderDetails + ", createAt=" + createAt + "]";
+	}
+	
+	
 }
