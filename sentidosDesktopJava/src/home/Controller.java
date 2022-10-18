@@ -352,22 +352,40 @@ public class Controller implements Initializable, EventHandler<ActionEvent> {
 			pnLateral.setVisible(true);
 			pnOrden.setVisible(true);
 			pnReservacion.setVisible(true);
+			pnLateralReserva.setVisible(true);
+			pnLateralTicket.setVisible(true);
+			pnLateralOrden.setVisible(true);
 
 		} else if (roles.contains("ROLE_MOZO")) {
 			pnLogin.setVisible(false);
 			pnFondo.setVisible(false);
 			pnLateral.setVisible(true);
 			pnOrden.setVisible(true);
+			pnReservacion.setVisible(false);
+			pnTicket.setVisible(false);
+			pnLateralTicket.setVisible(false);
+			pnLateralOrden.setVisible(true);
+			pnLateralReserva.setVisible(false);
 		} else if (roles.contains("ROLE_MAITRE")) {
 			pnLogin.setVisible(false);
 			pnFondo.setVisible(false);
 			pnLateral.setVisible(true);
+			pnOrden.setVisible(false);
 			pnReservacion.setVisible(true);
+			pnTicket.setVisible(false);
+			pnLateralTicket.setVisible(false);
+			pnLateralOrden.setVisible(false);
+			pnLateralReserva.setVisible(true);
 		} else if (roles.contains("ROLE_CAJA")) {
 			pnLogin.setVisible(false);
 			pnFondo.setVisible(false);
-			pnTicket.setVisible(true);
 			pnLateral.setVisible(true);
+			pnOrden.setVisible(false);
+			pnReservacion.setVisible(false);
+			pnTicket.setVisible(true);
+			pnLateralTicket.setVisible(true);
+			pnLateralOrden.setVisible(false);
+			pnLateralReserva.setVisible(false);
 		} else {
 			textLoginError.setText("Usted no cuenta con permisos para ingresar al sistema. \nIntente con otra cuenta.");
 		}
