@@ -71,7 +71,6 @@ function Home() {
                             <p className="comentarios"> <span>Marisa Lalo: </span>Muy rico todo.</p>
                             <p className="comentarios"> <span>Pepito Lovos: </span>Excelente atencion.</p>
                             <p className="comentarios"> <span>Martin Boeta: </span>Me encanto la musica y la comida.</p>
-                            <p className="comentarios"> <span>Jose Palaso: </span>Lo lindo es la variedad en el menu Vegano.</p>
                         </div> 
                         <div className="cajaTexto">
                             <textarea className="form-control" aria-label="With textarea"></textarea>
